@@ -22,6 +22,8 @@
 
 > Obrigado ao Kaushik Samanta por seu incrível tutorial introdutório sobre o NestJS. [Link aqui](https://medium.com/@kaushiksamanta23/nest-js-tutorial-series-part-1-introduction-setup-c87ba810ea9e)
 
+> Obrigado ao Prateek Kathal por fornecer uma estrutura de projeto para o NestJS. [Link aqui](https://medium.com/the-crowdlinker-chronicle/best-way-to-structure-your-directory-code-nestjs-a06c7a641401)
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
