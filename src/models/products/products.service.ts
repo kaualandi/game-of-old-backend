@@ -1,28 +1,79 @@
-import { PrismaService } from './../../modules/prisma';
-import { Injectable } from '@nestjs/common';
-import { Product } from '@prisma/client';
+import { ImagesService } from './../images/images.service';
+import { Injectable, BadRequestException } from '@nestjs/common';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { PrismaService } from 'src/modules/prisma';
 
 @Injectable()
 export class ProductsService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly imagesService: ImagesService,
+  ) {}
+
+  async create(createProductDto: CreateProductDto) {
+    const { images, ...product } = createProductDto;
+    try {
+      const productCreated = await this.prismaService.product.create({
+        data: product,
+      });
+
+      if (images.length > 0) {
+        for (const image of images) {
+          await this.imagesService.create({
+            productId: productCreated.id,
+            url: image,
+          });
+        }
+      }
+      return productCreated;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
+  }
 
   findAll() {
-    return this.prismaService.product.findMany();
+    return this.prismaService.product.findMany({
+      include: {
+        images: true,
+        category: true,
+        measure: true,
+        types: true,
+        variations: true,
+      },
+    });
   }
 
   findOne(id: number) {
-    return this.prismaService.product.findUnique({ where: { id } });
+    return this.prismaService.product.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        images: true,
+        category: true,
+        measure: true,
+        types: true,
+        variations: true,
+      },
+    });
   }
 
-  create(data: Product) {
-    return this.prismaService.product.create({ data });
+  update(id: number, updateProductDto: UpdateProductDto) {
+    const { images, ...product } = updateProductDto;
+    return this.prismaService.product.update({
+      where: {
+        id,
+      },
+      data: product,
+    });
   }
 
-  update(id: number, data: Product) {
-    return this.prismaService.product.update({ where: { id }, data });
-  }
-
-  delete(id: number) {
-    return this.prismaService.product.delete({ where: { id } });
+  remove(id: number) {
+    return this.prismaService.product.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

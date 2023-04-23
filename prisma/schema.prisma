@@ -11,69 +11,62 @@ model Product {
   id          Int         @id @default(autoincrement())
   name        String
   description String
-  category    Category    @relation(fields: [categoryId], references: [id])
-  categoryId  Int
-  Measure     Measure?    @relation(fields: [measureId], references: [id])
-  measureId   Int?
+  category    Category?   @relation(fields: [category_id], references: [id])
+  category_id Int
+  measure     Measure?    @relation(fields: [measure_id], references: [id])
+  measure_id  Int
   price       Int
-  Image       Image[]
-  Variation   Variation[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  deletedAt   DateTime?
-  Type        Type[]
+  images      Image[]
+  variations  Variation[]
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  types       Type[]
 }
 
 model Category {
   id          Int       @id @default(autoincrement())
   name        String
   description String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
-  Product     Product[]
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  products    Product[]
 }
 
 model Measure {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String
-  abreviation String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
-  Product     Product[]
+  id           Int       @id @default(autoincrement())
+  name         String
+  abbreviation String
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+  products     Product[]
 }
 
 model Image {
-  id        Int       @id @default(autoincrement())
-  url       String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  Product   Product?  @relation(fields: [productId], references: [id])
-  productId Int?
+  id         Int      @id @default(autoincrement())
+  url        String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  product    Product? @relation(fields: [product_id], references: [id])
+  product_id Int
 }
 
 model Variation {
-  id        Int       @id @default(autoincrement())
-  name      String
-  image     String
-  price     Int
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  Product   Product?  @relation(fields: [productId], references: [id])
-  productId Int?
+  id         Int      @id @default(autoincrement())
+  name       String
+  image      String
+  price      Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  product    Product? @relation(fields: [product_id], references: [id])
+  product_id Int
 }
 
 model Type {
-  id        Int       @id @default(autoincrement())
-  name      String
-  price     Int
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  Product   Product?  @relation(fields: [productId], references: [id])
-  productId Int?
+  id         Int      @id @default(autoincrement())
+  name       String
+  price      Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  product    Product? @relation(fields: [product_id], references: [id])
+  product_id Int
 }
