@@ -21,7 +21,7 @@ export class ProductsService {
       if (images.length > 0) {
         for (const image of images) {
           await this.imagesService.create({
-            productId: productCreated.id,
+            product_id: productCreated.id,
             url: image,
           });
         }
