@@ -1,5 +1,9 @@
 import { ImagesService } from './../images/images.service';
-import { Injectable, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaService } from 'src/modules/prisma';
@@ -40,12 +44,13 @@ export class ProductsService {
         measure: true,
         types: true,
         variations: true,
+        _count: true,
       },
     });
   }
 
-  findOne(id: number) {
-    return this.prismaService.product.findUnique({
+  async findOne(id: number) {
+    const product = await this.prismaService.product.findUnique({
       where: {
         id,
       },
@@ -57,9 +62,17 @@ export class ProductsService {
         variations: true,
       },
     });
+
+    if (!product) {
+      throw new NotFoundException(`Produto não encontrado`);
+    }
+
+    return product;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
+  async update(id: number, updateProductDto: UpdateProductDto) {
+    await this.findOne(id);
+
     const { images, ...product } = updateProductDto;
     return this.prismaService.product.update({
       where: {
@@ -69,7 +82,9 @@ export class ProductsService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prismaService.product.delete({
       where: {
         id,

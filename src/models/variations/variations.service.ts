@@ -1,5 +1,5 @@
 import { S3Service } from './../../modules/aws/s3/s3.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateVariationsDto } from './dto/create-variations.dto';
 import { UpdateVariationsDto } from './dto/update-variations.dto';
 import { PrismaService } from 'src/modules/prisma';
@@ -22,11 +22,21 @@ export class VariationsService {
     return this.prismaService.variation.findMany();
   }
 
-  findOne(id: number) {
-    return this.prismaService.variation.findUnique({ where: { id } });
+  async findOne(id: number) {
+    const variation = await this.prismaService.variation.findUnique({
+      where: { id },
+    });
+
+    if (!variation) {
+      throw new NotFoundException(`Variação não encontrada`);
+    }
+
+    return variation;
   }
 
   async update(id: number, updateVariationsDto: UpdateVariationsDto) {
+    await this.findOne(id);
+
     if (updateVariationsDto.image) {
       const imageUrl = await this.s3Service.uploadFile(
         updateVariationsDto.image,
@@ -40,7 +50,9 @@ export class VariationsService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prismaService.variation.delete({ where: { id } });
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/modules/prisma';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { UpdateTypeDto } from './dto/update-type.dto';
@@ -15,18 +15,28 @@ export class TypesService {
     return this.prismaService.type.findMany();
   }
 
-  findOne(id: number) {
-    return this.prismaService.type.findUnique({ where: { id } });
+  async findOne(id: number) {
+    const type = await this.prismaService.type.findUnique({ where: { id } });
+
+    if (!type) {
+      throw new NotFoundException(`Tipo não encontrado`);
+    }
+
+    return type;
   }
 
-  update(id: number, updateTypeDto: UpdateTypeDto) {
+  async update(id: number, updateTypeDto: UpdateTypeDto) {
+    await this.findOne(id);
+
     return this.prismaService.type.update({
       where: { id },
       data: updateTypeDto,
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prismaService.type.delete({ where: { id } });
   }
 }

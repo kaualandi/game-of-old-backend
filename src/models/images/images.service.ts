@@ -1,5 +1,5 @@
 import { S3Service } from './../../modules/aws/s3/s3.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { PrismaService } from 'src/modules/prisma';
@@ -22,11 +22,22 @@ export class ImagesService {
     return this.prismaService.image.findMany();
   }
 
-  findOne(id: number) {
-    return this.prismaService.image.findUnique({ where: { id } });
+  async findOne(id: number) {
+    const image = await this.prismaService.image.findUnique({
+      where: { id },
+      include: { product: true },
+    });
+
+    if (!image) {
+      throw new NotFoundException(`Imagem não encontrada`);
+    }
+
+    return image;
   }
 
   async update(id: number, updateImageDto: UpdateImageDto) {
+    await this.findOne(id);
+
     const imageUrl = await this.s3Service.uploadFile(updateImageDto.url);
     updateImageDto.url = imageUrl;
 
@@ -36,7 +47,9 @@ export class ImagesService {
     });
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    await this.findOne(id);
+
     return this.prismaService.image.delete({ where: { id } });
   }
 }

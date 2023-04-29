@@ -7,17 +7,20 @@ import {
   Param,
   Delete,
   UsePipes,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
+import { AdminGuard } from 'src/common/guards/admin.guard';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
+  @UseGuards(AdminGuard)
   @UsePipes(
     new RemoveExtraKeysPipe([
       'name',
@@ -43,6 +46,7 @@ export class ProductsController {
   }
 
   @Patch(':id')
+  @UseGuards(AdminGuard)
   @UsePipes(
     new RemoveExtraKeysPipe([
       'name',
@@ -58,6 +62,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @UseGuards(AdminGuard)
   remove(@Param('id') id: string) {
     return this.productsService.remove(+id);
   }

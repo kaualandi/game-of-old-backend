@@ -6,18 +6,21 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
 } from '@nestjs/common';
 import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { CreateVariationsDto } from './dto/create-variations.dto';
 import { UpdateVariationsDto } from './dto/update-variations.dto';
 import { VariationsService } from './variations.service';
+import { AdminGuard } from 'src/common/guards/admin.guard';
 
 @Controller('variations')
 export class VariationsController {
   constructor(private readonly variationService: VariationsService) {}
 
   @Post()
+  @UseGuards(AdminGuard)
   @UsePipes(new RemoveExtraKeysPipe(['name', 'price', 'image', 'product_id']))
   create(@Body() createVariationDto: CreateVariationsDto) {
     return this.variationService.create(createVariationDto);
@@ -34,6 +37,7 @@ export class VariationsController {
   }
 
   @Patch(':id')
+  @UseGuards(AdminGuard)
   @UsePipes(new RemoveExtraKeysPipe(['name', 'price', 'image', 'product_id']))
   update(
     @Param('id') id: string,
@@ -43,6 +47,7 @@ export class VariationsController {
   }
 
   @Delete(':id')
+  @UseGuards(AdminGuard)
   remove(@Param('id') id: string) {
     return this.variationService.remove(+id);
   }
