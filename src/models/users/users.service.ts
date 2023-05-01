@@ -61,4 +61,16 @@ export class UsersService {
 
     return this.prismaService.user.delete({ where: { id } });
   }
+
+  async findOneWithPassword(id: number) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`Usuário não encontrado`);
+    }
+
+    return user;
+  }
 }

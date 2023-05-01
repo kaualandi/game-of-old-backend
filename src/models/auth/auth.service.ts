@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { JwtService } from '@nestjs/jwt';
+import { ChangePasswordDto } from './dto/change-password';
 
 @Injectable()
 export class AuthService {
@@ -27,5 +28,16 @@ export class AuthService {
 
   getMe(id: string) {
     return this.usersService.findOne(parseInt(id));
+  }
+
+  async changePassword(id: string, changePasswordDto: ChangePasswordDto) {
+    const user = await this.usersService.findOneWithPassword(parseInt(id));
+
+    if (user.password !== changePasswordDto.old_password) {
+      throw new BadRequestException('Senha atual incorreta');
+    }
+
+    user.password = changePasswordDto.new_password;
+    await this.usersService.update(parseInt(id), user);
   }
 }
