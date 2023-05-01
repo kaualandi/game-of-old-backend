@@ -7,12 +7,16 @@ import {
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaService } from 'src/modules/prisma';
+import { TypesService } from '../types/types.service';
+import { VariationsService } from '../variations/variations.service';
 
 @Injectable()
 export class ProductsService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly imagesService: ImagesService,
+    private readonly typesService: TypesService,
+    private readonly variationsService: VariationsService,
   ) {}
 
   async create(createProductDto: CreateProductDto) {
@@ -36,7 +40,7 @@ export class ProductsService {
     }
   }
 
-  findAll() {
+  findAll(name: string) {
     return this.prismaService.product.findMany({
       include: {
         images: true,
@@ -45,6 +49,11 @@ export class ProductsService {
         types: true,
         variations: true,
         _count: true,
+      },
+      where: {
+        name: {
+          contains: name,
+        },
       },
     });
   }
@@ -74,16 +83,43 @@ export class ProductsService {
     await this.findOne(id);
 
     const { images, ...product } = updateProductDto;
-    return this.prismaService.product.update({
-      where: {
-        id,
-      },
-      data: product,
-    });
+
+    try {
+      const productUpdate = await this.prismaService.product.update({
+        where: {
+          id,
+        },
+        data: product,
+      });
+
+      if (images.length > 0) {
+        for (const image of images) {
+          await this.imagesService.create({
+            product_id: productUpdate.id,
+            url: image,
+          });
+        }
+      }
+      return productUpdate;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   async remove(id: number) {
-    await this.findOne(id);
+    const product = await this.findOne(id);
+
+    for (const image of product.images) {
+      await this.imagesService.remove(image.id);
+    }
+
+    for (const type of product.types) {
+      await this.typesService.remove(type.id);
+    }
+
+    for (const variation of product.variations) {
+      await this.variationsService.remove(variation.id);
+    }
 
     return this.prismaService.product.delete({
       where: {

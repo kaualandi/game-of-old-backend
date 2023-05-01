@@ -40,8 +40,13 @@ export class CategorysService {
   }
 
   async remove(id: number) {
-    await this.findOne(id);
+    const category = await this.findOne(id);
 
+    if (category._count.products > 0) {
+      throw new NotFoundException(
+        `Existem produtos cadastrados nesta categoria, remova os produtos antes de deletar a categoria`,
+      );
+    }
     return this.prismaService.category.delete({ where: { id } });
   }
 }

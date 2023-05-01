@@ -15,7 +15,18 @@ import { UsersModule } from './models/users/users.module';
 @Global()
 @Module({
   controllers: [AppController],
-  imports: [PrismaModule, VariationsModule, S3Module, TypesModule, ImagesModule, MeasuresModule, CategorysModule, ProductsModule, AuthModule, UsersModule],
+  imports: [
+    PrismaModule,
+    VariationsModule,
+    S3Module,
+    TypesModule,
+    ImagesModule,
+    MeasuresModule,
+    CategorysModule,
+    ProductsModule,
+    AuthModule,
+    UsersModule,
+  ],
   providers: [AppService],
 })
 export class AppModule {}

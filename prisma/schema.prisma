@@ -25,7 +25,7 @@ model Product {
   category_id Int
   measure     Measure?    @relation(fields: [measure_id], references: [id])
   measure_id  Int
-  price       Int
+  price       Float
   images      Image[]
   variations  Variation[]
   created_at  DateTime    @default(now())

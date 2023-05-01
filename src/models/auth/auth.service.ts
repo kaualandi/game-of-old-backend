@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { JwtService } from '@nestjs/jwt';
@@ -15,7 +15,7 @@ export class AuthService {
 
     const user = await this.usersService.findOneByEmail(email);
     if (user?.password !== pass) {
-      throw new UnauthorizedException('E-mail ou senha inválidos');
+      throw new BadRequestException('E-mail ou senha inválidos');
     }
 
     const payload = { email: user.email, id: user.id, admin: user.is_admin };

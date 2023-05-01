@@ -2,21 +2,32 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/modules/prisma';
-
 @Injectable()
 export class UsersService {
   constructor(private readonly prismaService: PrismaService) {}
+
+  selectUser = {
+    id: true,
+    name: true,
+    email: true,
+    is_admin: true,
+    created_at: true,
+    updated_at: true,
+  };
 
   create(createUserDto: CreateUserDto) {
     return this.prismaService.user.create({ data: createUserDto });
   }
 
   findAll() {
-    return this.prismaService.user.findMany();
+    return this.prismaService.user.findMany({ select: this.selectUser });
   }
 
   async findOne(id: number) {
-    const user = await this.prismaService.user.findUnique({ where: { id } });
+    const user = await this.prismaService.user.findUnique({
+      where: { id },
+      select: this.selectUser,
+    });
 
     if (!user) {
       throw new NotFoundException(`Usuário não encontrado`);
