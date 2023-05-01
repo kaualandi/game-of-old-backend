@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from './../../modules/prisma/prisma.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -11,9 +15,14 @@ export class CategorysService {
     return this.prismaService.category.create({ data: createCategoryDto });
   }
 
-  findAll() {
+  findAll(name: string) {
     return this.prismaService.category.findMany({
       include: { _count: true },
+      where: {
+        name: {
+          contains: name,
+        },
+      },
     });
   }
 
@@ -43,7 +52,7 @@ export class CategorysService {
     const category = await this.findOne(id);
 
     if (category._count.products > 0) {
-      throw new NotFoundException(
+      throw new BadRequestException(
         `Existem produtos cadastrados nesta categoria, remova os produtos antes de deletar a categoria`,
       );
     }

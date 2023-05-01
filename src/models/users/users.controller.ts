@@ -8,6 +8,7 @@ import {
   Delete,
   UsePipes,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -28,8 +29,8 @@ export class UsersController {
 
   @Get()
   @UseGuards(AdminGuard)
-  findAll() {
-    return this.usersService.findAll();
+  findAll(@Query('name') name: string) {
+    return this.usersService.findAll(name || '');
   }
 
   @Get(':id')

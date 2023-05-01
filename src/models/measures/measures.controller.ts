@@ -8,6 +8,7 @@ import {
   Delete,
   UsePipes,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { MeasuresService } from './measures.service';
 import { CreateMeasureDto } from './dto/create-measure.dto';
@@ -27,8 +28,8 @@ export class MeasuresController {
   }
 
   @Get()
-  findAll() {
-    return this.measuresService.findAll();
+  findAll(@Query('name') name: string) {
+    return this.measuresService.findAll(name || '');
   }
 
   @Get(':id')

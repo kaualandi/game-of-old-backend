@@ -8,6 +8,7 @@ import {
   Delete,
   UsePipes,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { TypesService } from './types.service';
 import { CreateTypeDto } from './dto/create-type.dto';
@@ -27,8 +28,8 @@ export class TypesController {
   }
 
   @Get()
-  findAll() {
-    return this.typesService.findAll();
+  findAll(@Query('name') name: string) {
+    return this.typesService.findAll(name || '');
   }
 
   @Get(':id')

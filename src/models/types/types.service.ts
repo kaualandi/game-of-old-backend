@@ -11,8 +11,17 @@ export class TypesService {
     return this.prismaService.type.create({ data: createTypeDto });
   }
 
-  findAll() {
-    return this.prismaService.type.findMany();
+  findAll(name: string) {
+    return this.prismaService.type.findMany({
+      include: {
+        product: true,
+      },
+      where: {
+        name: {
+          contains: name,
+        },
+      },
+    });
   }
 
   async findOne(id: number) {

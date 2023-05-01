@@ -19,8 +19,15 @@ export class UsersService {
     return this.prismaService.user.create({ data: createUserDto });
   }
 
-  findAll() {
-    return this.prismaService.user.findMany({ select: this.selectUser });
+  findAll(name: string) {
+    return this.prismaService.user.findMany({
+      select: this.selectUser,
+      where: {
+        name: {
+          contains: name,
+        },
+      },
+    });
   }
 
   async findOne(id: number) {

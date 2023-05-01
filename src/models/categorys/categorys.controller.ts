@@ -8,6 +8,7 @@ import {
   Post,
   UseGuards,
   UsePipes,
+  Query,
 } from '@nestjs/common';
 import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { CategorysService } from './categorys.service';
@@ -29,8 +30,8 @@ export class CategorysController {
   }
 
   @Get()
-  findAll() {
-    return this.categorysService.findAll();
+  findAll(@Query('name') name: string) {
+    return this.categorysService.findAll(name || '');
   }
 
   @Get(':id')

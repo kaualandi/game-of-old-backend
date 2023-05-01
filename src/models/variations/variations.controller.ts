@@ -8,6 +8,7 @@ import {
   Post,
   UseGuards,
   UsePipes,
+  Query,
 } from '@nestjs/common';
 import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { CreateVariationsDto } from './dto/create-variations.dto';
@@ -27,8 +28,8 @@ export class VariationsController {
   }
 
   @Get()
-  findAll() {
-    return this.variationService.findAll();
+  findAll(@Query('name') name: string) {
+    return this.variationService.findAll(name || '');
   }
 
   @Get(':id')

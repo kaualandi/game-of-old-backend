@@ -18,8 +18,17 @@ export class VariationsService {
     return this.prismaService.variation.create({ data: createVariationsDto });
   }
 
-  findAll() {
-    return this.prismaService.variation.findMany();
+  findAll(name: string) {
+    return this.prismaService.variation.findMany({
+      include: {
+        product: true,
+      },
+      where: {
+        name: {
+          contains: name,
+        },
+      },
+    });
   }
 
   async findOne(id: number) {
@@ -37,7 +46,7 @@ export class VariationsService {
   async update(id: number, updateVariationsDto: UpdateVariationsDto) {
     await this.findOne(id);
 
-    if (updateVariationsDto.image) {
+    if (!updateVariationsDto?.image?.startsWith('http')) {
       const imageUrl = await this.s3Service.uploadFile(
         updateVariationsDto.image,
       );
