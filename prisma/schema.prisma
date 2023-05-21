@@ -15,10 +15,35 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   is_admin   Boolean  @default(false)
+  Order      Order[]
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  user_id     Int
+  user        User        @relation(fields: [user_id], references: [id])
+  status      String
+  total       Float
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  order_items OrderItem[]
+}
+
+model OrderItem {
+  id         Int      @id @default(autoincrement())
+  order_id   Int
+  order      Order    @relation(fields: [order_id], references: [id])
+  product_id Int
+  product    Product  @relation(fields: [product_id], references: [id])
+  quantity   Int
+  price      Float
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 model Product {
   id          Int         @id @default(autoincrement())
+  code        String?
   name        String
   description String
   category    Category?   @relation(fields: [category_id], references: [id])
@@ -31,6 +56,7 @@ model Product {
   created_at  DateTime    @default(now())
   updated_at  DateTime    @updatedAt
   types       Type[]
+  OrderItem   OrderItem[]
 }
 
 model Category {
