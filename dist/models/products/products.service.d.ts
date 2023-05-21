@@ -12,19 +12,19 @@ export declare class ProductsService {
     constructor(prismaService: PrismaService, imagesService: ImagesService, typesService: TypesService, variationsService: VariationsService);
     create(createProductDto: CreateProductDto): Promise<import(".prisma/client").Product>;
     findAll(name: string): import(".prisma/client").Prisma.PrismaPromise<(import(".prisma/client").Product & {
-        variations: import(".prisma/client").Variation[];
-        types: import(".prisma/client").Type[];
-        images: import(".prisma/client").Image[];
         _count: import(".prisma/client").Prisma.ProductCountOutputType;
+        images: import(".prisma/client").Image[];
         category: import(".prisma/client").Category;
         measure: import(".prisma/client").Measure;
+        variations: import(".prisma/client").Variation[];
+        types: import(".prisma/client").Type[];
     })[]>;
     findOne(id: number): Promise<import(".prisma/client").Product & {
-        variations: import(".prisma/client").Variation[];
-        types: import(".prisma/client").Type[];
         images: import(".prisma/client").Image[];
         category: import(".prisma/client").Category;
         measure: import(".prisma/client").Measure;
+        variations: import(".prisma/client").Variation[];
+        types: import(".prisma/client").Type[];
     }>;
     update(id: number, updateProductDto: UpdateProductDto): Promise<import(".prisma/client").Product>;
     remove(id: number): Promise<import(".prisma/client").Product>;

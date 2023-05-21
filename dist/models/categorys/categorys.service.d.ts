@@ -9,10 +9,10 @@ export declare class CategorysService {
         _count: import(".prisma/client").Prisma.CategoryCountOutputType;
     })[]>;
     findOne(id: number): Promise<import(".prisma/client").Category & {
-        products: import(".prisma/client").Product[];
         _count: {
             products: number;
         };
+        products: import(".prisma/client").Product[];
     }>;
     update(id: number, updateCategoryDto: UpdateCategoryDto): Promise<import(".prisma/client").Category>;
     remove(id: number): Promise<import(".prisma/client").Category>;

@@ -9,11 +9,11 @@ export declare class AuthController {
         user_id: string;
     }): Promise<{
         name: string;
-        created_at: Date;
-        updated_at: Date;
-        id: number;
         email: string;
         is_admin: boolean;
+        id: number;
+        created_at: Date;
+        updated_at: Date;
     }>;
     changePassword(request: {
         user_id: string;

@@ -10,16 +10,17 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const prisma_module_1 = require("./modules/prisma/prisma.module");
-const variations_module_1 = require("./models/variations/variations.module");
-const s3_module_1 = require("./modules/aws/s3/s3.module");
-const types_module_1 = require("./models/types/types.module");
+const auth_module_1 = require("./models/auth/auth.module");
+const categorys_module_1 = require("./models/categorys/categorys.module");
 const images_module_1 = require("./models/images/images.module");
 const measures_module_1 = require("./models/measures/measures.module");
-const categorys_module_1 = require("./models/categorys/categorys.module");
+const orders_module_1 = require("./models/orders/orders.module");
 const products_module_1 = require("./models/products/products.module");
-const auth_module_1 = require("./models/auth/auth.module");
+const types_module_1 = require("./models/types/types.module");
 const users_module_1 = require("./models/users/users.module");
+const variations_module_1 = require("./models/variations/variations.module");
+const s3_module_1 = require("./modules/aws/s3/s3.module");
+const prisma_module_1 = require("./modules/prisma/prisma.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -37,6 +38,7 @@ AppModule = __decorate([
             products_module_1.ProductsModule,
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
+            orders_module_1.OrdersModule,
         ],
         providers: [app_service_1.AppService],
     })

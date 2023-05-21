@@ -10,10 +10,10 @@ export declare class CategorysController {
         _count: import(".prisma/client").Prisma.CategoryCountOutputType;
     })[]>;
     findOne(id: string): Promise<import(".prisma/client").Category & {
-        products: import(".prisma/client").Product[];
         _count: {
             products: number;
         };
+        products: import(".prisma/client").Product[];
     }>;
     update(id: string, updateCategoryDto: UpdateCategoryDto): Promise<import(".prisma/client").Category>;
     remove(id: string): Promise<import(".prisma/client").Category>;

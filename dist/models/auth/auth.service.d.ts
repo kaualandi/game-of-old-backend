@@ -9,11 +9,11 @@ export declare class AuthService {
     signIn(createAuthDto: SignInDto): Promise<any>;
     getMe(id: string): Promise<{
         name: string;
-        created_at: Date;
-        updated_at: Date;
-        id: number;
         email: string;
         is_admin: boolean;
+        id: number;
+        created_at: Date;
+        updated_at: Date;
     }>;
     changePassword(id: string, changePasswordDto: ChangePasswordDto): Promise<void>;
 }
