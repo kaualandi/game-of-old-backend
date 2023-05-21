@@ -1,20 +1,20 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
-  UsePipes,
-  UseGuards,
+  Get,
+  Param,
+  Patch,
+  Post,
   Query,
+  UseGuards,
+  UsePipes,
 } from '@nestjs/common';
-import { ProductsService } from './products.service';
+import { AdminGuard } from 'src/common/guards/admin.guard';
+import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
-import { AdminGuard } from 'src/common/guards/admin.guard';
+import { ProductsService } from './products.service';
 
 @Controller('products')
 export class ProductsController {
@@ -25,6 +25,7 @@ export class ProductsController {
   @UsePipes(
     new RemoveExtraKeysPipe([
       'name',
+      'code',
       'description',
       'category_id',
       'measure_id',
@@ -51,6 +52,7 @@ export class ProductsController {
   @UsePipes(
     new RemoveExtraKeysPipe([
       'name',
+      'code',
       'description',
       'category_id',
       'measure_id',
