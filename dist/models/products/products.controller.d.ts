@@ -4,22 +4,64 @@ import { ProductsService } from './products.service';
 export declare class ProductsController {
     private readonly productsService;
     constructor(productsService: ProductsService);
-    create(createProductDto: CreateProductDto): Promise<import(".prisma/client").Product>;
-    findAll(name: string): import(".prisma/client").Prisma.PrismaPromise<(import(".prisma/client").Product & {
-        _count: import(".prisma/client").Prisma.ProductCountOutputType;
-        images: import(".prisma/client").Image[];
-        category: import(".prisma/client").Category;
-        measure: import(".prisma/client").Measure;
-        variations: import(".prisma/client").Variation[];
-        types: import(".prisma/client").Type[];
-    })[]>;
-    findOne(id: string): Promise<import(".prisma/client").Product & {
-        images: import(".prisma/client").Image[];
-        category: import(".prisma/client").Category;
-        measure: import(".prisma/client").Measure;
-        variations: import(".prisma/client").Variation[];
-        types: import(".prisma/client").Type[];
-    }>;
-    update(id: string, updateProductDto: UpdateProductDto): Promise<import(".prisma/client").Product>;
-    remove(id: string): Promise<import(".prisma/client").Product>;
+    create(createProductDto: CreateProductDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+    }, unknown, never> & {}>;
+    findAll(name: string): import(".prisma/client").Prisma.PrismaPromise<(import("@prisma/client/runtime/library").GetResult<{
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+    }, unknown, never> & {})[]>;
+    findOne(id: string): Promise<import("@prisma/client/runtime/library").GetResult<{
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+    }, unknown, never> & {}>;
+    update(id: string, updateProductDto: UpdateProductDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+    }, unknown, never> & {}>;
+    remove(id: string): Promise<import("@prisma/client/runtime/library").GetResult<{
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+    }, unknown, never> & {}>;
 }

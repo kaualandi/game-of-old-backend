@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateVariationsDto {
+export class CreateVariantsDto {
   @IsNotEmpty()
   name: string;
 

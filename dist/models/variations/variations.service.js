@@ -9,22 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VariationsService = void 0;
+exports.VariantsService = void 0;
 const s3_service_1 = require("./../../modules/aws/s3/s3.service");
 const common_1 = require("@nestjs/common");
 const prisma_1 = require("../../modules/prisma");
-let VariationsService = class VariationsService {
+let VariantsService = class VariantsService {
     constructor(prismaService, s3Service) {
         this.prismaService = prismaService;
         this.s3Service = s3Service;
     }
-    async create(createVariationsDto) {
-        const imageUrl = await this.s3Service.uploadFile(createVariationsDto.image);
-        createVariationsDto.image = imageUrl;
-        return this.prismaService.variation.create({ data: createVariationsDto });
+    async create(createVariantsDto) {
+        const imageUrl = await this.s3Service.uploadFile(createVariantsDto.image);
+        createVariantsDto.image = imageUrl;
+        return this.prismaService.variant.create({ data: createVariantsDto });
     }
     findAll(name) {
-        return this.prismaService.variation.findMany({
+        return this.prismaService.variant.findMany({
             include: {
                 product: true,
             },
@@ -36,35 +36,35 @@ let VariationsService = class VariationsService {
         });
     }
     async findOne(id) {
-        const variation = await this.prismaService.variation.findUnique({
+        const variant = await this.prismaService.variant.findUnique({
             where: { id },
         });
-        if (!variation) {
+        if (!variant) {
             throw new common_1.NotFoundException(`Variação não encontrada`);
         }
-        return variation;
+        return variant;
     }
-    async update(id, updateVariationsDto) {
+    async update(id, updateVariantsDto) {
         var _a;
         await this.findOne(id);
-        if (!((_a = updateVariationsDto === null || updateVariationsDto === void 0 ? void 0 : updateVariationsDto.image) === null || _a === void 0 ? void 0 : _a.startsWith('http'))) {
-            const imageUrl = await this.s3Service.uploadFile(updateVariationsDto.image);
-            updateVariationsDto.image = imageUrl;
+        if (!((_a = updateVariantsDto === null || updateVariantsDto === void 0 ? void 0 : updateVariantsDto.image) === null || _a === void 0 ? void 0 : _a.startsWith('http'))) {
+            const imageUrl = await this.s3Service.uploadFile(updateVariantsDto.image);
+            updateVariantsDto.image = imageUrl;
         }
-        return this.prismaService.variation.update({
+        return this.prismaService.variant.update({
             where: { id },
-            data: updateVariationsDto,
+            data: updateVariantsDto,
         });
     }
     async remove(id) {
         await this.findOne(id);
-        return this.prismaService.variation.delete({ where: { id } });
+        return this.prismaService.variant.delete({ where: { id } });
     }
 };
-VariationsService = __decorate([
+VariantsService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_1.PrismaService,
-        s3_service_1.S3Service])
-], VariationsService);
-exports.VariationsService = VariationsService;
-//# sourceMappingURL=variations.service.js.map
+    s3_service_1.S3Service])
+], VariantsService);
+exports.VariantsService = VariantsService;
+//# sourceMappingURL=variants.service.js.map

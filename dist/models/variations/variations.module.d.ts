@@ -1,4 +1,4 @@
 import { MiddlewareConsumer } from '@nestjs/common';
-export declare class VariationsModule {
-    configure(consumer: MiddlewareConsumer): void;
+export declare class VariantsModule {
+  configure(consumer: MiddlewareConsumer): void;
 }

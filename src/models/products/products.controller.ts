@@ -25,12 +25,14 @@ export class ProductsController {
   @UsePipes(
     new RemoveExtraKeysPipe([
       'name',
-      'code',
       'description',
-      'category_id',
-      'measure_id',
-      'price',
+      'team_id',
+      'filters',
+      'base_price',
       'images',
+      'trending',
+      'discount',
+      'is_active',
     ]),
   )
   create(@Body() createProductDto: CreateProductDto) {
@@ -52,12 +54,14 @@ export class ProductsController {
   @UsePipes(
     new RemoveExtraKeysPipe([
       'name',
-      'code',
       'description',
-      'category_id',
-      'measure_id',
-      'price',
+      'team_id',
+      'filters',
+      'base_price',
       'images',
+      'trending',
+      'discount',
+      'is_active',
     ]),
   )
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {

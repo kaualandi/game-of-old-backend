@@ -12,7 +12,7 @@ const s3_module_1 = require("../../modules/aws/s3/s3.module");
 const prisma_1 = require("../../modules/prisma");
 const images_service_1 = require("../images/images.service");
 const types_service_1 = require("../types/types.service");
-const variations_service_1 = require("../variations/variations.service");
+const variants_service_1 = require("../variants/variants.service");
 const products_controller_1 = require("./products.controller");
 const products_service_1 = require("./products.service");
 let ProductsModule = class ProductsModule {
@@ -21,7 +21,7 @@ ProductsModule = __decorate([
     (0, common_1.Module)({
         controllers: [products_controller_1.ProductsController],
         imports: [prisma_1.PrismaModule, s3_module_1.S3Module],
-        providers: [products_service_1.ProductsService, images_service_1.ImagesService, types_service_1.TypesService, variations_service_1.VariationsService],
+        providers: [products_service_1.ProductsService, images_service_1.ImagesService, types_service_1.TypesService, variants_service_1.VariantsService],
     })
 ], ProductsModule);
 exports.ProductsModule = ProductsModule;

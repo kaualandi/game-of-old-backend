@@ -9,25 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateVariationsDto = void 0;
+exports.CreateVariantsDto = void 0;
 const class_validator_1 = require("class-validator");
-class CreateVariationsDto {
+class CreateVariantsDto {
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateVariationsDto.prototype, "name", void 0);
+], CreateVariantsDto.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateVariationsDto.prototype, "price", void 0);
+], CreateVariantsDto.prototype, "price", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateVariationsDto.prototype, "image", void 0);
+], CreateVariantsDto.prototype, "image", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateVariationsDto.prototype, "product_id", void 0);
-exports.CreateVariationsDto = CreateVariationsDto;
-//# sourceMappingURL=create-variations.dto.js.map
+], CreateVariantsDto.prototype, "product_id", void 0);
+exports.CreateVariantsDto = CreateVariantsDto;
+//# sourceMappingURL=create-variants.dto.js.map

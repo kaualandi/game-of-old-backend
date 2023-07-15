@@ -1,14 +1,12 @@
-import { CreateVariationsDto } from './dto/create-variations.dto';
-import { UpdateVariationsDto } from './dto/update-variations.dto';
-import { VariationsService } from './variations.service';
-export declare class VariationsController {
-    private readonly variationService;
-    constructor(variationService: VariationsService);
-    create(createVariationDto: CreateVariationsDto): Promise<import(".prisma/client").Variation>;
-    findAll(name: string): import(".prisma/client").Prisma.PrismaPromise<(import(".prisma/client").Variation & {
-        product: import(".prisma/client").Product;
-    })[]>;
-    findOne(id: string): Promise<import(".prisma/client").Variation>;
-    update(id: string, updateVariationDto: UpdateVariationsDto): Promise<import(".prisma/client").Variation>;
-    remove(id: string): Promise<import(".prisma/client").Variation>;
+import { CreateVariantsDto } from './dto/create-variants.dto';
+import { UpdateVariantsDto } from './dto/update-variants.dto';
+import { VariantsService } from './variants.service';
+export declare class VariantsController {
+  private readonly variantService;
+  constructor(variantService: VariantsService);
+  create(createVariationDto: CreateVariantsDto): Promise<any>;
+  findAll(name: string): any;
+  findOne(id: string): Promise<any>;
+  update(id: string, updateVariationDto: UpdateVariantsDto): Promise<any>;
+  remove(id: string): Promise<any>;
 }

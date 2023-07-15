@@ -32,7 +32,7 @@ let CategorysService = class CategorysService {
     async findOne(id) {
         const category = await this.prismaService.category.findUnique({
             where: { id },
-            include: { products: true, _count: { select: { products: true } } },
+            include: { filters: true, _count: true },
         });
         if (!category) {
             throw new common_1.NotFoundException(`Categoria não encontrada`);
@@ -48,8 +48,8 @@ let CategorysService = class CategorysService {
     }
     async remove(id) {
         const category = await this.findOne(id);
-        if (category._count.products > 0) {
-            throw new common_1.BadRequestException(`Existem produtos cadastrados nesta categoria, remova os produtos antes de deletar a categoria`);
+        if (category.filters.length > 0) {
+            throw new common_1.BadRequestException(`Existem filtros cadastrados nesta categoria, remova-os antes de deletar a categoria`);
         }
         return this.prismaService.category.delete({ where: { id } });
     }

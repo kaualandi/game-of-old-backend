@@ -18,12 +18,16 @@ const auth_guard_1 = require("../../common/guards/auth.guard");
 const auth_service_1 = require("./auth.service");
 const sign_in_dto_1 = require("./dto/sign-in.dto");
 const change_password_1 = require("./dto/change-password");
+const sign_up_dto_1 = require("./dto/sign-up.dto");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
     signIn(createAuthDto) {
         return this.authService.signIn(createAuthDto);
+    }
+    signUp(createUserDto) {
+        return this.authService.signUp(createUserDto);
     }
     getMe(request) {
         return this.authService.getMe(request.user_id);
@@ -39,6 +43,13 @@ __decorate([
     __metadata("design:paramtypes", [sign_in_dto_1.SignInDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "signIn", null);
+__decorate([
+    (0, common_1.Post)('sign-up'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [sign_up_dto_1.SignUpDto]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "signUp", null);
 __decorate([
     (0, common_1.Get)('me'),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),

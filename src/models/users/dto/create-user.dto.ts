@@ -2,13 +2,13 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty()
-  name: string;
-
-  @IsNotEmpty()
   email: string;
 
-  @IsNotEmpty()
+  name: string;
+  phone: string;
+  cpf: string;
   password: string;
-
+  google_id: string;
+  birth_date: Date;
   is_admin: boolean;
 }

@@ -15,15 +15,15 @@ export class ImagesService {
     const imageUrl = await this.s3Service.uploadFile(createImageDto.url);
     createImageDto.url = imageUrl;
 
-    return this.prismaService.image.create({ data: createImageDto });
+    return this.prismaService.productImage.create({ data: createImageDto });
   }
 
   findAll() {
-    return this.prismaService.image.findMany();
+    return this.prismaService.productImage.findMany();
   }
 
   async findOne(id: number) {
-    const image = await this.prismaService.image.findUnique({
+    const image = await this.prismaService.productImage.findUnique({
       where: { id },
       include: { product: true },
     });
@@ -41,7 +41,7 @@ export class ImagesService {
     const imageUrl = await this.s3Service.uploadFile(updateImageDto.url);
     updateImageDto.url = imageUrl;
 
-    return this.prismaService.image.update({
+    return this.prismaService.productImage.update({
       where: { id },
       data: updateImageDto,
     });
@@ -50,6 +50,6 @@ export class ImagesService {
   async remove(id: number) {
     await this.findOne(id);
 
-    return this.prismaService.image.delete({ where: { id } });
+    return this.prismaService.productImage.delete({ where: { id } });
   }
 }

@@ -29,6 +29,13 @@ let AuthService = class AuthService {
             access_token: await this.jwtService.signAsync(payload),
         };
     }
+    async signUp(createUserDto) {
+        const user = await this.usersService.create(createUserDto);
+        const payload = { email: user.email, id: user.id, admin: user.is_admin };
+        return {
+            access_token: await this.jwtService.signAsync(payload),
+        };
+    }
     getMe(id) {
         return this.usersService.findOne(parseInt(id));
     }

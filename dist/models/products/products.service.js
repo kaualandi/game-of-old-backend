@@ -19,19 +19,20 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsService = void 0;
 const images_service_1 = require("./../images/images.service");
 const common_1 = require("@nestjs/common");
 const prisma_1 = require("../../modules/prisma");
 const types_service_1 = require("../types/types.service");
-const variations_service_1 = require("../variations/variations.service");
+const variants_service_1 = require("../variants/variants.service");
 let ProductsService = class ProductsService {
-    constructor(prismaService, imagesService, typesService, variationsService) {
+    constructor(prismaService, imagesService, typesService, variantsService) {
         this.prismaService = prismaService;
         this.imagesService = imagesService;
         this.typesService = typesService;
-        this.variationsService = variationsService;
+        this.variantsService = variantsService;
     }
     async create(createProductDto) {
         const { images } = createProductDto, product = __rest(createProductDto, ["images"]);
@@ -60,7 +61,7 @@ let ProductsService = class ProductsService {
                 category: true,
                 measure: true,
                 types: true,
-                variations: true,
+                variants: true,
                 _count: true,
             },
             where: {
@@ -80,7 +81,7 @@ let ProductsService = class ProductsService {
                 category: true,
                 measure: true,
                 types: true,
-                variations: true,
+                variants: true,
             },
         });
         if (!product) {
@@ -120,8 +121,8 @@ let ProductsService = class ProductsService {
         for (const type of product.types) {
             await this.typesService.remove(type.id);
         }
-        for (const variation of product.variations) {
-            await this.variationsService.remove(variation.id);
+        for (const variant of product.variants) {
+            await this.variantsService.remove(variant.id);
         }
         return this.prismaService.product.delete({
             where: {
@@ -133,9 +134,7 @@ let ProductsService = class ProductsService {
 ProductsService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_1.PrismaService,
-        images_service_1.ImagesService,
-        types_service_1.TypesService,
-        variations_service_1.VariationsService])
+    images_service_1.ImagesService, typeof (_a = typeof types_service_1.TypesService !== "undefined" && types_service_1.TypesService) === "function" ? _a : Object, variants_service_1.VariantsService])
 ], ProductsService);
 exports.ProductsService = ProductsService;
 //# sourceMappingURL=products.service.js.map

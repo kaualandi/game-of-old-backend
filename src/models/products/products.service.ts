@@ -1,29 +1,34 @@
-import { ImagesService } from './../images/images.service';
 import {
-  Injectable,
   BadRequestException,
+  Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { PrismaService } from 'src/modules/prisma';
+import { VariantsService } from '../variants/variants.service';
+import { ImagesService } from './../images/images.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { PrismaService } from 'src/modules/prisma';
-import { TypesService } from '../types/types.service';
-import { VariationsService } from '../variations/variations.service';
 
 @Injectable()
 export class ProductsService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly imagesService: ImagesService,
-    private readonly typesService: TypesService,
-    private readonly variationsService: VariationsService,
+    private readonly variantsService: VariantsService,
   ) {}
 
   async create(createProductDto: CreateProductDto) {
-    const { images, ...product } = createProductDto;
+    const { images, filters, team_id, ...product } = createProductDto;
     try {
       const productCreated = await this.prismaService.product.create({
-        data: product,
+        data: {
+          ...product,
+          team: {
+            connect: {
+              id: team_id,
+            },
+          },
+        },
       });
 
       if (images.length > 0) {
@@ -44,10 +49,7 @@ export class ProductsService {
     return this.prismaService.product.findMany({
       include: {
         images: true,
-        category: true,
-        measure: true,
-        types: true,
-        variations: true,
+        variants: true,
         _count: true,
       },
       where: {
@@ -65,10 +67,7 @@ export class ProductsService {
       },
       include: {
         images: true,
-        category: true,
-        measure: true,
-        types: true,
-        variations: true,
+        variants: true,
       },
     });
 
@@ -82,14 +81,26 @@ export class ProductsService {
   async update(id: number, updateProductDto: UpdateProductDto) {
     await this.findOne(id);
 
-    const { images, ...product } = updateProductDto;
+    const { images, team_id, filters, ...product } = updateProductDto;
 
     try {
       const productUpdate = await this.prismaService.product.update({
         where: {
           id,
         },
-        data: product,
+        data: {
+          ...product,
+          team: {
+            connect: {
+              id: team_id,
+            },
+          },
+          filters: {
+            connect: filters.map((filter) => ({
+              id: filter,
+            })),
+          },
+        },
       });
 
       if (images.length > 0) {
@@ -113,12 +124,8 @@ export class ProductsService {
       await this.imagesService.remove(image.id);
     }
 
-    for (const type of product.types) {
-      await this.typesService.remove(type.id);
-    }
-
-    for (const variation of product.variations) {
-      await this.variationsService.remove(variation.id);
+    for (const variant of product.variants) {
+      await this.variantsService.remove(variant.id);
     }
 
     return this.prismaService.product.delete({

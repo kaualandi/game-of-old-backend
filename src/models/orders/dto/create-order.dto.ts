@@ -1,9 +1,13 @@
+import { PaymentMethod } from '@prisma/client';
 import { IsNotEmpty } from 'class-validator';
 
 export interface CreateOrderItem {
-  product_id: number;
+  product_variant_id: number;
   quantity: number;
   price: number;
+  customization: boolean;
+  customization_name: string;
+  customization_number: number;
 }
 
 export class CreateOrderDto {
@@ -11,11 +15,23 @@ export class CreateOrderDto {
   user_id: number;
 
   @IsNotEmpty()
-  status: string;
+  address_id: number;
 
   @IsNotEmpty()
   total: number;
 
   @IsNotEmpty()
+  subtotal: number;
+
+  @IsNotEmpty()
+  delivery_fee: number;
+
+  @IsNotEmpty()
+  customization_fee: number;
+
+  @IsNotEmpty()
   order_items: CreateOrderItem[];
+
+  @IsNotEmpty()
+  payment_method: PaymentMethod;
 }

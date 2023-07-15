@@ -8,14 +8,18 @@ export class CreateProductDto {
   description: string;
 
   @IsNotEmpty()
-  category_id: number;
+  team_id: number;
 
   @IsNotEmpty()
-  measure_id: number;
+  filters: number[];
 
   @IsNotEmpty()
-  price: number;
+  base_price: number;
 
   @IsNotEmpty()
   images: string[];
+
+  trending: boolean;
+  discount?: number;
+  is_active?: boolean;
 }

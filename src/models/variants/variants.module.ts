@@ -2,16 +2,16 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { LoggerMiddleware } from 'src/common/middleware/models/logger/logger.middleware';
 import { S3Module } from 'src/modules/aws/s3/s3.module';
 import { PrismaModule } from 'src/modules/prisma';
-import { VariationsController } from './variations.controller';
-import { VariationsService } from './variations.service';
+import { VariantsController } from './variants.controller';
+import { VariantsService } from './variants.service';
 
 @Module({
-  controllers: [VariationsController],
+  controllers: [VariantsController],
   imports: [S3Module, PrismaModule],
-  providers: [VariationsService],
+  providers: [VariantsService],
 })
-export class VariationsModule {
+export class VariantsModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes(VariationsController);
+    consumer.apply(LoggerMiddleware).forRoutes(VariantsController);
   }
 }

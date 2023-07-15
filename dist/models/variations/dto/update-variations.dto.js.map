@@ -1,1 +1,10 @@
-{"version":3,"file":"update-variations.dto.js","sourceRoot":"","sources":["../../../../src/models/variations/dto/update-variations.dto.ts"],"names":[],"mappings":";;;AAAA,uDAAmD;AACnD,mEAA8D;AAE9D,MAAa,mBAAoB,SAAQ,IAAA,0BAAW,EAAC,2CAAmB,CAAC;CAKxE;AALD,kDAKC"}
+{
+  "version": 3,
+  "file": "update-variants.dto.js",
+  "sourceRoot": "",
+  "sources": [
+    "../../../../src/models/variants/dto/update-variants.dto.ts"
+  ],
+  "names": [],
+  "mappings": ";;;AAAA,uDAAmD;AACnD,mEAA8D;AAE9D,MAAa,mBAAoB,SAAQ,IAAA,0BAAW,EAAC,2CAAmB,CAAC;CAKxE;AALD,kDAKC"
+}

@@ -22,7 +22,16 @@ export class OrdersController {
   @Post()
   @UseGuards(AdminGuard)
   @UsePipes(
-    new RemoveExtraKeysPipe(['user_id', 'status', 'total', 'order_items']),
+    new RemoveExtraKeysPipe([
+      'status',
+      'total',
+      'address_id',
+      'subtotal',
+      'delivery_fee',
+      'customization_fee',
+      'order_items',
+      'payment_method',
+    ]),
   )
   create(@Body() createOrderDto: CreateOrderDto) {
     return this.ordersService.create(createOrderDto);
@@ -41,7 +50,16 @@ export class OrdersController {
   @Patch(':id')
   @UseGuards(AdminGuard)
   @UsePipes(
-    new RemoveExtraKeysPipe(['user_id', 'status', 'total', 'order_items']),
+    new RemoveExtraKeysPipe([
+      'status',
+      'total',
+      'address_id',
+      'subtotal',
+      'delivery_fee',
+      'customization_fee',
+      'order_items',
+      'payment_method',
+    ]),
   )
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.ordersService.update(+id, updateOrderDto);

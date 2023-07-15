@@ -12,7 +12,7 @@
   - You are about to drop the `measure` table. If the table is not empty, all the data it contains will be lost.
   - You are about to drop the `orderitem` table. If the table is not empty, all the data it contains will be lost.
   - You are about to drop the `type` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `variation` table. If the table is not empty, all the data it contains will be lost.
+  - You are about to drop the `variant` table. If the table is not empty, all the data it contains will be lost.
   - Added the required column `address_id` to the `Order` table without a default value. This is not possible if the table is not empty.
   - Added the required column `customization_fee` to the `Order` table without a default value. This is not possible if the table is not empty.
   - Added the required column `delivery_fee` to the `Order` table without a default value. This is not possible if the table is not empty.
@@ -41,7 +41,7 @@ ALTER TABLE `product` DROP FOREIGN KEY `Product_measure_id_fkey`;
 ALTER TABLE `type` DROP FOREIGN KEY `Type_product_id_fkey`;
 
 -- DropForeignKey
-ALTER TABLE `variation` DROP FOREIGN KEY `Variation_product_id_fkey`;
+ALTER TABLE `variant` DROP FOREIGN KEY `Variation_product_id_fkey`;
 
 -- AlterTable
 ALTER TABLE `category` DROP COLUMN `description`,
@@ -95,7 +95,7 @@ DROP TABLE `orderitem`;
 DROP TABLE `type`;
 
 -- DropTable
-DROP TABLE `variation`;
+DROP TABLE `variant`;
 
 -- CreateTable
 CREATE TABLE `Used_Coupon` (

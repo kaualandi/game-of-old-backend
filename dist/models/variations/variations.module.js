@@ -6,24 +6,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VariationsModule = void 0;
+exports.VariantsModule = void 0;
 const common_1 = require("@nestjs/common");
 const logger_middleware_1 = require("../../common/middleware/models/logger/logger.middleware");
 const s3_module_1 = require("../../modules/aws/s3/s3.module");
 const prisma_1 = require("../../modules/prisma");
-const variations_controller_1 = require("./variations.controller");
-const variations_service_1 = require("./variations.service");
-let VariationsModule = class VariationsModule {
+const variants_controller_1 = require("./variants.controller");
+const variants_service_1 = require("./variants.service");
+let VariantsModule = class VariantsModule {
     configure(consumer) {
-        consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes(variations_controller_1.VariationsController);
+        consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes(variants_controller_1.VariantsController);
     }
 };
-VariationsModule = __decorate([
+VariantsModule = __decorate([
     (0, common_1.Module)({
-        controllers: [variations_controller_1.VariationsController],
+        controllers: [variants_controller_1.VariantsController],
         imports: [s3_module_1.S3Module, prisma_1.PrismaModule],
-        providers: [variations_service_1.VariationsService],
+        providers: [variants_service_1.VariantsService],
     })
-], VariationsModule);
-exports.VariationsModule = VariationsModule;
-//# sourceMappingURL=variations.module.js.map
+], VariantsModule);
+exports.VariantsModule = VariantsModule;
+//# sourceMappingURL=variants.module.js.map

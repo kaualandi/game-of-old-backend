@@ -3,29 +3,109 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { PrismaService } from 'src/modules/prisma';
 import { TypesService } from '../types/types.service';
-import { VariationsService } from '../variations/variations.service';
+import { VariantsService } from '../variants/variants.service';
 export declare class ProductsService {
-    private readonly prismaService;
-    private readonly imagesService;
-    private readonly typesService;
-    private readonly variationsService;
-    constructor(prismaService: PrismaService, imagesService: ImagesService, typesService: TypesService, variationsService: VariationsService);
-    create(createProductDto: CreateProductDto): Promise<import(".prisma/client").Product>;
-    findAll(name: string): import(".prisma/client").Prisma.PrismaPromise<(import(".prisma/client").Product & {
-        _count: import(".prisma/client").Prisma.ProductCountOutputType;
-        images: import(".prisma/client").Image[];
-        category: import(".prisma/client").Category;
-        measure: import(".prisma/client").Measure;
-        variations: import(".prisma/client").Variation[];
-        types: import(".prisma/client").Type[];
-    })[]>;
-    findOne(id: number): Promise<import(".prisma/client").Product & {
-        images: import(".prisma/client").Image[];
-        category: import(".prisma/client").Category;
-        measure: import(".prisma/client").Measure;
-        variations: import(".prisma/client").Variation[];
-        types: import(".prisma/client").Type[];
-    }>;
-    update(id: number, updateProductDto: UpdateProductDto): Promise<import(".prisma/client").Product>;
-    remove(id: number): Promise<import(".prisma/client").Product>;
+  private readonly prismaService;
+  private readonly imagesService;
+  private readonly typesService;
+  private readonly variantsService;
+  constructor(
+    prismaService: PrismaService,
+    imagesService: ImagesService,
+    typesService: TypesService,
+    variantsService: VariantsService,
+  );
+  create(createProductDto: CreateProductDto): Promise<
+    import('@prisma/client/runtime/library').GetResult<
+      {
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+      },
+      unknown,
+      never
+    > & {}
+  >;
+  findAll(name: string): import('.prisma/client').Prisma.PrismaPromise<
+    (import('@prisma/client/runtime/library').GetResult<
+      {
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+      },
+      unknown,
+      never
+    > & {})[]
+  >;
+  findOne(id: number): Promise<
+    import('@prisma/client/runtime/library').GetResult<
+      {
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+      },
+      unknown,
+      never
+    > & {}
+  >;
+  update(
+    id: number,
+    updateProductDto: UpdateProductDto,
+  ): Promise<
+    import('@prisma/client/runtime/library').GetResult<
+      {
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+      },
+      unknown,
+      never
+    > & {}
+  >;
+  remove(id: number): Promise<
+    import('@prisma/client/runtime/library').GetResult<
+      {
+        id: number;
+        name: string;
+        description: string;
+        base_price: number;
+        trending: boolean;
+        discount: number;
+        team_id: number;
+        is_active: boolean;
+        created_at: Date;
+        updated_at: Date;
+      },
+      unknown,
+      never
+    > & {}
+  >;
 }

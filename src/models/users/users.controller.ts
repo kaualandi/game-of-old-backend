@@ -22,7 +22,18 @@ export class UsersController {
 
   @Post()
   @UseGuards(AdminGuard)
-  @UsePipes(new RemoveExtraKeysPipe(['name', 'email', 'password', 'is_admin']))
+  @UsePipes(
+    new RemoveExtraKeysPipe([
+      'email',
+      'name',
+      'phone',
+      'cpf',
+      'password',
+      'google_id',
+      'birth_date',
+      'is_admin',
+    ]),
+  )
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
@@ -41,6 +52,18 @@ export class UsersController {
 
   @Patch(':id')
   @UseGuards(AdminGuard)
+  @UsePipes(
+    new RemoveExtraKeysPipe([
+      'email',
+      'name',
+      'phone',
+      'cpf',
+      'password',
+      'google_id',
+      'birth_date',
+      'is_admin',
+    ]),
+  )
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
