@@ -13,10 +13,18 @@ export class UsersService {
     is_admin: true,
     created_at: true,
     updated_at: true,
+    address: true,
   };
 
   create(createUserDto: CreateUserDto) {
-    return this.prismaService.user.create({ data: createUserDto });
+    return this.prismaService.user.create({
+      data: {
+        ...createUserDto,
+        address: {
+          create: createUserDto.address,
+        },
+      },
+    });
   }
 
   findAll(name: string) {
@@ -52,7 +60,12 @@ export class UsersService {
 
     return this.prismaService.user.update({
       where: { id },
-      data: updateUserDto,
+      data: {
+        ...updateUserDto,
+        address: {
+          create: updateUserDto.address,
+        },
+      },
     });
   }
 

@@ -4,6 +4,7 @@ import { SignInDto } from './dto/sign-in.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ChangePasswordDto } from './dto/change-password';
 import { SignUpDto } from './dto/sign-up.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -50,5 +51,11 @@ export class AuthService {
 
     user.password = changePasswordDto.new_password;
     await this.usersService.update(parseInt(id), user);
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    await this.usersService.findOne(parseInt(id));
+
+    return this.usersService.update(parseInt(id), updateUserDto);
   }
 }

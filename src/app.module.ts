@@ -10,6 +10,14 @@ import { UsersModule } from './models/users/users.module';
 import { VariantsModule } from './models/variants/variants.module';
 import { S3Module } from './modules/aws/s3/s3.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
+import { CouponsModule } from './models/coupons/coupons.module';
+import { CartModule } from './models/cart/cart.module';
+import { TeamsModule } from './models/teams/teams.module';
+import { FiltersModule } from './models/filters/filters.module';
+import { ConfigModule } from './models/config/config.module';
+import { TagsModule } from './models/tags/tags.module';
+import { BannersModule } from './models/banners/banners.module';
+import { ArticlesModule } from './models/articles/articles.module';
 
 @Global()
 @Module({
@@ -24,6 +32,14 @@ import { PrismaModule } from './modules/prisma/prisma.module';
     AuthModule,
     UsersModule,
     OrdersModule,
+    CouponsModule,
+    CartModule,
+    TeamsModule,
+    FiltersModule,
+    ConfigModule,
+    TagsModule,
+    BannersModule,
+    ArticlesModule,
   ],
   providers: [AppService],
 })

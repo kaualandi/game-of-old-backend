@@ -1,3 +1,4 @@
+import { Address } from '@prisma/client';
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateUserDto {
@@ -11,4 +12,5 @@ export class CreateUserDto {
   google_id: string;
   birth_date: Date;
   is_admin: boolean;
+  address?: Address;
 }

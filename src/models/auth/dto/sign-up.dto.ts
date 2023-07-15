@@ -15,7 +15,7 @@ export class SignUpDto {
 
   google_id: string;
 
-  birth_date: string;
+  birth_date: Date;
 
   is_admin: boolean;
 }

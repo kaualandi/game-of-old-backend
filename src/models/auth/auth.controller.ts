@@ -2,17 +2,19 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   Post,
   Request,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
+import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { AuthGuard } from '../../common/guards/auth.guard';
 import { AuthService } from './auth.service';
-import { SignInDto } from './dto/sign-in.dto';
 import { ChangePasswordDto } from './dto/change-password';
+import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
-import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -53,5 +55,17 @@ export class AuthController {
     @Body() changePasswordDto: ChangePasswordDto,
   ) {
     return this.authService.changePassword(request.user_id, changePasswordDto);
+  }
+
+  @Patch('update')
+  @UseGuards(AuthGuard)
+  @UsePipes(
+    new RemoveExtraKeysPipe(['email', 'name', 'phone', 'cpf', 'birth_date']),
+  )
+  update(
+    @Request() request: { user_id: string },
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.authService.update(request.user_id, updateUserDto);
   }
 }
