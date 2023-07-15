@@ -6,25 +6,23 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
   UsePipes,
-  Query,
 } from '@nestjs/common';
+import { AdminGuard } from 'src/common/guards/admin.guard';
 import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { CategorysService } from './categorys.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { AdminGuard } from 'src/common/guards/admin.guard';
 
 @Controller('categorys')
 export class CategorysController {
   constructor(private readonly categorysService: CategorysService) {}
 
-  allowedKeys = ['name', 'description'];
-
   @Post()
   @UseGuards(AdminGuard)
-  @UsePipes(new RemoveExtraKeysPipe(['name', 'description']))
+  @UsePipes(new RemoveExtraKeysPipe(['name']))
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categorysService.create(createCategoryDto);
   }
@@ -41,7 +39,7 @@ export class CategorysController {
 
   @Patch(':id')
   @UseGuards(AdminGuard)
-  @UsePipes(new RemoveExtraKeysPipe(['name', 'description']))
+  @UsePipes(new RemoveExtraKeysPipe(['name']))
   update(
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,

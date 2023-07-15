@@ -1,26 +1,48 @@
 import { Injectable } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common/exceptions';
 import { CreateFilterDto } from './dto/create-filter.dto';
 import { UpdateFilterDto } from './dto/update-filter.dto';
+import { PrismaService } from 'src/modules/prisma';
 
 @Injectable()
 export class FiltersService {
+  constructor(private readonly prismaService: PrismaService) {}
+
   create(createFilterDto: CreateFilterDto) {
-    return 'This action adds a new filter';
+    return this.prismaService.filter.create({ data: createFilterDto });
   }
 
-  findAll() {
-    return `This action returns all filters`;
+  findAll(name: string) {
+    return this.prismaService.filter.findMany({
+      where: { name: { contains: name } },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} filter`;
+  async findOne(id: number) {
+    const filter = await this.prismaService.filter.findUnique({
+      where: { id },
+      include: { products: true },
+    });
+
+    if (!filter) {
+      throw new NotFoundException(`Filtro não encontrado`);
+    }
+
+    return filter;
   }
 
-  update(id: number, updateFilterDto: UpdateFilterDto) {
-    return `This action updates a #${id} filter`;
+  async update(id: number, updateFilterDto: UpdateFilterDto) {
+    await this.findOne(id);
+
+    return this.prismaService.filter.update({
+      where: { id },
+      data: updateFilterDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} filter`;
+  async remove(id: number) {
+    await this.findOne(id);
+
+    return await this.prismaService.filter.delete({ where: { id } });
   }
 }
