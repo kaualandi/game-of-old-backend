@@ -28,6 +28,11 @@ export class ProductsService {
               id: team_id,
             },
           },
+          filters: {
+            connect: filters.map((filter) => ({
+              id: filter,
+            })),
+          },
         },
       });
 
