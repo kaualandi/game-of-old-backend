@@ -1,26 +1,67 @@
 import { Injectable } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common/exceptions';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
+import { PrismaService } from 'src/modules/prisma';
+import { ImagesService } from '../images/images.service';
 
 @Injectable()
 export class TeamsService {
-  create(createTeamDto: CreateTeamDto) {
-    return 'This action adds a new team';
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly imagesService: ImagesService,
+  ) {}
+
+  async create(createTeamDto: CreateTeamDto) {
+    const { name, url } = createTeamDto;
+    const image_url = await this.imagesService.saveImage(url);
+
+    return this.prismaService.team.create({
+      data: { name, url: image_url },
+    });
   }
 
   findAll() {
-    return `This action returns all teams`;
+    return this.prismaService.team.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} team`;
+  async findOne(id: number) {
+    const team = await this.prismaService.team.findUnique({
+      where: { id },
+      include: {
+        products: true,
+      },
+    });
+
+    if (!team) {
+      throw new NotFoundException(`Time não encontrado`);
+    }
+
+    return team;
   }
 
-  update(id: number, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${id} team`;
+  async update(id: number, updateTeamDto: UpdateTeamDto) {
+    await this.findOne(id);
+
+    if (updateTeamDto.url && !updateTeamDto.url.startsWith('http')) {
+      updateTeamDto.url = await this.imagesService.saveImage(updateTeamDto.url);
+    }
+
+    return this.prismaService.team.update({
+      where: { id },
+      data: updateTeamDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} team`;
+  async remove(id: number) {
+    const team = await this.findOne(id);
+
+    if (team.products.length > 0) {
+      throw new NotFoundException(
+        `Não é possível excluir um time que possui produtos`,
+      );
+    }
+
+    return this.prismaService.team.delete({ where: { id } });
   }
 }

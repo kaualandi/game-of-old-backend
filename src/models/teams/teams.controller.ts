@@ -1,15 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TeamsService } from './teams.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { AdminGuard } from 'src/common/guards/admin.guard';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
+import { TeamsService } from './teams.service';
 
 @Controller('teams')
 export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
   @Post()
-  create(@Body() createTeamDto: CreateTeamDto) {
-    return this.teamsService.create(createTeamDto);
+  @UseGuards(AdminGuard)
+  async create(@Body() createTeamDto: CreateTeamDto) {
+    return await this.teamsService.create(createTeamDto);
   }
 
   @Get()
@@ -18,17 +29,19 @@ export class TeamsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.teamsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.teamsService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTeamDto: UpdateTeamDto) {
-    return this.teamsService.update(+id, updateTeamDto);
+  @UseGuards(AdminGuard)
+  async update(@Param('id') id: string, @Body() updateTeamDto: UpdateTeamDto) {
+    return await this.teamsService.update(+id, updateTeamDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.teamsService.remove(+id);
+  @UseGuards(AdminGuard)
+  async remove(@Param('id') id: string) {
+    return await this.teamsService.remove(+id);
   }
 }

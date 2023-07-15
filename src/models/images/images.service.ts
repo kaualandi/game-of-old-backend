@@ -11,6 +11,10 @@ export class ImagesService {
     private readonly s3Service: S3Service,
   ) {}
 
+  async saveImage(url: string) {
+    return await this.s3Service.uploadFile(url);
+  }
+
   async create(createImageDto: CreateImageDto) {
     const imageUrl = await this.s3Service.uploadFile(createImageDto.url);
     createImageDto.url = imageUrl;
