@@ -43,7 +43,7 @@ export class TeamsService {
   async update(id: number, updateTeamDto: UpdateTeamDto) {
     await this.findOne(id);
 
-    if (updateTeamDto.url && !updateTeamDto.url.startsWith('http')) {
+    if (!updateTeamDto?.url?.startsWith('http')) {
       updateTeamDto.url = await this.imagesService.saveImage(updateTeamDto.url);
     }
 

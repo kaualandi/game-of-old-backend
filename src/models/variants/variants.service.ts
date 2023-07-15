@@ -1,20 +1,13 @@
-import { S3Service } from './../../modules/aws/s3/s3.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from 'src/modules/prisma';
 import { CreateVariantsDto } from './dto/create-variants.dto';
 import { UpdateVariantsDto } from './dto/update-variants.dto';
-import { PrismaService } from 'src/modules/prisma';
 
 @Injectable()
 export class VariantsService {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly s3Service: S3Service,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   async create(createVariantsDto: CreateVariantsDto) {
-    const imageUrl = await this.s3Service.uploadFile(createVariantsDto.image);
-    createVariantsDto.image = imageUrl;
-
     return this.prismaService.productVariant.create({
       data: createVariantsDto,
     });
@@ -36,6 +29,7 @@ export class VariantsService {
   async findOne(id: number) {
     const variant = await this.prismaService.productVariant.findUnique({
       where: { id },
+      include: { product: true },
     });
 
     if (!variant) {
@@ -47,11 +41,6 @@ export class VariantsService {
 
   async update(id: number, updateVariantsDto: UpdateVariantsDto) {
     await this.findOne(id);
-
-    if (!updateVariantsDto?.image?.startsWith('http')) {
-      const imageUrl = await this.s3Service.uploadFile(updateVariantsDto.image);
-      updateVariantsDto.image = imageUrl;
-    }
 
     return this.prismaService.productVariant.update({
       where: { id },

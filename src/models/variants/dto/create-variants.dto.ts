@@ -5,11 +5,7 @@ export class CreateVariantsDto {
   name: string;
 
   @IsNotEmpty()
-  price: number;
-
-  @IsNotEmpty()
-  image: string;
-
-  @IsNotEmpty()
   product_id: number;
+
+  is_active: boolean;
 }
