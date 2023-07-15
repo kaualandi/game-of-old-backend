@@ -43,7 +43,7 @@ export class TeamsService {
     });
 
     return {
-      count: teams.length,
+      count: await this.prismaService.team.count(),
       results: teams,
       next: teams.length < page_size ? false : true,
       previous: page <= 1 ? false : true,
