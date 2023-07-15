@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { AdminGuard } from 'src/common/guards/admin.guard';
@@ -24,8 +25,12 @@ export class TeamsController {
   }
 
   @Get()
-  findAll() {
-    return this.teamsService.findAll();
+  async findAll(
+    @Query('name') name: string,
+    @Query('page') page: string,
+    @Query('page_size') page_size: string,
+  ) {
+    return await this.teamsService.findAll(name || '', +page, +page_size);
   }
 
   @Get(':id')

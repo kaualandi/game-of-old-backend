@@ -21,8 +21,25 @@ export class TeamsService {
     });
   }
 
-  findAll() {
-    return this.prismaService.team.findMany();
+  async findAll(name: string, page: number, page_size: number) {
+    if (!page || !page_size) {
+      throw new NotFoundException(
+        'Especifique a página e o tamanho da página.',
+      );
+    }
+
+    const teams = await this.prismaService.team.findMany({
+      where: { name: { contains: name } },
+      skip: (page - 1) * page_size,
+      take: page_size,
+    });
+
+    return {
+      count: teams.length,
+      results: teams,
+      next: teams.length < page_size ? false : true,
+      previous: page <= 1 ? false : true,
+    };
   }
 
   async findOne(id: number) {
