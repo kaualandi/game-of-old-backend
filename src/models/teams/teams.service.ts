@@ -14,7 +14,15 @@ export class TeamsService {
 
   async create(createTeamDto: CreateTeamDto) {
     const { name, url } = createTeamDto;
-    const image_url = await this.imagesService.saveImage(url);
+
+    let image_url = undefined;
+    if (url) {
+      if (!url.startsWith('http')) {
+        image_url = await this.imagesService.saveImage(url);
+      } else {
+        image_url = url;
+      }
+    }
 
     return this.prismaService.team.create({
       data: { name, url: image_url },
