@@ -29,7 +29,7 @@ export class CategorysService {
   async findOne(id: number) {
     const category = await this.prismaService.category.findUnique({
       where: { id },
-      include: { products: true, _count: { select: { products: true } } },
+      include: { filters: true, _count: true },
     });
 
     if (!category) {
@@ -51,9 +51,9 @@ export class CategorysService {
   async remove(id: number) {
     const category = await this.findOne(id);
 
-    if (category._count.products > 0) {
+    if (category.filters.length > 0) {
       throw new BadRequestException(
-        `Existem produtos cadastrados nesta categoria, remova os produtos antes de deletar a categoria`,
+        `Existem filtros cadastrados nesta categoria, remova-os antes de deletar a categoria`,
       );
     }
     return this.prismaService.category.delete({ where: { id } });

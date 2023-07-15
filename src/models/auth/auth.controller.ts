@@ -10,6 +10,7 @@ import { AuthGuard } from '../../common/guards/auth.guard';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { ChangePasswordDto } from './dto/change-password';
+import { SignUpDto } from './dto/sign-up.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -18,6 +19,11 @@ export class AuthController {
   @Post('login')
   signIn(@Body() createAuthDto: SignInDto) {
     return this.authService.signIn(createAuthDto);
+  }
+
+  @Post('sign-up')
+  signUp(@Body() createUserDto: SignUpDto) {
+    return this.authService.signUp(createUserDto);
   }
 
   @Get('me')
