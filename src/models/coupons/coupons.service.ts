@@ -1,26 +1,80 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCouponDto } from './dto/create-coupon.dto';
 import { UpdateCouponDto } from './dto/update-coupon.dto';
+import { PrismaService } from 'src/modules/prisma';
 
 @Injectable()
 export class CouponsService {
-  create(createCouponDto: CreateCouponDto) {
-    return 'This action adds a new coupon';
+  constructor(private readonly prismaService: PrismaService) {}
+
+  async create(createCouponDto: CreateCouponDto) {
+    const coupon = await this.findByCode(createCouponDto.code);
+
+    if (coupon) {
+      throw new Error('Já existe um cupom com esse código');
+    }
+
+    return this.prismaService.coupon.create({
+      data: createCouponDto,
+    });
   }
 
-  findAll() {
-    return `This action returns all coupons`;
+  findAll(name: string, page: number, page_size: number) {
+    return this.prismaService.coupon.findMany({
+      where: {
+        code: {
+          contains: name,
+        },
+      },
+      skip: (page - 1) * page_size,
+      take: page_size,
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} coupon`;
+  async findOne(id: number) {
+    const coupon = await this.prismaService.coupon.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!coupon) {
+      throw new Error('Cupom não encontrado');
+    }
+
+    return coupon;
   }
 
-  update(id: number, updateCouponDto: UpdateCouponDto) {
-    return `This action updates a #${id} coupon`;
+  async update(id: number, updateCouponDto: UpdateCouponDto) {
+    await this.findOne(id);
+    const coupon = await this.findByCode(updateCouponDto.code);
+
+    if (coupon && coupon.id !== id) {
+      throw new Error('Já existe um cupom com esse código');
+    }
+
+    return this.prismaService.coupon.update({
+      where: {
+        id,
+      },
+      data: updateCouponDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} coupon`;
+  async remove(id: number) {
+    await this.findOne(id);
+    return this.prismaService.coupon.delete({
+      where: {
+        id,
+      },
+    });
+  }
+
+  private async findByCode(code: string) {
+    return await this.prismaService.coupon.findUnique({
+      where: {
+        code,
+      },
+    });
   }
 }

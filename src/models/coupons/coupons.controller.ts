@@ -1,34 +1,55 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UsePipes,
+  UseGuards,
+} from '@nestjs/common';
 import { CouponsService } from './coupons.service';
 import { CreateCouponDto } from './dto/create-coupon.dto';
 import { UpdateCouponDto } from './dto/update-coupon.dto';
+import { AdminGuard } from 'src/common/guards/admin.guard';
 
 @Controller('coupons')
 export class CouponsController {
   constructor(private readonly couponsService: CouponsService) {}
 
   @Post()
-  create(@Body() createCouponDto: CreateCouponDto) {
-    return this.couponsService.create(createCouponDto);
+  @UseGuards(AdminGuard)
+  async create(@Body() createCouponDto: CreateCouponDto) {
+    return await this.couponsService.create(createCouponDto);
   }
 
   @Get()
-  findAll() {
-    return this.couponsService.findAll();
+  findAll(
+    @Param('name') name: string,
+    @Param('page') page: number,
+    @Param('page_size') page_size: number,
+  ) {
+    return this.couponsService.findAll(name, +page, +page_size);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.couponsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.couponsService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCouponDto: UpdateCouponDto) {
-    return this.couponsService.update(+id, updateCouponDto);
+  @UseGuards(AdminGuard)
+  async update(
+    @Param('id') id: string,
+    @Body() updateCouponDto: UpdateCouponDto,
+  ) {
+    return await this.couponsService.update(+id, updateCouponDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.couponsService.remove(+id);
+  @UseGuards(AdminGuard)
+  async remove(@Param('id') id: string) {
+    return await this.couponsService.remove(+id);
   }
 }
