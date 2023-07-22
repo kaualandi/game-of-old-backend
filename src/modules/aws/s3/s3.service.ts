@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common/exceptions';
 import * as AWS from 'aws-sdk';
 
 @Injectable()
@@ -14,19 +15,25 @@ export class S3Service {
   }
 
   async uploadFile(base64: string) {
-    const bufferImage = Buffer.from(
-      base64.replace(/^data:image\/\w+;base64,/, ''),
-      'base64',
-    );
-    const params: AWS.S3.PutObjectRequest = {
-      Bucket: process.env.AWS_S3_BUCKET_NAME,
-      Key: `${Date.now()}.jpg`,
-      Body: bufferImage,
-      ContentType: 'image/jpg',
-    };
+    try {
+      if (base64.startsWith('http')) return base64;
 
-    const { Location } = await this.s3.upload(params).promise();
+      const bufferImage = Buffer.from(
+        base64.replace(/^data:image\/\w+;base64,/, ''),
+        'base64',
+      );
+      const params: AWS.S3.PutObjectRequest = {
+        Bucket: process.env.AWS_S3_BUCKET_NAME,
+        Key: `${Date.now()}.jpg`,
+        Body: bufferImage,
+        ContentType: 'image/jpg',
+      };
 
-    return Location;
+      const { Location } = await this.s3.upload(params).promise();
+
+      return Location;
+    } catch (error) {
+      throw new BadRequestException('Imagem inválida');
+    }
   }
 }
