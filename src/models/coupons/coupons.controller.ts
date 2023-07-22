@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  UsePipes,
   UseGuards,
 } from '@nestjs/common';
 import { CouponsService } from './coupons.service';
