@@ -28,7 +28,7 @@ export class CartController {
       'quantity',
       'customization',
       'customization_name',
-      'customization_price',
+      'customization_number',
     ]),
   )
   async create(
@@ -57,7 +57,7 @@ export class CartController {
       'quantity',
       'customization',
       'customization_name',
-      'customization_price',
+      'customization_number',
     ]),
   )
   async update(

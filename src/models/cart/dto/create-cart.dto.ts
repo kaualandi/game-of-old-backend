@@ -11,5 +11,5 @@ export class CreateCartDto {
   customization: boolean;
 
   customization_name?: string;
-  customization_price?: number;
+  customization_number?: number;
 }

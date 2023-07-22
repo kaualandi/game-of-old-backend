@@ -114,6 +114,7 @@ model OrderItem {
   customization        Boolean
   customization_name   String?
   customization_number Int?
+  customization_price  Int?
   created_at           DateTime       @default(now())
   updated_at           DateTime       @default(now()) @updatedAt
 }
@@ -128,17 +129,17 @@ model Cart {
 }
 
 model CartItem {
-  id                  Int            @id @default(autoincrement())
-  cart_id             Int
-  cart                Cart           @relation(fields: [cart_id], references: [id])
-  product_variant_id  Int
-  product_variant     ProductVariant @relation(fields: [product_variant_id], references: [id])
-  quantity            Int
-  customization       Boolean
-  customization_name  String?
-  customization_price Int?
-  created_at          DateTime       @default(now())
-  updated_at          DateTime       @default(now()) @updatedAt
+  id                   Int            @id @default(autoincrement())
+  cart_id              Int
+  cart                 Cart           @relation(fields: [cart_id], references: [id])
+  product_variant_id   Int
+  product_variant      ProductVariant @relation(fields: [product_variant_id], references: [id])
+  quantity             Int
+  customization        Boolean
+  customization_name   String?
+  customization_number Int?
+  created_at           DateTime       @default(now())
+  updated_at           DateTime       @default(now()) @updatedAt
 }
 
 model Product {
