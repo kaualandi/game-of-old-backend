@@ -32,6 +32,7 @@ export class UsersController {
       'google_id',
       'birth_date',
       'is_admin',
+      'address',
     ]),
   )
   create(@Body() createUserDto: CreateUserDto) {
@@ -62,6 +63,7 @@ export class UsersController {
       'google_id',
       'birth_date',
       'is_admin',
+      'address',
     ]),
   )
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {

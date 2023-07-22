@@ -14,6 +14,12 @@ export class UsersService {
     created_at: true,
     updated_at: true,
     address: true,
+    cart: {
+      select: {
+        id: true,
+        cart_items: true,
+      },
+    },
   };
 
   create(createUserDto: CreateUserDto) {
@@ -22,6 +28,9 @@ export class UsersService {
         ...createUserDto,
         address: {
           create: createUserDto.address,
+        },
+        cart: {
+          create: {},
         },
       },
     });

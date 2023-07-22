@@ -1,4 +1,13 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateConfigDto } from './create-config.dto';
-
-export class UpdateConfigDto extends PartialType(CreateConfigDto) {}
+export class UpdateConfigDto {
+  instagram?: string;
+  facebook?: string;
+  twitter?: string;
+  whatsapp?: string;
+  tiktok?: string;
+  email?: string;
+  phone?: string;
+  cnpj?: string;
+  customization_fee?: number;
+  delivery_fee?: number;
+  free_shipping?: boolean;
+}

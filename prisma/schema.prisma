@@ -176,8 +176,8 @@ model ProductVariant {
   is_active  Boolean     @default(true)
   created_at DateTime    @default(now())
   updated_at DateTime    @default(now()) @updatedAt
-  Order_Item OrderItem[]
-  Cart_Item  CartItem[]
+  order_item OrderItem[]
+  cart_item  CartItem[]
 }
 
 model ProductImage {

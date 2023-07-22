@@ -1,34 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Patch, UsePipes } from '@nestjs/common';
+import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { ConfigService } from './config.service';
-import { CreateConfigDto } from './dto/create-config.dto';
 import { UpdateConfigDto } from './dto/update-config.dto';
 
 @Controller('config')
 export class ConfigController {
   constructor(private readonly configService: ConfigService) {}
 
-  @Post()
-  create(@Body() createConfigDto: CreateConfigDto) {
-    return this.configService.create(createConfigDto);
-  }
-
   @Get()
-  findAll() {
-    return this.configService.findAll();
+  findOne() {
+    return this.configService.findOne(1);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.configService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateConfigDto: UpdateConfigDto) {
-    return this.configService.update(+id, updateConfigDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.configService.remove(+id);
+  @Patch()
+  @UsePipes(new RemoveExtraKeysPipe(['id']))
+  update(@Body() updateConfigDto: UpdateConfigDto) {
+    return this.configService.update(updateConfigDto);
   }
 }

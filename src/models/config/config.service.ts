@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { CreateConfigDto } from './dto/create-config.dto';
 import { UpdateConfigDto } from './dto/update-config.dto';
+import { PrismaService } from 'src/modules/prisma';
 
 @Injectable()
 export class ConfigService {
-  create(createConfigDto: CreateConfigDto) {
-    return 'This action adds a new config';
-  }
-
-  findAll() {
-    return `This action returns all config`;
-  }
+  constructor(private readonly prismaService: PrismaService) {}
 
   findOne(id: number) {
-    return `This action returns a #${id} config`;
+    return this.prismaService.config.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
-  update(id: number, updateConfigDto: UpdateConfigDto) {
-    return `This action updates a #${id} config`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} config`;
+  update(updateConfigDto: UpdateConfigDto) {
+    return this.prismaService.config.update({
+      where: {
+        id: 1,
+      },
+      data: updateConfigDto,
+    });
   }
 }
