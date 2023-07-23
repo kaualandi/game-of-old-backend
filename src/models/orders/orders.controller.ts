@@ -38,18 +38,21 @@ export class OrdersController {
       'installments',
     ]),
   )
-  create(@Body() createOrderDto: CreateOrderDto) {
-    return this.ordersService.create(createOrderDto);
+  async create(@Body() createOrderDto: CreateOrderDto) {
+    return await this.ordersService.create(createOrderDto);
   }
 
   @Get()
-  findAll() {
-    return this.ordersService.findAll();
+  async findAll(
+    @Param('page') page: string,
+    @Param('page_size') page_size: string,
+  ) {
+    return await this.ordersService.findAll(+page, +page_size);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ordersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.ordersService.findOne(+id);
   }
 
   @Patch(':id')
@@ -66,12 +69,15 @@ export class OrdersController {
       'payment_method',
     ]),
   )
-  update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-    return this.ordersService.update(+id, updateOrderDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateOrderDto: UpdateOrderDto,
+  ) {
+    return await this.ordersService.update(+id, updateOrderDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.ordersService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.ordersService.remove(+id);
   }
 }

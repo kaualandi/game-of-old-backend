@@ -36,15 +36,32 @@ export class UsersService {
     });
   }
 
-  findAll(name: string) {
-    return this.prismaService.user.findMany({
+  async findAll(name: string, page: number, page_size: number) {
+    if (!page || !page_size) {
+      throw new NotFoundException(
+        'Especifique a página e o tamanho da página.',
+      );
+    }
+
+    const pagedResult = await this.prismaService.user.findMany({
       select: this.selectUser,
       where: {
         name: {
           contains: name,
         },
       },
+      skip: (page - 1) * page_size,
+      take: page_size,
     });
+
+    const count = await this.prismaService.user.count();
+
+    return {
+      count,
+      results: pagedResult,
+      next: count > page * page_size ? true : false,
+      previous: page <= 1 ? false : true,
+    };
   }
 
   async findOne(id: number) {

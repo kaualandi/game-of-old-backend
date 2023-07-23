@@ -21,11 +21,26 @@ export class ArticlesService {
     });
   }
 
-  findAll(page: number, page_size: number) {
-    return this.prismaService.article.findMany({
+  async findAll(page: number, page_size: number) {
+    if (!page || !page_size) {
+      throw new NotFoundException(
+        'Especifique a página e o tamanho da página.',
+      );
+    }
+
+    const pagedResult = await this.prismaService.article.findMany({
       skip: (page - 1) * page_size,
       take: page_size,
     });
+
+    const count = await this.prismaService.article.count();
+
+    return {
+      count,
+      results: pagedResult,
+      next: count > page * page_size ? true : false,
+      previous: page <= 1 ? false : true,
+    };
   }
 
   async findOne(id: number) {

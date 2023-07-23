@@ -41,8 +41,12 @@ export class UsersController {
 
   @Get()
   @UseGuards(AdminGuard)
-  findAll(@Query('name') name: string) {
-    return this.usersService.findAll(name || '');
+  async findAll(
+    @Query('name') name: string,
+    @Query('page') page: string,
+    @Query('page_size') page_size: string,
+  ) {
+    return this.usersService.findAll(name, +page, +page_size);
   }
 
   @Get(':id')

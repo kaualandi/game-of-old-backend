@@ -50,8 +50,14 @@ export class ProductsService {
     }
   }
 
-  findAll(name: string) {
-    return this.prismaService.product.findMany({
+  async findAll(name: string, page: number, page_size: number) {
+    if (!page || !page_size) {
+      throw new NotFoundException(
+        'Especifique a página e o tamanho da página.',
+      );
+    }
+
+    const pagedResult = await this.prismaService.product.findMany({
       include: {
         images: true,
         variants: true,
@@ -62,7 +68,18 @@ export class ProductsService {
           contains: name,
         },
       },
+      skip: (page - 1) * page_size,
+      take: page_size,
     });
+
+    const count = await this.prismaService.product.count();
+
+    return {
+      count,
+      results: pagedResult,
+      next: count > page * page_size ? true : false,
+      previous: page <= 1 ? false : true,
+    };
   }
 
   async findOne(id: number) {

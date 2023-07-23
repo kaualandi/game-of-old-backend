@@ -27,12 +27,12 @@ export class TagsController {
   }
 
   @Get()
-  findAll(
+  async findAll(
     @Param('name') name: string,
     @Param('page') page: string,
     @Param('page_size') page_size: string,
   ) {
-    return this.tagsService.findAll(name, +page, +page_size);
+    return await this.tagsService.findAll(name, +page, +page_size);
   }
 
   @Get(':id')

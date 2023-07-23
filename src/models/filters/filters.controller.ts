@@ -22,13 +22,17 @@ export class FiltersController {
   }
 
   @Get()
-  async findAll(@Query('name') name: string) {
-    return await this.filtersService.findAll(name || '');
+  async findAll(
+    @Query('name') name: string,
+    @Query('page') page: string,
+    @Query('page_size') page_size: string,
+  ) {
+    return await this.filtersService.findAll(name, +page, +page_size);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.filtersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.filtersService.findOne(+id);
   }
 
   @Patch(':id')

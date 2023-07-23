@@ -25,18 +25,21 @@ export class ArticlesController {
   }
 
   @Get()
-  findAll(@Param('page') page: number, @Param('page_size') page_size: number) {
-    return this.articlesService.findAll(+page, +page_size);
+  async findAll(
+    @Param('page') page: number,
+    @Param('page_size') page_size: number,
+  ) {
+    return await this.articlesService.findAll(+page, +page_size);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.articlesService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.articlesService.findOne(+id);
   }
 
   @Delete(':id')
   @UseGuards(AdminGuard)
-  remove(@Param('id') id: string) {
-    return this.articlesService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.articlesService.remove(+id);
   }
 }

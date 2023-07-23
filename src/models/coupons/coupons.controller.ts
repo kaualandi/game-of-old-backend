@@ -24,12 +24,12 @@ export class CouponsController {
   }
 
   @Get()
-  findAll(
+  async findAll(
     @Param('name') name: string,
     @Param('page') page: number,
     @Param('page_size') page_size: number,
   ) {
-    return this.couponsService.findAll(name, +page, +page_size);
+    return await this.couponsService.findAll(name, +page, +page_size);
   }
 
   @Get(':id')

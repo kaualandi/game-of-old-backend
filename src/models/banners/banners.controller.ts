@@ -26,8 +26,11 @@ export class BannersController {
   }
 
   @Get()
-  findAll(@Param('page') page: number, @Param('page_size') page_size: number) {
-    return this.bannersService.findAll(+page, +page_size);
+  async findAll(
+    @Param('page') page: number,
+    @Param('page_size') page_size: number,
+  ) {
+    return await this.bannersService.findAll(+page, +page_size);
   }
 
   @Get(':id')

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common/exceptions';
 import { CreateCouponDto } from './dto/create-coupon.dto';
 import { UpdateCouponDto } from './dto/update-coupon.dto';
 import { PrismaService } from 'src/modules/prisma';
@@ -11,7 +12,7 @@ export class CouponsService {
     const coupon = await this.findByCode(createCouponDto.code);
 
     if (coupon) {
-      throw new Error('Já existe um cupom com esse código');
+      throw new NotFoundException('Já existe um cupom com esse código');
     }
 
     return this.prismaService.coupon.create({
@@ -19,8 +20,14 @@ export class CouponsService {
     });
   }
 
-  findAll(name: string, page: number, page_size: number) {
-    return this.prismaService.coupon.findMany({
+  async findAll(name: string, page: number, page_size: number) {
+    if (!page || !page_size) {
+      throw new NotFoundException(
+        'Especifique a página e o tamanho da página.',
+      );
+    }
+
+    const pagedResult = await this.prismaService.coupon.findMany({
       where: {
         code: {
           contains: name,
@@ -29,6 +36,15 @@ export class CouponsService {
       skip: (page - 1) * page_size,
       take: page_size,
     });
+
+    const count = await this.prismaService.coupon.count();
+
+    return {
+      count,
+      results: pagedResult,
+      next: count > page * page_size ? true : false,
+      previous: page <= 1 ? false : true,
+    };
   }
 
   async findOne(id: number) {
@@ -39,7 +55,7 @@ export class CouponsService {
     });
 
     if (!coupon) {
-      throw new Error('Cupom não encontrado');
+      throw new NotFoundException('Cupom não encontrado');
     }
 
     return coupon;
@@ -50,7 +66,7 @@ export class CouponsService {
     const coupon = await this.findByCode(updateCouponDto.code);
 
     if (coupon && coupon.id !== id) {
-      throw new Error('Já existe um cupom com esse código');
+      throw new NotFoundException('Já existe um cupom com esse código');
     }
 
     return this.prismaService.coupon.update({

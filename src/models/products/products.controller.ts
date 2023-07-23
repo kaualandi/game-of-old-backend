@@ -35,18 +35,22 @@ export class ProductsController {
       'is_active',
     ]),
   )
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+  async create(@Body() createProductDto: CreateProductDto) {
+    return await this.productsService.create(createProductDto);
   }
 
   @Get()
-  findAll(@Query('name') name: string) {
-    return this.productsService.findAll(name || '');
+  async findAll(
+    @Query('name') name: string,
+    @Query('page') page: string,
+    @Query('page_size') page_size: string,
+  ) {
+    return await this.productsService.findAll(name, +page, +page_size);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.productsService.findOne(+id);
   }
 
   @Patch(':id')
@@ -64,13 +68,16 @@ export class ProductsController {
       'is_active',
     ]),
   )
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(+id, updateProductDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateProductDto: UpdateProductDto,
+  ) {
+    return await this.productsService.update(+id, updateProductDto);
   }
 
   @Delete(':id')
   @UseGuards(AdminGuard)
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.productsService.remove(+id);
   }
 }

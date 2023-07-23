@@ -29,16 +29,18 @@ export class TeamsService {
       );
     }
 
-    const teams = await this.prismaService.team.findMany({
+    const pagedResult = await this.prismaService.team.findMany({
       where: { name: { contains: name } },
       skip: (page - 1) * page_size,
       take: page_size,
     });
 
+    const count = await this.prismaService.team.count();
+
     return {
-      count: await this.prismaService.team.count(),
-      results: teams,
-      next: teams.length < page_size ? false : true,
+      count,
+      results: pagedResult,
+      next: count > page * page_size ? true : false,
       previous: page <= 1 ? false : true,
     };
   }
