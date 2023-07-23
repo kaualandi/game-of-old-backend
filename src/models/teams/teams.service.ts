@@ -1,31 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { NotFoundException } from '@nestjs/common/exceptions';
+import { S3Service } from 'src/modules/aws/s3/s3.service';
+import { PrismaService } from 'src/modules/prisma';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
-import { PrismaService } from 'src/modules/prisma';
-import { ImagesService } from '../images/images.service';
 
 @Injectable()
 export class TeamsService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly imagesService: ImagesService,
+    private readonly s3Service: S3Service,
   ) {}
 
   async create(createTeamDto: CreateTeamDto) {
-    const { name, url } = createTeamDto;
+    const { url } = createTeamDto;
 
-    let image_url = undefined;
-    if (url) {
-      if (!url.startsWith('http')) {
-        image_url = await this.imagesService.saveImage(url);
-      } else {
-        image_url = url;
-      }
-    }
+    createTeamDto.url = await this.s3Service.uploadFile(url);
 
     return this.prismaService.team.create({
-      data: { name, url: image_url },
+      data: createTeamDto,
     });
   }
 
@@ -68,8 +61,8 @@ export class TeamsService {
   async update(id: number, updateTeamDto: UpdateTeamDto) {
     await this.findOne(id);
 
-    if (!updateTeamDto?.url?.startsWith('http')) {
-      updateTeamDto.url = await this.imagesService.saveImage(updateTeamDto.url);
+    if (!updateTeamDto?.url) {
+      updateTeamDto.url = await this.s3Service.uploadFile(updateTeamDto.url);
     }
 
     return this.prismaService.team.update({
