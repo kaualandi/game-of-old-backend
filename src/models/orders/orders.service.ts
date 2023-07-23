@@ -27,6 +27,19 @@ export class OrdersService {
 
     if (order_items.length > 0) {
       for (const item of order_items) {
+        const productVariant =
+          await this.prismaService.productVariant.findUnique({
+            where: { id: item.product_variant_id },
+            include: { product: true },
+          });
+
+        await this.prismaService.product.update({
+          where: { id: productVariant.product.id },
+          data: {
+            sold: productVariant.product.sold + item.quantity,
+          },
+        });
+
         await this.prismaService.orderItem.create({
           data: {
             ...item,

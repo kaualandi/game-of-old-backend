@@ -18,6 +18,7 @@ import { ConfigModule } from './models/config/config.module';
 import { TagsModule } from './models/tags/tags.module';
 import { BannersModule } from './models/banners/banners.module';
 import { ArticlesModule } from './models/articles/articles.module';
+import { HomeModule } from './models/home/home.module';
 
 @Global()
 @Module({
@@ -40,6 +41,7 @@ import { ArticlesModule } from './models/articles/articles.module';
     TagsModule,
     BannersModule,
     ArticlesModule,
+    HomeModule,
   ],
   providers: [AppService],
 })

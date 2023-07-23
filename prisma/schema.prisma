@@ -150,6 +150,7 @@ model Product {
   trending    Boolean          @default(false)
   discount    Int?
   team_id     Int
+  sold        Int              @default(0)
   team        Team             @relation(fields: [team_id], references: [id])
   is_active   Boolean          @default(true)
   created_at  DateTime         @default(now())

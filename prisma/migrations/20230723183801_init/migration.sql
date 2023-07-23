@@ -90,6 +90,7 @@ CREATE TABLE `OrderItem` (
     `customization` BOOLEAN NOT NULL,
     `customization_name` VARCHAR(191) NULL,
     `customization_number` INTEGER NULL,
+    `customization_price` INTEGER NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
@@ -115,7 +116,7 @@ CREATE TABLE `CartItem` (
     `quantity` INTEGER NOT NULL,
     `customization` BOOLEAN NOT NULL,
     `customization_name` VARCHAR(191) NULL,
-    `customization_price` INTEGER NULL,
+    `customization_number` INTEGER NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
@@ -131,6 +132,7 @@ CREATE TABLE `Product` (
     `trending` BOOLEAN NOT NULL DEFAULT false,
     `discount` INTEGER NULL,
     `team_id` INTEGER NOT NULL,
+    `sold` INTEGER NOT NULL DEFAULT 0,
     `is_active` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -231,6 +233,7 @@ CREATE TABLE `Config` (
     `customization_fee` INTEGER NOT NULL,
     `delivery_fee` INTEGER NOT NULL,
     `free_shipping` BOOLEAN NOT NULL,
+    `installment_limit` INTEGER NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
