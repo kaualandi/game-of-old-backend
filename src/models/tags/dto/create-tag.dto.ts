@@ -1,1 +1,8 @@
-export class CreateTagDto {}
+import { IsNotEmpty } from 'class-validator';
+export class CreateTagDto {
+  @IsNotEmpty()
+  name: string;
+
+  @IsNotEmpty()
+  icon: string;
+}
