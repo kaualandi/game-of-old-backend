@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { S3Service } from 'src/modules/aws/s3/s3.service';
 import { PrismaService } from 'src/modules/prisma';
@@ -13,7 +13,7 @@ export class BannersService {
   async create(createBannerDto: CreateBannerDto) {
     const url = await this.s3Service.uploadFile(createBannerDto.image);
 
-    return await this.prismaService.article.create({
+    return await this.prismaService.banner.create({
       data: {
         image: url,
         config_id: 1,
@@ -22,22 +22,30 @@ export class BannersService {
   }
 
   findAll(page: number, page_size: number) {
-    return this.prismaService.article.findMany({
+    return this.prismaService.banner.findMany({
       skip: (page - 1) * page_size,
       take: page_size,
     });
   }
 
-  findOne(id: number) {
-    return this.prismaService.article.findUnique({
+  async findOne(id: number) {
+    const banner = this.prismaService.banner.findUnique({
       where: {
         id,
       },
     });
+
+    if (!banner) {
+      throw new NotFoundException(`Banner não encontrado`);
+    }
+
+    return banner;
   }
 
-  remove(id: number) {
-    return this.prismaService.article.delete({
+  async remove(id: number) {
+    await this.findOne(id);
+
+    return this.prismaService.banner.delete({
       where: {
         id,
       },

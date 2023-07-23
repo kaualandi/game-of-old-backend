@@ -1,5 +1,5 @@
 import { UsersService } from './../users/users.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { PrismaService } from 'src/modules/prisma';
@@ -51,7 +51,7 @@ export class CartService {
   async findOne(id: number, user_id: number) {
     const user = await this.usersService.findOne(user_id);
 
-    return await this.prismaService.cartItem.findUnique({
+    const cartItem = await this.prismaService.cartItem.findUnique({
       where: {
         id,
         cart_id: user.cart.id,
@@ -64,12 +64,23 @@ export class CartService {
         },
       },
     });
+
+    if (!cartItem) {
+      throw new NotFoundException(`Item do carrinho não encontrado`);
+    }
+
+    return cartItem;
   }
 
   async update(id: number, updateCartDto: UpdateCartDto, user_id: number) {
+    await this.findOne(id, user_id);
     const user = await this.usersService.findOne(user_id);
-    const { quantity, customization, customization_name, customization_price } =
-      updateCartDto;
+    const {
+      quantity,
+      customization,
+      customization_name,
+      customization_number,
+    } = updateCartDto;
 
     return await this.prismaService.cartItem.update({
       where: {
@@ -80,12 +91,13 @@ export class CartService {
         quantity,
         customization,
         customization_name,
-        customization_price,
+        customization_number,
       },
     });
   }
 
   async remove(id: number, user_id: number) {
+    await this.findOne(id, user_id);
     const user = await this.usersService.findOne(user_id);
 
     return await this.prismaService.cartItem.delete({

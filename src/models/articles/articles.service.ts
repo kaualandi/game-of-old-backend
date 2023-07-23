@@ -1,5 +1,5 @@
 import { S3Service } from './../../modules/aws/s3/s3.service';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { PrismaService } from 'src/modules/prisma';
 
@@ -28,15 +28,21 @@ export class ArticlesService {
     });
   }
 
-  findOne(id: number) {
-    return this.prismaService.article.findUnique({
+  async findOne(id: number) {
+    const article = await this.prismaService.article.findUnique({
       where: {
         id,
       },
     });
+
+    if (!article) {
+      throw new NotFoundException(`Artigo não encontrado`);
+    }
+
+    return article;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.prismaService.article.delete({
       where: {
         id,

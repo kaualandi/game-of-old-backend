@@ -5,5 +5,5 @@ export class UpdateCartDto extends PartialType(CreateCartDto) {
   quantity?: number;
   customization?: boolean;
   customization_name?: string;
-  customization_price?: number;
+  customization_number?: number;
 }

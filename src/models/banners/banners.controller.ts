@@ -31,12 +31,12 @@ export class BannersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.bannersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.bannersService.findOne(+id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.bannersService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.bannersService.remove(+id);
   }
 }
