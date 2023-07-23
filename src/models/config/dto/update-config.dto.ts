@@ -10,4 +10,5 @@ export class UpdateConfigDto {
   customization_fee?: number;
   delivery_fee?: number;
   free_shipping?: boolean;
+  installment_limit?: number;
 }

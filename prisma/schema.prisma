@@ -243,6 +243,7 @@ model Config {
   customization_fee Int
   delivery_fee      Int
   free_shipping     Boolean
+  installment_limit Int
   created_at        DateTime  @default(now())
   updated_at        DateTime  @default(now()) @updatedAt
   tags              Tag[]

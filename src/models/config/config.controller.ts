@@ -13,7 +13,22 @@ export class ConfigController {
   }
 
   @Patch()
-  @UsePipes(new RemoveExtraKeysPipe(['id']))
+  @UsePipes(
+    new RemoveExtraKeysPipe([
+      'instagram',
+      'facebook',
+      'twitter',
+      'whatsapp',
+      'tiktok',
+      'email',
+      'phone',
+      'cnpj',
+      'customization_fee',
+      'delivery_fee',
+      'free_shipping',
+      'installment_limit',
+    ]),
+  )
   update(@Body() updateConfigDto: UpdateConfigDto) {
     return this.configService.update(updateConfigDto);
   }
