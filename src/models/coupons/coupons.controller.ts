@@ -1,17 +1,19 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
   UseGuards,
+  UsePipes,
 } from '@nestjs/common';
+import { AdminGuard } from 'src/common/guards/admin.guard';
+import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { CouponsService } from './coupons.service';
 import { CreateCouponDto } from './dto/create-coupon.dto';
 import { UpdateCouponDto } from './dto/update-coupon.dto';
-import { AdminGuard } from 'src/common/guards/admin.guard';
 
 @Controller('coupons')
 export class CouponsController {
@@ -19,6 +21,7 @@ export class CouponsController {
 
   @Post()
   @UseGuards(AdminGuard)
+  @UsePipes(new RemoveExtraKeysPipe(['code', 'discount', 'is_active']))
   async create(@Body() createCouponDto: CreateCouponDto) {
     return await this.couponsService.create(createCouponDto);
   }
@@ -39,6 +42,7 @@ export class CouponsController {
 
   @Patch(':id')
   @UseGuards(AdminGuard)
+  @UsePipes(new RemoveExtraKeysPipe(['code', 'discount', 'is_active']))
   async update(
     @Param('id') id: string,
     @Body() updateCouponDto: UpdateCouponDto,

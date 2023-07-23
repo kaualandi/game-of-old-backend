@@ -6,10 +6,12 @@ import {
   Param,
   Patch,
   Post,
+  Request,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
 import { AdminGuard } from 'src/common/guards/admin.guard';
+import { AuthGuard, AuthRequest } from 'src/common/guards/auth.guard';
 import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
@@ -20,7 +22,7 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
-  @UseGuards(AdminGuard)
+  @UseGuards(AuthGuard)
   @UsePipes(
     new RemoveExtraKeysPipe([
       'status',
@@ -43,6 +45,7 @@ export class OrdersController {
   }
 
   @Get()
+  @UseGuards(AdminGuard)
   async findAll(
     @Param('page') page: string,
     @Param('page_size') page_size: string,
@@ -77,7 +80,14 @@ export class OrdersController {
   }
 
   @Delete(':id')
+  @UseGuards(AdminGuard)
   async remove(@Param('id') id: string) {
     return await this.ordersService.remove(+id);
+  }
+
+  @Patch(':id/cancel')
+  @UseGuards(AuthGuard)
+  async cancel(@Param('id') id: string, @Request() request: AuthRequest) {
+    return await this.ordersService.cancel(+id, request.user_id);
   }
 }

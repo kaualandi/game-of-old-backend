@@ -108,4 +108,32 @@ export class OrdersService {
 
     return this.prismaService.order.delete({ where: { id } });
   }
+
+  async cancel(id: number, user_id: number) {
+    const order = await this.findOne(id);
+    const user = await this.prismaService.user.findUnique({
+      where: { id: user_id },
+    });
+
+    if (order.user_id !== user_id && !user.is_admin) {
+      throw new NotFoundException(`Pedido não encontrado.`);
+    }
+
+    if (order.status === 'CANCELLED') {
+      throw new NotFoundException(`Pedido já cancelado.`);
+    }
+
+    if (order.status.match(/(SENT|DELIVERED)/)) {
+      throw new NotFoundException(
+        `Impossível cancelar esse pedido no estado atual.`,
+      );
+    }
+
+    return this.prismaService.order.update({
+      where: { id },
+      data: {
+        status: 'CANCELLED',
+      },
+    });
+  }
 }

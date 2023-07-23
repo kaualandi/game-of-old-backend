@@ -1,22 +1,28 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
   Query,
+  UseGuards,
+  UsePipes,
 } from '@nestjs/common';
-import { FiltersService } from './filters.service';
+import { AdminGuard } from 'src/common/guards/admin.guard';
+import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { CreateFilterDto } from './dto/create-filter.dto';
 import { UpdateFilterDto } from './dto/update-filter.dto';
+import { FiltersService } from './filters.service';
 
 @Controller('filters')
 export class FiltersController {
   constructor(private readonly filtersService: FiltersService) {}
 
   @Post()
+  @UseGuards(AdminGuard)
+  @UsePipes(new RemoveExtraKeysPipe(['name', 'category_id']))
   create(@Body() createFilterDto: CreateFilterDto) {
     return this.filtersService.create(createFilterDto);
   }
@@ -36,6 +42,8 @@ export class FiltersController {
   }
 
   @Patch(':id')
+  @UseGuards(AdminGuard)
+  @UsePipes(new RemoveExtraKeysPipe(['name', 'category_id']))
   async update(
     @Param('id') id: string,
     @Body() updateFilterDto: UpdateFilterDto,
@@ -44,6 +52,7 @@ export class FiltersController {
   }
 
   @Delete(':id')
+  @UseGuards(AdminGuard)
   async remove(@Param('id') id: string) {
     return await this.filtersService.remove(+id);
   }

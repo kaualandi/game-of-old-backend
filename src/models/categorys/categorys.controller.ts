@@ -29,7 +29,7 @@ export class CategorysController {
 
   @Get()
   findAll(@Query('name') name: string) {
-    return this.categorysService.findAll(name || '');
+    return this.categorysService.findAll(name);
   }
 
   @Get(':id')

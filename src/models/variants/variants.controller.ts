@@ -29,7 +29,7 @@ export class VariantsController {
 
   @Get()
   findAll(@Query('name') name: string) {
-    return this.variantService.findAll(name || '');
+    return this.variantService.findAll(name);
   }
 
   @Get(':id')

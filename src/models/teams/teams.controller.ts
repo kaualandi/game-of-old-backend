@@ -30,7 +30,7 @@ export class TeamsController {
     @Query('page') page: string,
     @Query('page_size') page_size: string,
   ) {
-    return await this.teamsService.findAll(name || '', +page, +page_size);
+    return await this.teamsService.findAll(name, +page, +page_size);
   }
 
   @Get(':id')

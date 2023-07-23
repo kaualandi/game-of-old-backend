@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Patch, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Patch,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
+import { AdminGuard } from 'src/common/guards/admin.guard';
 import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/remove-extra-keys.pipe';
 import { ConfigService } from './config.service';
 import { UpdateConfigDto } from './dto/update-config.dto';
@@ -13,6 +21,7 @@ export class ConfigController {
   }
 
   @Patch()
+  @UseGuards(AdminGuard)
   @UsePipes(
     new RemoveExtraKeysPipe([
       'instagram',
