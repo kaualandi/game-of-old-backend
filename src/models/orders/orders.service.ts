@@ -8,8 +8,22 @@ export class OrdersService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(createOrderDto: CreateOrderDto) {
-    const { order_items, ...order } = createOrderDto;
-    const createdOrder = await this.prismaService.order.create({ data: order });
+    const {
+      order_items,
+      card_number,
+      card_validity,
+      card_holder_name,
+      user_id,
+      address_id,
+      ...order
+    } = createOrderDto;
+    const createdOrder = await this.prismaService.order.create({
+      data: {
+        ...order,
+        user: { connect: { id: user_id } },
+        address: { connect: { id: address_id } },
+      },
+    });
 
     if (order_items.length > 0) {
       for (const item of order_items) {
@@ -22,7 +36,12 @@ export class OrdersService {
       }
     }
 
-    return createdOrder;
+    return {
+      worked: true,
+      status: 'PENDING',
+      order_id: createdOrder.id,
+      qr_code: null,
+    };
   }
 
   findAll() {

@@ -34,4 +34,10 @@ export class CreateOrderDto {
 
   @IsNotEmpty()
   payment_method: PaymentMethod;
+
+  card_number: string;
+  card_validity: string;
+  card_cvv: string;
+  card_holder_name: string;
+  installments: number;
 }

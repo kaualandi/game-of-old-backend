@@ -31,6 +31,11 @@ export class OrdersController {
       'customization_fee',
       'order_items',
       'payment_method',
+      'card_number',
+      'card_validity',
+      'card_cvv',
+      'card_holder_name',
+      'installments',
     ]),
   )
   create(@Body() createOrderDto: CreateOrderDto) {
