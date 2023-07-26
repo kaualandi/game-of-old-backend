@@ -28,8 +28,12 @@ export class CategorysController {
   }
 
   @Get()
-  findAll(@Query('name') name: string) {
-    return this.categorysService.findAll(name);
+  async findAll(
+    @Query('name') name: string,
+    @Query('page') page: string,
+    @Query('page_size') page_size: string,
+  ) {
+    return await this.categorysService.findAll(name, +page, +page_size);
   }
 
   @Get(':id')

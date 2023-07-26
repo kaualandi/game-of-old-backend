@@ -15,8 +15,14 @@ export class CategorysService {
     return this.prismaService.category.create({ data: createCategoryDto });
   }
 
-  findAll(name: string) {
-    return this.prismaService.category.findMany({
+  async findAll(name: string, page: number, page_size: number) {
+    if (!page || !page_size) {
+      throw new NotFoundException(
+        'Especifique a página e o tamanho da página.',
+      );
+    }
+
+    const pagedResult = await this.prismaService.category.findMany({
       include: { _count: true },
       where: {
         name: {
@@ -24,6 +30,15 @@ export class CategorysService {
         },
       },
     });
+
+    const count = await this.prismaService.category.count();
+
+    return {
+      count,
+      results: pagedResult,
+      next: count > page * page_size ? true : false,
+      previous: page <= 1 ? false : true,
+    };
   }
 
   async findOne(id: number) {
