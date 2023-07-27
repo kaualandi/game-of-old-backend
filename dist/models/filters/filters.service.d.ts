@@ -13,7 +13,21 @@ export declare class FiltersService {
     }, unknown, never> & {}, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(name: string, page: number, page_size: number): Promise<{
         count: number;
-        results: (import("@prisma/client/runtime/library").GetResult<{
+        results: ({
+            category: import("@prisma/client/runtime/library").GetResult<{
+                id: number;
+                name: string;
+                created_at: Date;
+                updated_at: Date;
+            }, unknown, never> & {};
+            products: (import("@prisma/client/runtime/library").GetResult<{
+                id: number;
+                product_id: number;
+                filter_id: number;
+                created_at: Date;
+                updated_at: Date;
+            }, unknown, never> & {})[];
+        } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             category_id: number;
@@ -24,6 +38,12 @@ export declare class FiltersService {
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
+        category: import("@prisma/client/runtime/library").GetResult<{
+            id: number;
+            name: string;
+            created_at: Date;
+            updated_at: Date;
+        }, unknown, never> & {};
         products: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             product_id: number;
