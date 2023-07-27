@@ -19,8 +19,11 @@ let CategorysService = class CategorysService {
     create(createCategoryDto) {
         return this.prismaService.category.create({ data: createCategoryDto });
     }
-    findAll(name) {
-        return this.prismaService.category.findMany({
+    async findAll(name, page, page_size) {
+        if (!page || !page_size) {
+            throw new common_1.NotFoundException('Especifique a página e o tamanho da página.');
+        }
+        const pagedResult = await this.prismaService.category.findMany({
             include: { _count: true },
             where: {
                 name: {
@@ -28,6 +31,13 @@ let CategorysService = class CategorysService {
                 },
             },
         });
+        const count = await this.prismaService.category.count();
+        return {
+            count,
+            results: pagedResult,
+            next: count > page * page_size ? true : false,
+            previous: page <= 1 ? false : true,
+        };
     }
     async findOne(id) {
         const category = await this.prismaService.category.findUnique({

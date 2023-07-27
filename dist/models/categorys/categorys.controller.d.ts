@@ -10,16 +10,21 @@ export declare class CategorysController {
         created_at: Date;
         updated_at: Date;
     }, unknown, never> & {}, never, import("@prisma/client/runtime/library").DefaultArgs>;
-    findAll(name: string): import(".prisma/client").Prisma.PrismaPromise<({
-        _count: {
-            filters: number;
-        };
-    } & import("@prisma/client/runtime/library").GetResult<{
-        id: number;
-        name: string;
-        created_at: Date;
-        updated_at: Date;
-    }, unknown, never> & {})[]>;
+    findAll(name: string, page: string, page_size: string): Promise<{
+        count: number;
+        results: ({
+            _count: {
+                filters: number;
+            };
+        } & import("@prisma/client/runtime/library").GetResult<{
+            id: number;
+            name: string;
+            created_at: Date;
+            updated_at: Date;
+        }, unknown, never> & {})[];
+        next: boolean;
+        previous: boolean;
+    }>;
     findOne(id: string): Promise<{
         filters: (import("@prisma/client/runtime/library").GetResult<{
             id: number;

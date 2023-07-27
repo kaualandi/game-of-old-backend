@@ -17,9 +17,5 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateCategoryDto.prototype, "name", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateCategoryDto.prototype, "description", void 0);
 exports.CreateCategoryDto = CreateCategoryDto;
 //# sourceMappingURL=create-category.dto.js.map
