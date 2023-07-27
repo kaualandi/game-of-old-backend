@@ -21,6 +21,7 @@ export class FiltersService {
 
     const pagedResult = await this.prismaService.filter.findMany({
       where: { name: { contains: name } },
+      include: { category: true, products: true },
       skip: (page - 1) * page_size,
       take: page_size,
     });
@@ -38,7 +39,7 @@ export class FiltersService {
   async findOne(id: number) {
     const filter = await this.prismaService.filter.findUnique({
       where: { id },
-      include: { products: true },
+      include: { category: true, products: true },
     });
 
     if (!filter) {
