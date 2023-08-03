@@ -19,6 +19,7 @@ import { TagsModule } from './models/tags/tags.module';
 import { BannersModule } from './models/banners/banners.module';
 import { ArticlesModule } from './models/articles/articles.module';
 import { HomeModule } from './models/home/home.module';
+import { SectionsModule } from './models/sections/sections.module';
 
 @Global()
 @Module({
@@ -42,6 +43,7 @@ import { HomeModule } from './models/home/home.module';
     BannersModule,
     ArticlesModule,
     HomeModule,
+    SectionsModule,
   ],
   providers: [AppService],
 })
