@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import {
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common/exceptions';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
 import { PrismaService } from 'src/modules/prisma';
@@ -15,7 +19,7 @@ export class TagsService {
 
   async findAll(name: string, page: number, page_size: number) {
     if (!page || !page_size) {
-      throw new NotFoundException(
+      throw new BadRequestException(
         'Especifique a página e o tamanho da página.',
       );
     }

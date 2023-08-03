@@ -1,5 +1,9 @@
 import { S3Service } from './../../modules/aws/s3/s3.service';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import {
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common/exceptions';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { PrismaService } from 'src/modules/prisma';
 
@@ -23,7 +27,7 @@ export class ArticlesService {
 
   async findAll(page: number, page_size: number) {
     if (!page || !page_size) {
-      throw new NotFoundException(
+      throw new BadRequestException(
         'Especifique a página e o tamanho da página.',
       );
     }

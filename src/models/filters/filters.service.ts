@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { NotFoundException } from '@nestjs/common/exceptions';
+import {
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common/exceptions';
 import { CreateFilterDto } from './dto/create-filter.dto';
 import { UpdateFilterDto } from './dto/update-filter.dto';
 import { PrismaService } from 'src/modules/prisma';
@@ -14,7 +17,7 @@ export class FiltersService {
 
   async findAll(name: string, page: number, page_size: number) {
     if (!page || !page_size) {
-      throw new NotFoundException(
+      throw new BadRequestException(
         'Especifique a página e o tamanho da página.',
       );
     }

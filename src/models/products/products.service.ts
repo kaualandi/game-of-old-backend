@@ -1,8 +1,8 @@
+import { Injectable } from '@nestjs/common';
 import {
-  BadRequestException,
-  Injectable,
   NotFoundException,
-} from '@nestjs/common';
+  BadRequestException,
+} from '@nestjs/common/exceptions';
 import { PrismaService } from 'src/modules/prisma';
 import { VariantsService } from '../variants/variants.service';
 import { ImagesService } from './../images/images.service';
@@ -52,7 +52,7 @@ export class ProductsService {
 
   async findAll(name: string, page: number, page_size: number) {
     if (!page || !page_size) {
-      throw new NotFoundException(
+      throw new BadRequestException(
         'Especifique a página e o tamanho da página.',
       );
     }

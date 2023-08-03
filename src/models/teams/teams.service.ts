@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { NotFoundException } from '@nestjs/common/exceptions';
+import {
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common/exceptions';
 import { S3Service } from 'src/modules/aws/s3/s3.service';
 import { PrismaService } from 'src/modules/prisma';
 import { CreateTeamDto } from './dto/create-team.dto';
@@ -24,7 +27,7 @@ export class TeamsService {
 
   async findAll(name: string, page: number, page_size: number) {
     if (!page || !page_size) {
-      throw new NotFoundException(
+      throw new BadRequestException(
         'Especifique a página e o tamanho da página.',
       );
     }

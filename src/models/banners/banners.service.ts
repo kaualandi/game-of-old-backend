@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import {
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common/exceptions';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { S3Service } from 'src/modules/aws/s3/s3.service';
 import { PrismaService } from 'src/modules/prisma';
@@ -23,7 +27,7 @@ export class BannersService {
 
   async findAll(page: number, page_size: number) {
     if (!page || !page_size) {
-      throw new NotFoundException(
+      throw new BadRequestException(
         'Especifique a página e o tamanho da página.',
       );
     }
