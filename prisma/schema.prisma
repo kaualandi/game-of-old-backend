@@ -226,7 +226,7 @@ model Section {
   name       String
   created_at DateTime  @default(now())
   updated_at DateTime  @default(now()) @updatedAt
-  Category   Category?
+  category   Category?
 }
 
 model Avaliation {

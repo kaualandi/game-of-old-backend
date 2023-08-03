@@ -21,17 +21,49 @@ export class SectionsService {
         'Especifique a página e o tamanho da página.',
       );
     }
+
+    const pagedResult = await this.prismaService.section.findMany({
+      where: { name: { contains: name } },
+      include: { category: true },
+      skip: (page - 1) * page_size,
+      take: page_size,
+    });
+
+    const count = await this.prismaService.section.count();
+
+    return {
+      count,
+      results: pagedResult,
+      next: count > page * page_size ? true : false,
+      previous: page <= 1 ? false : true,
+    };
   }
 
   async findOne(id: number) {
-    return `This action returns a #${id} section`;
+    const filter = await this.prismaService.section.findUnique({
+      where: { id },
+      include: { category: true },
+    });
+
+    if (!filter) {
+      throw new NotFoundException(`Filtro não encontrado`);
+    }
+
+    return filter;
   }
 
   async update(id: number, updateSectionDto: UpdateSectionDto) {
-    return `This action updates a #${id} section`;
+    await this.findOne(id);
+
+    return this.prismaService.section.update({
+      where: { id },
+      data: updateSectionDto,
+    });
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} section`;
+    await this.findOne(id);
+
+    return this.prismaService.section.delete({ where: { id } });
   }
 }
