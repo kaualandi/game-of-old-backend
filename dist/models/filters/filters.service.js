@@ -22,7 +22,7 @@ let FiltersService = class FiltersService {
     }
     async findAll(name, page, page_size) {
         if (!page || !page_size) {
-            throw new exceptions_1.NotFoundException('Especifique a página e o tamanho da página.');
+            throw new exceptions_1.BadRequestException('Especifique a página e o tamanho da página.');
         }
         const pagedResult = await this.prismaService.filter.findMany({
             where: { name: { contains: name } },

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategorysService = void 0;
 const common_1 = require("@nestjs/common");
+const exceptions_1 = require("@nestjs/common/exceptions");
 const prisma_service_1 = require("./../../modules/prisma/prisma.service");
 let CategorysService = class CategorysService {
     constructor(prismaService) {
@@ -21,7 +22,7 @@ let CategorysService = class CategorysService {
     }
     async findAll(name, page, page_size) {
         if (!page || !page_size) {
-            throw new common_1.NotFoundException('Especifique a página e o tamanho da página.');
+            throw new exceptions_1.BadRequestException('Especifique a página e o tamanho da página.');
         }
         const pagedResult = await this.prismaService.category.findMany({
             include: { _count: true },
@@ -45,7 +46,7 @@ let CategorysService = class CategorysService {
             include: { filters: true, _count: true },
         });
         if (!category) {
-            throw new common_1.NotFoundException(`Categoria não encontrada`);
+            throw new exceptions_1.NotFoundException(`Categoria não encontrada`);
         }
         return category;
     }
@@ -59,7 +60,7 @@ let CategorysService = class CategorysService {
     async remove(id) {
         const category = await this.findOne(id);
         if (category.filters.length > 0) {
-            throw new common_1.BadRequestException(`Existem filtros cadastrados nesta categoria, remova-os antes de deletar a categoria`);
+            throw new exceptions_1.BadRequestException(`Existem filtros cadastrados nesta categoria, remova-os antes de deletar a categoria`);
         }
         return this.prismaService.category.delete({ where: { id } });
     }

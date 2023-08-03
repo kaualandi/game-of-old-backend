@@ -9,29 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TagsService = void 0;
+exports.SectionsService = void 0;
 const common_1 = require("@nestjs/common");
 const exceptions_1 = require("@nestjs/common/exceptions");
 const prisma_1 = require("../../modules/prisma");
-let TagsService = class TagsService {
+let SectionsService = class SectionsService {
     constructor(prismaService) {
         this.prismaService = prismaService;
     }
-    create(createTagDto) {
-        return this.prismaService.tag.create({
-            data: Object.assign(Object.assign({}, createTagDto), { config_id: 1 }),
-        });
+    create(createSectionDto) {
+        this.prismaService.section.create({ data: createSectionDto });
     }
     async findAll(name, page, page_size) {
         if (!page || !page_size) {
             throw new exceptions_1.BadRequestException('Especifique a página e o tamanho da página.');
         }
-        const pagedResult = await this.prismaService.tag.findMany({
+        const pagedResult = await this.prismaService.section.findMany({
             where: { name: { contains: name } },
+            include: { category: true },
             skip: (page - 1) * page_size,
             take: page_size,
         });
-        const count = await this.prismaService.tag.count();
+        const count = await this.prismaService.section.count();
         return {
             count,
             results: pagedResult,
@@ -40,31 +39,30 @@ let TagsService = class TagsService {
         };
     }
     async findOne(id) {
-        const tag = await this.prismaService.tag.findUnique({
+        const filter = await this.prismaService.section.findUnique({
             where: { id },
+            include: { category: true },
         });
-        if (!tag) {
-            throw new exceptions_1.NotFoundException(`Tag não encontrada`);
+        if (!filter) {
+            throw new exceptions_1.NotFoundException(`Filtro não encontrado`);
         }
-        return tag;
+        return filter;
     }
-    async update(id, updateTagDto) {
+    async update(id, updateSectionDto) {
         await this.findOne(id);
-        return this.prismaService.tag.update({
+        return this.prismaService.section.update({
             where: { id },
-            data: updateTagDto,
+            data: updateSectionDto,
         });
     }
     async remove(id) {
         await this.findOne(id);
-        return this.prismaService.tag.delete({
-            where: { id },
-        });
+        return this.prismaService.section.delete({ where: { id } });
     }
 };
-TagsService = __decorate([
+SectionsService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_1.PrismaService])
-], TagsService);
-exports.TagsService = TagsService;
-//# sourceMappingURL=tags.service.js.map
+], SectionsService);
+exports.SectionsService = SectionsService;
+//# sourceMappingURL=sections.service.js.map

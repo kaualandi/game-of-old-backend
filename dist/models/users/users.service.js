@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
+const exceptions_1 = require("@nestjs/common/exceptions");
 const prisma_1 = require("../../modules/prisma");
 let UsersService = class UsersService {
     constructor(prismaService) {
@@ -42,7 +43,7 @@ let UsersService = class UsersService {
     }
     async findAll(name, page, page_size) {
         if (!page || !page_size) {
-            throw new common_1.NotFoundException('Especifique a página e o tamanho da página.');
+            throw new exceptions_1.BadRequestException('Especifique a página e o tamanho da página.');
         }
         const pagedResult = await this.prismaService.user.findMany({
             select: this.selectUser,
@@ -68,7 +69,7 @@ let UsersService = class UsersService {
             select: this.selectUser,
         });
         if (!user) {
-            throw new common_1.NotFoundException(`Usuário não encontrado`);
+            throw new exceptions_1.NotFoundException(`Usuário não encontrado`);
         }
         return user;
     }
@@ -93,7 +94,7 @@ let UsersService = class UsersService {
             where: { id },
         });
         if (!user) {
-            throw new common_1.NotFoundException(`Usuário não encontrado`);
+            throw new exceptions_1.NotFoundException(`Usuário não encontrado`);
         }
         return user;
     }

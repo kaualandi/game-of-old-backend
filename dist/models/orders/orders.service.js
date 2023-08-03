@@ -22,6 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrdersService = void 0;
 const common_1 = require("@nestjs/common");
+const exceptions_1 = require("@nestjs/common/exceptions");
 const prisma_1 = require("../../modules/prisma");
 let OrdersService = class OrdersService {
     constructor(prismaService) {
@@ -58,7 +59,7 @@ let OrdersService = class OrdersService {
     }
     async findAll(page, page_size) {
         if (!page || !page_size) {
-            throw new common_1.NotFoundException('Especifique a página e o tamanho da página.');
+            throw new exceptions_1.BadRequestException('Especifique a página e o tamanho da página.');
         }
         const pagedResult = await this.prismaService.order.findMany({
             include: {
@@ -83,7 +84,7 @@ let OrdersService = class OrdersService {
             },
         });
         if (!order) {
-            throw new common_1.NotFoundException(`Pedido não encontrado`);
+            throw new exceptions_1.NotFoundException(`Pedido não encontrado`);
         }
         return order;
     }
@@ -109,13 +110,13 @@ let OrdersService = class OrdersService {
             where: { id: user_id },
         });
         if (order.user_id !== user_id && !user.is_admin) {
-            throw new common_1.NotFoundException(`Pedido não encontrado.`);
+            throw new exceptions_1.NotFoundException(`Pedido não encontrado.`);
         }
         if (order.status === 'CANCELLED') {
-            throw new common_1.NotFoundException(`Pedido já cancelado.`);
+            throw new exceptions_1.NotFoundException(`Pedido já cancelado.`);
         }
         if (order.status.match(/(SENT|DELIVERED)/)) {
-            throw new common_1.NotFoundException(`Impossível cancelar esse pedido no estado atual.`);
+            throw new exceptions_1.NotFoundException(`Impossível cancelar esse pedido no estado atual.`);
         }
         return this.prismaService.order.update({
             where: { id },

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BannersService = void 0;
 const common_1 = require("@nestjs/common");
+const exceptions_1 = require("@nestjs/common/exceptions");
 const s3_service_1 = require("../../modules/aws/s3/s3.service");
 const prisma_1 = require("../../modules/prisma");
 let BannersService = class BannersService {
@@ -29,7 +30,7 @@ let BannersService = class BannersService {
     }
     async findAll(page, page_size) {
         if (!page || !page_size) {
-            throw new common_1.NotFoundException('Especifique a página e o tamanho da página.');
+            throw new exceptions_1.BadRequestException('Especifique a página e o tamanho da página.');
         }
         const pagedResult = await this.prismaService.banner.findMany({
             skip: (page - 1) * page_size,
@@ -50,7 +51,7 @@ let BannersService = class BannersService {
             },
         });
         if (!banner) {
-            throw new common_1.NotFoundException(`Banner não encontrado`);
+            throw new exceptions_1.NotFoundException(`Banner não encontrado`);
         }
         return banner;
     }

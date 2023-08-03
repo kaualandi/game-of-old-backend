@@ -1,16 +1,10 @@
-import { CreateFilterDto } from './dto/create-filter.dto';
-import { UpdateFilterDto } from './dto/update-filter.dto';
-import { FiltersService } from './filters.service';
-export declare class FiltersController {
-    private readonly filtersService;
-    constructor(filtersService: FiltersService);
-    create(createFilterDto: CreateFilterDto): import(".prisma/client").Prisma.Prisma__FilterClient<import("@prisma/client/runtime/library").GetResult<{
-        id: number;
-        name: string;
-        category_id: number;
-        created_at: Date;
-        updated_at: Date;
-    }, unknown, never> & {}, never, import("@prisma/client/runtime/library").DefaultArgs>;
+import { CreateSectionDto } from './dto/create-section.dto';
+import { UpdateSectionDto } from './dto/update-section.dto';
+import { SectionsService } from './sections.service';
+export declare class SectionsController {
+    private readonly sectionsService;
+    constructor(sectionsService: SectionsService);
+    create(createSectionDto: CreateSectionDto): void;
     findAll(name: string, page: string, page_size: string): Promise<{
         count: number;
         results: ({
@@ -21,17 +15,9 @@ export declare class FiltersController {
                 updated_at: Date;
                 section_id: number;
             }, unknown, never> & {};
-            products: (import("@prisma/client/runtime/library").GetResult<{
-                id: number;
-                product_id: number;
-                filter_id: number;
-                created_at: Date;
-                updated_at: Date;
-            }, unknown, never> & {})[];
         } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
-            category_id: number;
             created_at: Date;
             updated_at: Date;
         }, unknown, never> & {})[];
@@ -46,31 +32,21 @@ export declare class FiltersController {
             updated_at: Date;
             section_id: number;
         }, unknown, never> & {};
-        products: (import("@prisma/client/runtime/library").GetResult<{
-            id: number;
-            product_id: number;
-            filter_id: number;
-            created_at: Date;
-            updated_at: Date;
-        }, unknown, never> & {})[];
     } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
-        category_id: number;
         created_at: Date;
         updated_at: Date;
     }, unknown, never> & {}>;
-    update(id: string, updateFilterDto: UpdateFilterDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+    update(id: string, updateSectionDto: UpdateSectionDto): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
-        category_id: number;
         created_at: Date;
         updated_at: Date;
     }, unknown, never> & {}>;
     remove(id: string): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
-        category_id: number;
         created_at: Date;
         updated_at: Date;
     }, unknown, never> & {}>;

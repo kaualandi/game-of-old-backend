@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ArticlesService = void 0;
 const s3_service_1 = require("./../../modules/aws/s3/s3.service");
 const common_1 = require("@nestjs/common");
+const exceptions_1 = require("@nestjs/common/exceptions");
 const prisma_1 = require("../../modules/prisma");
 let ArticlesService = class ArticlesService {
     constructor(s3Service, prismaService) {
@@ -29,7 +30,7 @@ let ArticlesService = class ArticlesService {
     }
     async findAll(page, page_size) {
         if (!page || !page_size) {
-            throw new common_1.NotFoundException('Especifique a página e o tamanho da página.');
+            throw new exceptions_1.BadRequestException('Especifique a página e o tamanho da página.');
         }
         const pagedResult = await this.prismaService.article.findMany({
             skip: (page - 1) * page_size,
@@ -50,7 +51,7 @@ let ArticlesService = class ArticlesService {
             },
         });
         if (!article) {
-            throw new common_1.NotFoundException(`Artigo não encontrado`);
+            throw new exceptions_1.NotFoundException(`Artigo não encontrado`);
         }
         return article;
     }

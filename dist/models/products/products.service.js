@@ -22,6 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsService = void 0;
 const common_1 = require("@nestjs/common");
+const exceptions_1 = require("@nestjs/common/exceptions");
 const prisma_1 = require("../../modules/prisma");
 const variants_service_1 = require("../variants/variants.service");
 const images_service_1 = require("./../images/images.service");
@@ -56,12 +57,12 @@ let ProductsService = class ProductsService {
             return productCreated;
         }
         catch (error) {
-            throw new common_1.BadRequestException(error.message);
+            throw new exceptions_1.BadRequestException(error.message);
         }
     }
     async findAll(name, page, page_size) {
         if (!page || !page_size) {
-            throw new common_1.NotFoundException('Especifique a página e o tamanho da página.');
+            throw new exceptions_1.BadRequestException('Especifique a página e o tamanho da página.');
         }
         const pagedResult = await this.prismaService.product.findMany({
             include: {
@@ -96,7 +97,7 @@ let ProductsService = class ProductsService {
             },
         });
         if (!product) {
-            throw new common_1.NotFoundException(`Produto não encontrado`);
+            throw new exceptions_1.NotFoundException(`Produto não encontrado`);
         }
         return product;
     }
@@ -129,7 +130,7 @@ let ProductsService = class ProductsService {
             return productUpdate;
         }
         catch (error) {
-            throw new common_1.BadRequestException(error.message);
+            throw new exceptions_1.BadRequestException(error.message);
         }
     }
     async remove(id) {

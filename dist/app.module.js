@@ -28,6 +28,7 @@ const tags_module_1 = require("./models/tags/tags.module");
 const banners_module_1 = require("./models/banners/banners.module");
 const articles_module_1 = require("./models/articles/articles.module");
 const home_module_1 = require("./models/home/home.module");
+const sections_module_1 = require("./models/sections/sections.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -53,6 +54,7 @@ AppModule = __decorate([
             banners_module_1.BannersModule,
             articles_module_1.ArticlesModule,
             home_module_1.HomeModule,
+            sections_module_1.SectionsModule,
         ],
         providers: [app_service_1.AppService],
     })
