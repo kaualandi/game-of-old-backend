@@ -26,7 +26,7 @@ let SectionsService = class SectionsService {
         }
         const pagedResult = await this.prismaService.section.findMany({
             where: { name: { contains: name } },
-            include: { category: true },
+            include: { categorys: true },
             skip: (page - 1) * page_size,
             take: page_size,
         });
@@ -41,7 +41,7 @@ let SectionsService = class SectionsService {
     async findOne(id) {
         const filter = await this.prismaService.section.findUnique({
             where: { id },
-            include: { category: true },
+            include: { categorys: true },
         });
         if (!filter) {
             throw new exceptions_1.NotFoundException(`Filtro não encontrado`);

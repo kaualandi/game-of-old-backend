@@ -8,13 +8,13 @@ export declare class SectionsService {
     findAll(name: string, page: number, page_size: number): Promise<{
         count: number;
         results: ({
-            category: import("@prisma/client/runtime/library").GetResult<{
+            categorys: (import("@prisma/client/runtime/library").GetResult<{
                 id: number;
                 name: string;
                 created_at: Date;
                 updated_at: Date;
                 section_id: number;
-            }, unknown, never> & {};
+            }, unknown, never> & {})[];
         } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
@@ -25,13 +25,13 @@ export declare class SectionsService {
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
-        category: import("@prisma/client/runtime/library").GetResult<{
+        categorys: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             created_at: Date;
             updated_at: Date;
             section_id: number;
-        }, unknown, never> & {};
+        }, unknown, never> & {})[];
     } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
