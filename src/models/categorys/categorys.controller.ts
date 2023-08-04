@@ -22,7 +22,7 @@ export class CategorysController {
 
   @Post()
   @UseGuards(AdminGuard)
-  @UsePipes(new RemoveExtraKeysPipe(['name']))
+  @UsePipes(new RemoveExtraKeysPipe(['name', 'section_id']))
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categorysService.create(createCategoryDto);
   }
@@ -43,7 +43,7 @@ export class CategorysController {
 
   @Patch(':id')
   @UseGuards(AdminGuard)
-  @UsePipes(new RemoveExtraKeysPipe(['name']))
+  @UsePipes(new RemoveExtraKeysPipe(['name', 'section_id']))
   update(
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
