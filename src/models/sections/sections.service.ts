@@ -24,7 +24,7 @@ export class SectionsService {
 
     const pagedResult = await this.prismaService.section.findMany({
       where: { name: { contains: name } },
-      include: { category: true },
+      include: { categorys: true },
       skip: (page - 1) * page_size,
       take: page_size,
     });
@@ -42,7 +42,7 @@ export class SectionsService {
   async findOne(id: number) {
     const filter = await this.prismaService.section.findUnique({
       where: { id },
-      include: { category: true },
+      include: { categorys: true },
     });
 
     if (!filter) {

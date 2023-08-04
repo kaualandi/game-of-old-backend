@@ -217,16 +217,16 @@ model Category {
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
   filters    Filter[]
-  section_id Int      @unique
+  section_id Int
   section    Section? @relation(fields: [section_id], references: [id])
 }
 
 model Section {
-  id         Int       @id @default(autoincrement())
+  id         Int        @id @default(autoincrement())
   name       String
-  created_at DateTime  @default(now())
-  updated_at DateTime  @default(now()) @updatedAt
-  category   Category?
+  created_at DateTime   @default(now())
+  updated_at DateTime   @default(now()) @updatedAt
+  categorys  Category[]
 }
 
 model Avaliation {
