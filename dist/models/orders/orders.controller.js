@@ -69,8 +69,8 @@ __decorate([
 __decorate([
     (0, common_1.Get)(),
     (0, common_1.UseGuards)(admin_guard_1.AdminGuard),
-    __param(0, (0, common_1.Param)('page')),
-    __param(1, (0, common_1.Param)('page_size')),
+    __param(0, (0, common_1.Query)('page')),
+    __param(1, (0, common_1.Query)('page_size')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)

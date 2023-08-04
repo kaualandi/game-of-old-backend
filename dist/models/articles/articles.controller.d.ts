@@ -10,7 +10,7 @@ export declare class ArticlesController {
         updated_at: Date;
         config_id: number;
     }>;
-    findAll(page: number, page_size: number): Promise<{
+    findAll(page: string, page_size: string): Promise<{
         count: number;
         results: {
             id: number;

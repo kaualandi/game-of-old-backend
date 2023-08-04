@@ -46,10 +46,10 @@ __decorate([
 ], ArticlesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Param)('page')),
-    __param(1, (0, common_1.Param)('page_size')),
+    __param(0, (0, common_1.Query)('page')),
+    __param(1, (0, common_1.Query)('page_size')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], ArticlesController.prototype, "findAll", null);
 __decorate([
