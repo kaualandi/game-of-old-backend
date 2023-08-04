@@ -3,34 +3,34 @@ export declare class HomeController {
     private readonly homeService;
     constructor(homeService: HomeService);
     config(): Promise<{
-        tags: (import("@prisma/client/runtime/library").GetResult<{
+        _count: {
+            tags: number;
+            banners: number;
+            articles: number;
+        };
+        tags: {
             id: number;
             name: string;
             icon: string;
             created_at: Date;
             updated_at: Date;
             config_id: number;
-        }, unknown, never> & {})[];
-        articles: (import("@prisma/client/runtime/library").GetResult<{
+        }[];
+        banners: {
             id: number;
             image: string;
             created_at: Date;
             updated_at: Date;
             config_id: number;
-        }, unknown, never> & {})[];
-        banners: (import("@prisma/client/runtime/library").GetResult<{
+        }[];
+        articles: {
             id: number;
             image: string;
             created_at: Date;
             updated_at: Date;
             config_id: number;
-        }, unknown, never> & {})[];
-        _count: {
-            tags: number;
-            banners: number;
-            articles: number;
-        };
-    } & import("@prisma/client/runtime/library").GetResult<{
+        }[];
+    } & {
         id: number;
         instagram: string;
         facebook: string;
@@ -46,16 +46,16 @@ export declare class HomeController {
         installment_limit: number;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
+    }>;
     teamsSellers(): Promise<{
-        teams: (import("@prisma/client/runtime/library").GetResult<{
+        teams: {
             id: number;
             name: string;
             url: string;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {})[];
-        products: (import("@prisma/client/runtime/library").GetResult<{
+        }[];
+        products: {
             id: number;
             name: string;
             description: string;
@@ -67,9 +67,9 @@ export declare class HomeController {
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {})[];
+        }[];
     }>;
-    releases(): Promise<(import("@prisma/client/runtime/library").GetResult<{
+    releases(): Promise<{
         id: number;
         name: string;
         description: string;
@@ -81,5 +81,5 @@ export declare class HomeController {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {})[]>;
+    }[]>;
 }

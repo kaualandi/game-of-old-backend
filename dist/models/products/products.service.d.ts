@@ -8,7 +8,7 @@ export declare class ProductsService {
     private readonly imagesService;
     private readonly variantsService;
     constructor(prismaService: PrismaService, imagesService: ImagesService, variantsService: VariantsService);
-    create(createProductDto: CreateProductDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+    create(createProductDto: CreateProductDto): Promise<{
         id: number;
         name: string;
         description: string;
@@ -20,25 +20,10 @@ export declare class ProductsService {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
+    }>;
     findAll(name: string, page: number, page_size: number): Promise<{
         count: number;
         results: ({
-            images: (import("@prisma/client/runtime/library").GetResult<{
-                id: number;
-                product_id: number;
-                url: string;
-                created_at: Date;
-                updated_at: Date;
-            }, unknown, never> & {})[];
-            variants: (import("@prisma/client/runtime/library").GetResult<{
-                id: number;
-                product_id: number;
-                name: string;
-                is_active: boolean;
-                created_at: Date;
-                updated_at: Date;
-            }, unknown, never> & {})[];
             _count: {
                 team: number;
                 variants: number;
@@ -46,7 +31,22 @@ export declare class ProductsService {
                 filters: number;
                 avaliations: number;
             };
-        } & import("@prisma/client/runtime/library").GetResult<{
+            variants: {
+                id: number;
+                product_id: number;
+                name: string;
+                is_active: boolean;
+                created_at: Date;
+                updated_at: Date;
+            }[];
+            images: {
+                id: number;
+                product_id: number;
+                url: string;
+                created_at: Date;
+                updated_at: Date;
+            }[];
+        } & {
             id: number;
             name: string;
             description: string;
@@ -58,27 +58,27 @@ export declare class ProductsService {
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {})[];
+        })[];
         next: boolean;
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
-        images: (import("@prisma/client/runtime/library").GetResult<{
-            id: number;
-            product_id: number;
-            url: string;
-            created_at: Date;
-            updated_at: Date;
-        }, unknown, never> & {})[];
-        variants: (import("@prisma/client/runtime/library").GetResult<{
+        variants: {
             id: number;
             product_id: number;
             name: string;
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {})[];
-    } & import("@prisma/client/runtime/library").GetResult<{
+        }[];
+        images: {
+            id: number;
+            product_id: number;
+            url: string;
+            created_at: Date;
+            updated_at: Date;
+        }[];
+    } & {
         id: number;
         name: string;
         description: string;
@@ -90,8 +90,8 @@ export declare class ProductsService {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    update(id: number, updateProductDto: UpdateProductDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    update(id: number, updateProductDto: UpdateProductDto): Promise<{
         id: number;
         name: string;
         description: string;
@@ -103,8 +103,8 @@ export declare class ProductsService {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    remove(id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    remove(id: number): Promise<{
         id: number;
         name: string;
         description: string;
@@ -116,5 +116,5 @@ export declare class ProductsService {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
+    }>;
 }

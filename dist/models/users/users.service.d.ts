@@ -19,7 +19,7 @@ export declare class UsersService {
             };
         };
     };
-    create(createUserDto: CreateUserDto): import(".prisma/client").Prisma.Prisma__UserClient<import("@prisma/client/runtime/library").GetResult<{
+    create(createUserDto: CreateUserDto): import(".prisma/client").Prisma.Prisma__UserClient<{
         id: number;
         email: string;
         name: string;
@@ -32,17 +32,12 @@ export declare class UsersService {
         is_admin: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(name: string, page: number, page_size: number): Promise<{
         count: number;
         results: {
-            id: number;
-            name: string;
             email: string;
-            is_admin: boolean;
-            created_at: Date;
-            updated_at: Date;
-            address: (import("@prisma/client/runtime/library").GetResult<{
+            address: {
                 id: number;
                 user_id: number;
                 zip_code: string;
@@ -54,10 +49,12 @@ export declare class UsersService {
                 complement: string;
                 created_at: Date;
                 updated_at: Date;
-            }, unknown, never> & {})[];
+            }[];
+            name: string;
+            is_admin: boolean;
             cart: {
                 id: number;
-                cart_items: (import("@prisma/client/runtime/library").GetResult<{
+                cart_items: {
                     id: number;
                     cart_id: number;
                     product_variant_id: number;
@@ -67,20 +64,18 @@ export declare class UsersService {
                     customization_number: number;
                     created_at: Date;
                     updated_at: Date;
-                }, unknown, never> & {})[];
+                }[];
             };
+            id: number;
+            created_at: Date;
+            updated_at: Date;
         }[];
         next: boolean;
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
-        id: number;
-        name: string;
         email: string;
-        is_admin: boolean;
-        created_at: Date;
-        updated_at: Date;
-        address: (import("@prisma/client/runtime/library").GetResult<{
+        address: {
             id: number;
             user_id: number;
             zip_code: string;
@@ -92,10 +87,12 @@ export declare class UsersService {
             complement: string;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {})[];
+        }[];
+        name: string;
+        is_admin: boolean;
         cart: {
             id: number;
-            cart_items: (import("@prisma/client/runtime/library").GetResult<{
+            cart_items: {
                 id: number;
                 cart_id: number;
                 product_variant_id: number;
@@ -105,10 +102,13 @@ export declare class UsersService {
                 customization_number: number;
                 created_at: Date;
                 updated_at: Date;
-            }, unknown, never> & {})[];
+            }[];
         };
+        id: number;
+        created_at: Date;
+        updated_at: Date;
     }>;
-    findOneByEmail(email: string): Promise<import("@prisma/client/runtime/library").GetResult<{
+    findOneByEmail(email: string): Promise<{
         id: number;
         email: string;
         name: string;
@@ -121,8 +121,8 @@ export declare class UsersService {
         is_admin: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    update(id: number, updateUserDto: UpdateUserDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    update(id: number, updateUserDto: UpdateUserDto): Promise<{
         id: number;
         email: string;
         name: string;
@@ -135,8 +135,8 @@ export declare class UsersService {
         is_admin: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    remove(id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    remove(id: number): Promise<{
         id: number;
         email: string;
         name: string;
@@ -149,8 +149,8 @@ export declare class UsersService {
         is_admin: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    findOneWithPassword(id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    findOneWithPassword(id: number): Promise<{
         id: number;
         email: string;
         name: string;
@@ -163,5 +163,5 @@ export declare class UsersService {
         is_admin: boolean;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
+    }>;
 }

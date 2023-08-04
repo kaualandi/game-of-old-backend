@@ -18,7 +18,7 @@ let SectionsService = class SectionsService {
         this.prismaService = prismaService;
     }
     create(createSectionDto) {
-        this.prismaService.section.create({ data: createSectionDto });
+        return this.prismaService.section.create({ data: createSectionDto });
     }
     async findAll(name, page, page_size) {
         if (!page || !page_size) {

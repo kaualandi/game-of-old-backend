@@ -4,49 +4,49 @@ import { TagsService } from './tags.service';
 export declare class TagsController {
     private readonly tagsService;
     constructor(tagsService: TagsService);
-    create(createTagDto: CreateTagDto): import(".prisma/client").Prisma.Prisma__TagClient<import("@prisma/client/runtime/library").GetResult<{
+    create(createTagDto: CreateTagDto): import(".prisma/client").Prisma.Prisma__TagClient<{
         id: number;
         name: string;
         icon: string;
         created_at: Date;
         updated_at: Date;
         config_id: number;
-    }, unknown, never> & {}, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(name: string, page: string, page_size: string): Promise<{
         count: number;
-        results: (import("@prisma/client/runtime/library").GetResult<{
+        results: {
             id: number;
             name: string;
             icon: string;
             created_at: Date;
             updated_at: Date;
             config_id: number;
-        }, unknown, never> & {})[];
+        }[];
         next: boolean;
         previous: boolean;
     }>;
-    findOne(id: string): Promise<import("@prisma/client/runtime/library").GetResult<{
+    findOne(id: string): Promise<{
         id: number;
         name: string;
         icon: string;
         created_at: Date;
         updated_at: Date;
         config_id: number;
-    }, unknown, never> & {}>;
-    update(id: string, updateTagDto: UpdateTagDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    update(id: string, updateTagDto: UpdateTagDto): Promise<{
         id: number;
         name: string;
         icon: string;
         created_at: Date;
         updated_at: Date;
         config_id: number;
-    }, unknown, never> & {}>;
-    remove(id: string): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    remove(id: string): Promise<{
         id: number;
         name: string;
         icon: string;
         created_at: Date;
         updated_at: Date;
         config_id: number;
-    }, unknown, never> & {}>;
+    }>;
 }

@@ -3,7 +3,7 @@ import { UpdateConfigDto } from './dto/update-config.dto';
 export declare class ConfigController {
     private readonly configService;
     constructor(configService: ConfigService);
-    findOne(): import(".prisma/client").Prisma.Prisma__ConfigClient<import("@prisma/client/runtime/library").GetResult<{
+    findOne(): import(".prisma/client").Prisma.Prisma__ConfigClient<{
         id: number;
         instagram: string;
         facebook: string;
@@ -19,8 +19,8 @@ export declare class ConfigController {
         installment_limit: number;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}, null, import("@prisma/client/runtime/library").DefaultArgs>;
-    update(updateConfigDto: UpdateConfigDto): import(".prisma/client").Prisma.Prisma__ConfigClient<import("@prisma/client/runtime/library").GetResult<{
+    }, null, import("@prisma/client/runtime/library").DefaultArgs>;
+    update(updateConfigDto: UpdateConfigDto): import(".prisma/client").Prisma.Prisma__ConfigClient<{
         id: number;
         instagram: string;
         facebook: string;
@@ -36,5 +36,5 @@ export declare class ConfigController {
         installment_limit: number;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
 }

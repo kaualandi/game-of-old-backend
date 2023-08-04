@@ -4,50 +4,55 @@ import { PrismaService } from 'src/modules/prisma';
 export declare class SectionsService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
-    create(createSectionDto: CreateSectionDto): void;
+    create(createSectionDto: CreateSectionDto): import(".prisma/client").Prisma.Prisma__SectionClient<{
+        id: number;
+        name: string;
+        created_at: Date;
+        updated_at: Date;
+    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(name: string, page: number, page_size: number): Promise<{
         count: number;
         results: ({
-            categorys: (import("@prisma/client/runtime/library").GetResult<{
+            categorys: {
                 id: number;
                 name: string;
                 created_at: Date;
                 updated_at: Date;
                 section_id: number;
-            }, unknown, never> & {})[];
-        } & import("@prisma/client/runtime/library").GetResult<{
+            }[];
+        } & {
             id: number;
             name: string;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {})[];
+        })[];
         next: boolean;
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
-        categorys: (import("@prisma/client/runtime/library").GetResult<{
+        categorys: {
             id: number;
             name: string;
             created_at: Date;
             updated_at: Date;
             section_id: number;
-        }, unknown, never> & {})[];
-    } & import("@prisma/client/runtime/library").GetResult<{
+        }[];
+    } & {
         id: number;
         name: string;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    update(id: number, updateSectionDto: UpdateSectionDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    update(id: number, updateSectionDto: UpdateSectionDto): Promise<{
         id: number;
         name: string;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    remove(id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    remove(id: number): Promise<{
         id: number;
         name: string;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
+    }>;
 }

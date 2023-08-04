@@ -5,7 +5,7 @@ import { AuthRequest } from 'src/common/guards/auth.guard';
 export declare class CartController {
     private readonly cartService;
     constructor(cartService: CartService);
-    create(createCartDto: CreateCartDto, request: AuthRequest): Promise<import("@prisma/client/runtime/library").GetResult<{
+    create(createCartDto: CreateCartDto, request: AuthRequest): Promise<{
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -15,10 +15,10 @@ export declare class CartController {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
+    }>;
     findAll(request: AuthRequest): Promise<({
         product_variant: {
-            product: import("@prisma/client/runtime/library").GetResult<{
+            product: {
                 id: number;
                 name: string;
                 description: string;
@@ -30,16 +30,16 @@ export declare class CartController {
                 is_active: boolean;
                 created_at: Date;
                 updated_at: Date;
-            }, unknown, never> & {};
-        } & import("@prisma/client/runtime/library").GetResult<{
+            };
+        } & {
             id: number;
             product_id: number;
             name: string;
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {};
-    } & import("@prisma/client/runtime/library").GetResult<{
+        };
+    } & {
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -49,10 +49,10 @@ export declare class CartController {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {})[]>;
+    })[]>;
     findOne(id: string, request: AuthRequest): Promise<{
         product_variant: {
-            product: import("@prisma/client/runtime/library").GetResult<{
+            product: {
                 id: number;
                 name: string;
                 description: string;
@@ -64,16 +64,16 @@ export declare class CartController {
                 is_active: boolean;
                 created_at: Date;
                 updated_at: Date;
-            }, unknown, never> & {};
-        } & import("@prisma/client/runtime/library").GetResult<{
+            };
+        } & {
             id: number;
             product_id: number;
             name: string;
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {};
-    } & import("@prisma/client/runtime/library").GetResult<{
+        };
+    } & {
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -83,8 +83,8 @@ export declare class CartController {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    update(id: string, updateCartDto: UpdateCartDto, request: AuthRequest): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    update(id: string, updateCartDto: UpdateCartDto, request: AuthRequest): Promise<{
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -94,8 +94,8 @@ export declare class CartController {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    remove(id: string, request: AuthRequest): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    remove(id: string, request: AuthRequest): Promise<{
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -105,5 +105,5 @@ export declare class CartController {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
+    }>;
 }

@@ -5,37 +5,37 @@ export declare class ArticlesService {
     private readonly s3Service;
     private readonly prismaService;
     constructor(s3Service: S3Service, prismaService: PrismaService);
-    create(createArticleDto: CreateArticleDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+    create(createArticleDto: CreateArticleDto): Promise<{
         id: number;
         image: string;
         created_at: Date;
         updated_at: Date;
         config_id: number;
-    }, unknown, never> & {}>;
+    }>;
     findAll(page: number, page_size: number): Promise<{
         count: number;
-        results: (import("@prisma/client/runtime/library").GetResult<{
+        results: {
             id: number;
             image: string;
             created_at: Date;
             updated_at: Date;
             config_id: number;
-        }, unknown, never> & {})[];
+        }[];
         next: boolean;
         previous: boolean;
     }>;
-    findOne(id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
+    findOne(id: number): Promise<{
         id: number;
         image: string;
         created_at: Date;
         updated_at: Date;
         config_id: number;
-    }, unknown, never> & {}>;
-    remove(id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    remove(id: number): Promise<{
         id: number;
         image: string;
         created_at: Date;
         updated_at: Date;
         config_id: number;
-    }, unknown, never> & {}>;
+    }>;
 }

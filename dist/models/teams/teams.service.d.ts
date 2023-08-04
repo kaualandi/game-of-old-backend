@@ -6,27 +6,27 @@ export declare class TeamsService {
     private readonly prismaService;
     private readonly s3Service;
     constructor(prismaService: PrismaService, s3Service: S3Service);
-    create(createTeamDto: CreateTeamDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+    create(createTeamDto: CreateTeamDto): Promise<{
         id: number;
         name: string;
         url: string;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
+    }>;
     findAll(name: string, page: number, page_size: number): Promise<{
         count: number;
-        results: (import("@prisma/client/runtime/library").GetResult<{
+        results: {
             id: number;
             name: string;
             url: string;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {})[];
+        }[];
         next: boolean;
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
-        products: (import("@prisma/client/runtime/library").GetResult<{
+        products: {
             id: number;
             name: string;
             description: string;
@@ -38,26 +38,26 @@ export declare class TeamsService {
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        }, unknown, never> & {})[];
-    } & import("@prisma/client/runtime/library").GetResult<{
+        }[];
+    } & {
         id: number;
         name: string;
         url: string;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    update(id: number, updateTeamDto: UpdateTeamDto): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    update(id: number, updateTeamDto: UpdateTeamDto): Promise<{
         id: number;
         name: string;
         url: string;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
-    remove(id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
+    }>;
+    remove(id: number): Promise<{
         id: number;
         name: string;
         url: string;
         created_at: Date;
         updated_at: Date;
-    }, unknown, never> & {}>;
+    }>;
 }
