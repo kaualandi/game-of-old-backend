@@ -62,7 +62,13 @@ export class SectionsService {
   }
 
   async remove(id: number) {
-    await this.findOne(id);
+    const section = await this.findOne(id);
+
+    if (section.categorys.length > 0) {
+      throw new BadRequestException(
+        `Existem categorias cadastradas nesta sessão, remova-as antes de deletar a sessão`,
+      );
+    }
 
     return this.prismaService.section.delete({ where: { id } });
   }
