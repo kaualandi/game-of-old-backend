@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -26,8 +27,8 @@ export class ArticlesController {
 
   @Get()
   async findAll(
-    @Param('page') page: number,
-    @Param('page_size') page_size: number,
+    @Query('page') page: string,
+    @Query('page_size') page_size: string,
   ) {
     return await this.articlesService.findAll(+page, +page_size);
   }

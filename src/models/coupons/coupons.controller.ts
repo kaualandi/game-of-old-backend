@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -28,9 +29,9 @@ export class CouponsController {
 
   @Get()
   async findAll(
-    @Param('name') name: string,
-    @Param('page') page: number,
-    @Param('page_size') page_size: number,
+    @Query('name') name: string,
+    @Query('page') page: number,
+    @Query('page_size') page_size: number,
   ) {
     return await this.couponsService.findAll(name, +page, +page_size);
   }

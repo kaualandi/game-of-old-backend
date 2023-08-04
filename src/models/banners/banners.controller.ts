@@ -7,6 +7,7 @@ import {
   Delete,
   UseGuards,
   UsePipes,
+  Query,
 } from '@nestjs/common';
 import { BannersService } from './banners.service';
 import { CreateBannerDto } from './dto/create-banner.dto';
@@ -26,8 +27,8 @@ export class BannersController {
 
   @Get()
   async findAll(
-    @Param('page') page: number,
-    @Param('page_size') page_size: number,
+    @Query('page') page: number,
+    @Query('page_size') page_size: number,
   ) {
     return await this.bannersService.findAll(+page, +page_size);
   }

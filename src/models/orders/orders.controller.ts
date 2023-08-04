@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Request,
   UseGuards,
   UsePipes,
@@ -47,8 +48,8 @@ export class OrdersController {
   @Get()
   @UseGuards(AdminGuard)
   async findAll(
-    @Param('page') page: string,
-    @Param('page_size') page_size: string,
+    @Query('page') page: string,
+    @Query('page_size') page_size: string,
   ) {
     return await this.ordersService.findAll(+page, +page_size);
   }

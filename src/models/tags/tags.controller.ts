@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -28,9 +29,9 @@ export class TagsController {
 
   @Get()
   async findAll(
-    @Param('name') name: string,
-    @Param('page') page: string,
-    @Param('page_size') page_size: string,
+    @Query('name') name: string,
+    @Query('page') page: string,
+    @Query('page_size') page_size: string,
   ) {
     return await this.tagsService.findAll(name, +page, +page_size);
   }
