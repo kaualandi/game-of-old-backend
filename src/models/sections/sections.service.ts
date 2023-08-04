@@ -12,7 +12,7 @@ export class SectionsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   create(createSectionDto: CreateSectionDto) {
-    this.prismaService.section.create({ data: createSectionDto });
+    return this.prismaService.section.create({ data: createSectionDto });
   }
 
   async findAll(name: string, page: number, page_size: number) {
