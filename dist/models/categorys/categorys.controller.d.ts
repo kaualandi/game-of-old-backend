@@ -18,6 +18,19 @@ export declare class CategorysController {
                 filters: number;
                 section: number;
             };
+            filters: (import("@prisma/client/runtime/library").GetResult<{
+                id: number;
+                name: string;
+                category_id: number;
+                created_at: Date;
+                updated_at: Date;
+            }, unknown, never> & {})[];
+            section: import("@prisma/client/runtime/library").GetResult<{
+                id: number;
+                name: string;
+                created_at: Date;
+                updated_at: Date;
+            }, unknown, never> & {};
         } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
@@ -36,6 +49,12 @@ export declare class CategorysController {
             created_at: Date;
             updated_at: Date;
         }, unknown, never> & {})[];
+        section: import("@prisma/client/runtime/library").GetResult<{
+            id: number;
+            name: string;
+            created_at: Date;
+            updated_at: Date;
+        }, unknown, never> & {};
         _count: {
             filters: number;
             section: number;

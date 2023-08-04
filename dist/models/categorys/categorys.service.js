@@ -25,7 +25,7 @@ let CategorysService = class CategorysService {
             throw new exceptions_1.BadRequestException('Especifique a página e o tamanho da página.');
         }
         const pagedResult = await this.prismaService.category.findMany({
-            include: { _count: true },
+            include: { _count: true, filters: true, section: true },
             where: {
                 name: {
                     contains: name,
@@ -43,7 +43,7 @@ let CategorysService = class CategorysService {
     async findOne(id) {
         const category = await this.prismaService.category.findUnique({
             where: { id },
-            include: { filters: true, _count: true },
+            include: { filters: true, section: true, _count: true },
         });
         if (!category) {
             throw new exceptions_1.NotFoundException(`Categoria não encontrada`);
