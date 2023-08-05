@@ -8,6 +8,10 @@ export declare class UsersService {
         id: boolean;
         name: boolean;
         email: boolean;
+        phone: boolean;
+        profile_url: boolean;
+        cpf: boolean;
+        birth_date: boolean;
         is_admin: boolean;
         created_at: boolean;
         updated_at: boolean;
@@ -51,6 +55,9 @@ export declare class UsersService {
                 updated_at: Date;
             }[];
             name: string;
+            phone: string;
+            cpf: string;
+            birth_date: Date;
             is_admin: boolean;
             cart: {
                 id: number;
@@ -67,6 +74,7 @@ export declare class UsersService {
                 }[];
             };
             id: number;
+            profile_url: string;
             created_at: Date;
             updated_at: Date;
         }[];
@@ -89,6 +97,9 @@ export declare class UsersService {
             updated_at: Date;
         }[];
         name: string;
+        phone: string;
+        cpf: string;
+        birth_date: Date;
         is_admin: boolean;
         cart: {
             id: number;
@@ -105,6 +116,7 @@ export declare class UsersService {
             }[];
         };
         id: number;
+        profile_url: string;
         created_at: Date;
         updated_at: Date;
     }>;

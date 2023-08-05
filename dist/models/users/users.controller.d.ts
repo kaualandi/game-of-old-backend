@@ -36,6 +36,9 @@ export declare class UsersController {
                 updated_at: Date;
             }[];
             name: string;
+            phone: string;
+            cpf: string;
+            birth_date: Date;
             is_admin: boolean;
             cart: {
                 id: number;
@@ -52,6 +55,7 @@ export declare class UsersController {
                 }[];
             };
             id: number;
+            profile_url: string;
             created_at: Date;
             updated_at: Date;
         }[];
@@ -74,6 +78,9 @@ export declare class UsersController {
             updated_at: Date;
         }[];
         name: string;
+        phone: string;
+        cpf: string;
+        birth_date: Date;
         is_admin: boolean;
         cart: {
             id: number;
@@ -90,6 +97,7 @@ export declare class UsersController {
             }[];
         };
         id: number;
+        profile_url: string;
         created_at: Date;
         updated_at: Date;
     }>;

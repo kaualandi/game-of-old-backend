@@ -49,7 +49,8 @@ let AuthService = class AuthService {
     }
     async update(id, updateUserDto) {
         await this.usersService.findOne(parseInt(id));
-        return this.usersService.update(parseInt(id), updateUserDto);
+        await this.usersService.update(parseInt(id), updateUserDto);
+        return this.usersService.findOne(parseInt(id));
     }
 };
 AuthService = __decorate([

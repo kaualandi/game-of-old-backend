@@ -30,6 +30,9 @@ export declare class AuthService {
             updated_at: Date;
         }[];
         name: string;
+        phone: string;
+        cpf: string;
+        birth_date: Date;
         is_admin: boolean;
         cart: {
             id: number;
@@ -46,21 +49,47 @@ export declare class AuthService {
             }[];
         };
         id: number;
+        profile_url: string;
         created_at: Date;
         updated_at: Date;
     }>;
     changePassword(id: string, changePasswordDto: ChangePasswordDto): Promise<void>;
     update(id: string, updateUserDto: UpdateUserDto): Promise<{
-        id: number;
         email: string;
+        address: {
+            id: number;
+            user_id: number;
+            zip_code: string;
+            state: string;
+            city: string;
+            neighborhood: string;
+            street: string;
+            number: string;
+            complement: string;
+            created_at: Date;
+            updated_at: Date;
+        }[];
         name: string;
-        profile_url: string;
         phone: string;
         cpf: string;
-        password: string;
-        google_id: string;
         birth_date: Date;
         is_admin: boolean;
+        cart: {
+            id: number;
+            cart_items: {
+                id: number;
+                cart_id: number;
+                product_variant_id: number;
+                quantity: number;
+                customization: boolean;
+                customization_name: string;
+                customization_number: number;
+                created_at: Date;
+                updated_at: Date;
+            }[];
+        };
+        id: number;
+        profile_url: string;
         created_at: Date;
         updated_at: Date;
     }>;
