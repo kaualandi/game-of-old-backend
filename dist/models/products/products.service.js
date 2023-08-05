@@ -73,6 +73,7 @@ let ProductsService = class ProductsService {
                 images: true,
                 variants: true,
                 filters: true,
+                team: true,
                 _count: true,
             },
             where: {
@@ -99,6 +100,7 @@ let ProductsService = class ProductsService {
             include: {
                 images: true,
                 variants: true,
+                team: true,
                 filters: true,
             },
         });

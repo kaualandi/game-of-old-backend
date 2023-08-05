@@ -24,6 +24,13 @@ export declare class ProductsService {
     findAll(name: string, page: number, page_size: number): Promise<{
         count: number;
         results: ({
+            team: {
+                id: number;
+                name: string;
+                url: string;
+                created_at: Date;
+                updated_at: Date;
+            };
             _count: {
                 team: number;
                 variants: number;
@@ -70,6 +77,13 @@ export declare class ProductsService {
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
+        team: {
+            id: number;
+            name: string;
+            url: string;
+            created_at: Date;
+            updated_at: Date;
+        };
         filters: {
             id: number;
             product_id: number;

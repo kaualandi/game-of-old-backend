@@ -20,6 +20,13 @@ export declare class ProductsController {
     findAll(name: string, page: string, page_size: string): Promise<{
         count: number;
         results: ({
+            team: {
+                id: number;
+                name: string;
+                url: string;
+                created_at: Date;
+                updated_at: Date;
+            };
             _count: {
                 team: number;
                 variants: number;
@@ -66,6 +73,13 @@ export declare class ProductsController {
         previous: boolean;
     }>;
     findOne(id: string): Promise<{
+        team: {
+            id: number;
+            name: string;
+            url: string;
+            created_at: Date;
+            updated_at: Date;
+        };
         filters: {
             id: number;
             product_id: number;
