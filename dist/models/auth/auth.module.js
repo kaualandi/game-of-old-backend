@@ -13,6 +13,8 @@ const users_module_1 = require("../users/users.module");
 const auth_controller_1 = require("./auth.controller");
 const auth_service_1 = require("./auth.service");
 const constants_1 = require("./constants");
+const s3_module_1 = require("../../modules/aws/s3/s3.module");
+const s3_service_1 = require("../../modules/aws/s3/s3.service");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
@@ -24,8 +26,9 @@ AuthModule = __decorate([
                 secret: constants_1.jwtConstants.secret,
                 signOptions: { expiresIn: '60d' },
             }),
+            s3_module_1.S3Module,
         ],
-        providers: [auth_service_1.AuthService],
+        providers: [auth_service_1.AuthService, s3_service_1.S3Service],
         controllers: [auth_controller_1.AuthController],
     })
 ], AuthModule);

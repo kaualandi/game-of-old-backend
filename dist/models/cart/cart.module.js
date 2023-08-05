@@ -13,13 +13,15 @@ const cart_controller_1 = require("./cart.controller");
 const users_module_1 = require("../users/users.module");
 const prisma_1 = require("../../modules/prisma");
 const users_service_1 = require("../users/users.service");
+const s3_module_1 = require("../../modules/aws/s3/s3.module");
+const s3_service_1 = require("../../modules/aws/s3/s3.service");
 let CartModule = class CartModule {
 };
 CartModule = __decorate([
     (0, common_1.Module)({
         controllers: [cart_controller_1.CartController],
-        imports: [prisma_1.PrismaModule, users_module_1.UsersModule],
-        providers: [cart_service_1.CartService, prisma_1.PrismaService, users_service_1.UsersService],
+        imports: [prisma_1.PrismaModule, users_module_1.UsersModule, s3_module_1.S3Module],
+        providers: [cart_service_1.CartService, prisma_1.PrismaService, users_service_1.UsersService, s3_service_1.S3Service],
     })
 ], CartModule);
 exports.CartModule = CartModule;
