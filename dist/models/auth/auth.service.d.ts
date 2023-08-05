@@ -15,7 +15,6 @@ export declare class AuthService {
         access_token: string;
     }>;
     getMe(id: string): Promise<{
-        email: string;
         address: {
             id: number;
             user_id: number;
@@ -29,11 +28,6 @@ export declare class AuthService {
             created_at: Date;
             updated_at: Date;
         }[];
-        name: string;
-        phone: string;
-        cpf: string;
-        birth_date: Date;
-        is_admin: boolean;
         cart: {
             id: number;
             cart_items: {
@@ -48,6 +42,12 @@ export declare class AuthService {
                 updated_at: Date;
             }[];
         };
+        email: string;
+        name: string;
+        phone: string;
+        cpf: string;
+        birth_date: Date;
+        is_admin: boolean;
         id: number;
         profile_url: string;
         created_at: Date;
@@ -55,7 +55,6 @@ export declare class AuthService {
     }>;
     changePassword(id: string, changePasswordDto: ChangePasswordDto): Promise<void>;
     update(id: string, updateUserDto: UpdateUserDto): Promise<{
-        email: string;
         address: {
             id: number;
             user_id: number;
@@ -69,11 +68,6 @@ export declare class AuthService {
             created_at: Date;
             updated_at: Date;
         }[];
-        name: string;
-        phone: string;
-        cpf: string;
-        birth_date: Date;
-        is_admin: boolean;
         cart: {
             id: number;
             cart_items: {
@@ -88,6 +82,12 @@ export declare class AuthService {
                 updated_at: Date;
             }[];
         };
+        email: string;
+        name: string;
+        phone: string;
+        cpf: string;
+        birth_date: Date;
+        is_admin: boolean;
         id: number;
         profile_url: string;
         created_at: Date;

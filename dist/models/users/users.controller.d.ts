@@ -21,7 +21,6 @@ export declare class UsersController {
     findAll(name: string, page: string, page_size: string): Promise<{
         count: number;
         results: {
-            email: string;
             address: {
                 id: number;
                 user_id: number;
@@ -35,11 +34,6 @@ export declare class UsersController {
                 created_at: Date;
                 updated_at: Date;
             }[];
-            name: string;
-            phone: string;
-            cpf: string;
-            birth_date: Date;
-            is_admin: boolean;
             cart: {
                 id: number;
                 cart_items: {
@@ -54,6 +48,12 @@ export declare class UsersController {
                     updated_at: Date;
                 }[];
             };
+            email: string;
+            name: string;
+            phone: string;
+            cpf: string;
+            birth_date: Date;
+            is_admin: boolean;
             id: number;
             profile_url: string;
             created_at: Date;
@@ -63,7 +63,6 @@ export declare class UsersController {
         previous: boolean;
     }>;
     findOne(id: string): Promise<{
-        email: string;
         address: {
             id: number;
             user_id: number;
@@ -77,11 +76,6 @@ export declare class UsersController {
             created_at: Date;
             updated_at: Date;
         }[];
-        name: string;
-        phone: string;
-        cpf: string;
-        birth_date: Date;
-        is_admin: boolean;
         cart: {
             id: number;
             cart_items: {
@@ -96,6 +90,12 @@ export declare class UsersController {
                 updated_at: Date;
             }[];
         };
+        email: string;
+        name: string;
+        phone: string;
+        cpf: string;
+        birth_date: Date;
+        is_admin: boolean;
         id: number;
         profile_url: string;
         created_at: Date;

@@ -85,6 +85,7 @@ __decorate([
         'phone',
         'cpf',
         'password',
+        'profile_url',
         'google_id',
         'birth_date',
         'is_admin',

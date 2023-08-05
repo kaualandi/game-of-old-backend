@@ -1,9 +1,11 @@
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/modules/prisma';
+import { S3Service } from 'src/modules/aws/s3/s3.service';
 export declare class UsersService {
     private readonly prismaService;
-    constructor(prismaService: PrismaService);
+    private s3Service;
+    constructor(prismaService: PrismaService, s3Service: S3Service);
     selectUser: {
         id: boolean;
         name: boolean;
@@ -40,7 +42,6 @@ export declare class UsersService {
     findAll(name: string, page: number, page_size: number): Promise<{
         count: number;
         results: {
-            email: string;
             address: {
                 id: number;
                 user_id: number;
@@ -54,11 +55,6 @@ export declare class UsersService {
                 created_at: Date;
                 updated_at: Date;
             }[];
-            name: string;
-            phone: string;
-            cpf: string;
-            birth_date: Date;
-            is_admin: boolean;
             cart: {
                 id: number;
                 cart_items: {
@@ -73,6 +69,12 @@ export declare class UsersService {
                     updated_at: Date;
                 }[];
             };
+            email: string;
+            name: string;
+            phone: string;
+            cpf: string;
+            birth_date: Date;
+            is_admin: boolean;
             id: number;
             profile_url: string;
             created_at: Date;
@@ -82,7 +84,6 @@ export declare class UsersService {
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
-        email: string;
         address: {
             id: number;
             user_id: number;
@@ -96,11 +97,6 @@ export declare class UsersService {
             created_at: Date;
             updated_at: Date;
         }[];
-        name: string;
-        phone: string;
-        cpf: string;
-        birth_date: Date;
-        is_admin: boolean;
         cart: {
             id: number;
             cart_items: {
@@ -115,6 +111,12 @@ export declare class UsersService {
                 updated_at: Date;
             }[];
         };
+        email: string;
+        name: string;
+        phone: string;
+        cpf: string;
+        birth_date: Date;
+        is_admin: boolean;
         id: number;
         profile_url: string;
         created_at: Date;

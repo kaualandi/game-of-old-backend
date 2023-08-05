@@ -13,9 +13,11 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const exceptions_1 = require("@nestjs/common/exceptions");
 const prisma_1 = require("../../modules/prisma");
+const s3_service_1 = require("../../modules/aws/s3/s3.service");
 let UsersService = class UsersService {
-    constructor(prismaService) {
+    constructor(prismaService, s3Service) {
         this.prismaService = prismaService;
+        this.s3Service = s3Service;
         this.selectUser = {
             id: true,
             name: true,
@@ -82,9 +84,10 @@ let UsersService = class UsersService {
     }
     async update(id, updateUserDto) {
         await this.findOne(id);
+        const profile_url = await this.s3Service.uploadFile(updateUserDto.profile_url);
         return this.prismaService.user.update({
             where: { id },
-            data: Object.assign(Object.assign({}, updateUserDto), { address: {
+            data: Object.assign(Object.assign({}, updateUserDto), { profile_url, address: {
                     create: updateUserDto.address,
                 } }),
         });
@@ -105,7 +108,8 @@ let UsersService = class UsersService {
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_1.PrismaService,
+        s3_service_1.S3Service])
 ], UsersService);
 exports.UsersService = UsersService;
 //# sourceMappingURL=users.service.js.map

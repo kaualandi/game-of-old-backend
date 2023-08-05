@@ -5,6 +5,7 @@ export declare class UpdateUserDto extends UpdateUserDto_base {
     name: string;
     phone: string;
     cpf: string;
+    profile_url?: string;
     password: string;
     google_id: string;
     birth_date: Date;

@@ -15,7 +15,6 @@ export declare class AuthController {
     getMe(request: {
         user_id: string;
     }): Promise<{
-        email: string;
         address: {
             id: number;
             user_id: number;
@@ -29,11 +28,6 @@ export declare class AuthController {
             created_at: Date;
             updated_at: Date;
         }[];
-        name: string;
-        phone: string;
-        cpf: string;
-        birth_date: Date;
-        is_admin: boolean;
         cart: {
             id: number;
             cart_items: {
@@ -48,6 +42,12 @@ export declare class AuthController {
                 updated_at: Date;
             }[];
         };
+        email: string;
+        name: string;
+        phone: string;
+        cpf: string;
+        birth_date: Date;
+        is_admin: boolean;
         id: number;
         profile_url: string;
         created_at: Date;
@@ -59,7 +59,6 @@ export declare class AuthController {
     update(request: {
         user_id: string;
     }, updateUserDto: UpdateUserDto): Promise<{
-        email: string;
         address: {
             id: number;
             user_id: number;
@@ -73,11 +72,6 @@ export declare class AuthController {
             created_at: Date;
             updated_at: Date;
         }[];
-        name: string;
-        phone: string;
-        cpf: string;
-        birth_date: Date;
-        is_admin: boolean;
         cart: {
             id: number;
             cart_items: {
@@ -92,6 +86,12 @@ export declare class AuthController {
                 updated_at: Date;
             }[];
         };
+        email: string;
+        name: string;
+        phone: string;
+        cpf: string;
+        birth_date: Date;
+        is_admin: boolean;
         id: number;
         profile_url: string;
         created_at: Date;
