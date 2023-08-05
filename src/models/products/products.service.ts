@@ -19,6 +19,15 @@ export class ProductsService {
 
   async create(createProductDto: CreateProductDto) {
     const { images, filters, team_id, ...product } = createProductDto;
+
+    const filtersRel = await this.prismaService.filter.findMany({
+      where: {
+        id: {
+          in: filters,
+        },
+      },
+    });
+
     try {
       const productCreated = await this.prismaService.product.create({
         data: {
@@ -29,8 +38,8 @@ export class ProductsService {
             },
           },
           filters: {
-            connect: filters.map((filter) => ({
-              id: filter,
+            connect: filtersRel.map((filter) => ({
+              id: filter.id,
             })),
           },
         },
