@@ -51,20 +51,11 @@ let ProductsService = class ProductsService {
                 }
             }
             if (filters.length > 0) {
-                await this.prismaService.product.update({
-                    where: {
-                        id: productCreated.id,
-                    },
-                    data: {
-                        filters: {
-                            createMany: {
-                                data: filters.map((filter) => ({
-                                    filter_id: filter,
-                                    product_id: productCreated.id,
-                                })),
-                            },
-                        },
-                    },
+                await this.prismaService.productFilter.createMany({
+                    data: filters.map((filter) => ({
+                        filter_id: filter,
+                        product_id: productCreated.id,
+                    })),
                 });
             }
             return productCreated;
