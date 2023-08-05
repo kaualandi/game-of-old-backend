@@ -20,14 +20,6 @@ export class ProductsService {
   async create(createProductDto: CreateProductDto) {
     const { images, filters, team_id, ...product } = createProductDto;
 
-    const filtersRel = await this.prismaService.filter.findMany({
-      where: {
-        id: {
-          in: filters,
-        },
-      },
-    });
-
     try {
       const productCreated = await this.prismaService.product.create({
         data: {
@@ -36,11 +28,6 @@ export class ProductsService {
             connect: {
               id: team_id,
             },
-          },
-          filters: {
-            connect: filtersRel.map((filter) => ({
-              id: filter.id,
-            })),
           },
         },
       });
@@ -53,6 +40,25 @@ export class ProductsService {
           });
         }
       }
+
+      if (filters.length > 0) {
+        await this.prismaService.product.update({
+          where: {
+            id: productCreated.id,
+          },
+          data: {
+            filters: {
+              createMany: {
+                data: filters.map((filter) => ({
+                  filter_id: filter,
+                  product_id: productCreated.id,
+                })),
+              },
+            },
+          },
+        });
+      }
+
       return productCreated;
     } catch (error) {
       throw new BadRequestException(error.message);
