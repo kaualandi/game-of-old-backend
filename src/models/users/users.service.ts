@@ -6,9 +6,13 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/modules/prisma';
+import { S3Service } from 'src/modules/aws/s3/s3.service';
 @Injectable()
 export class UsersService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private s3Service: S3Service,
+  ) {}
 
   selectUser = {
     id: true,
@@ -92,10 +96,15 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     await this.findOne(id);
 
+    const profile_url = await this.s3Service.uploadFile(
+      updateUserDto.profile_url,
+    );
+
     return this.prismaService.user.update({
       where: { id },
       data: {
         ...updateUserDto,
+        profile_url,
         address: {
           create: updateUserDto.address,
         },

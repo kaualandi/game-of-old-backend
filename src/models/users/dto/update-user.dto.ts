@@ -6,6 +6,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   name: string;
   phone: string;
   cpf: string;
+  profile_url?: string;
   password: string;
   google_id: string;
   birth_date: Date;
