@@ -67,6 +67,7 @@ export class ProductsService {
       include: {
         images: true,
         variants: true,
+        filters: true,
         _count: true,
       },
       where: {
@@ -96,6 +97,7 @@ export class ProductsService {
       include: {
         images: true,
         variants: true,
+        filters: true,
       },
     });
 
