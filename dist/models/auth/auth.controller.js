@@ -85,7 +85,14 @@ __decorate([
 __decorate([
     (0, common_1.Patch)('update'),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    (0, common_1.UsePipes)(new remove_extra_keys_pipe_1.RemoveExtraKeysPipe(['email', 'name', 'phone', 'cpf', 'birth_date'])),
+    (0, common_1.UsePipes)(new remove_extra_keys_pipe_1.RemoveExtraKeysPipe([
+        'email',
+        'name',
+        'phone',
+        'cpf',
+        'profile_url',
+        'birth_date',
+    ])),
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

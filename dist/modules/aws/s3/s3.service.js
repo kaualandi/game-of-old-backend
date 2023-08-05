@@ -23,6 +23,8 @@ let S3Service = class S3Service {
     }
     async uploadFile(base64) {
         try {
+            if (!base64)
+                return null;
             if (base64.startsWith('http'))
                 return base64;
             const bufferImage = Buffer.from(base64.replace(/^data:image\/\w+;base64,/, ''), 'base64');
