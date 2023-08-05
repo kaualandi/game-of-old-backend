@@ -60,7 +60,14 @@ export class AuthController {
   @Patch('update')
   @UseGuards(AuthGuard)
   @UsePipes(
-    new RemoveExtraKeysPipe(['email', 'name', 'phone', 'cpf', 'birth_date']),
+    new RemoveExtraKeysPipe([
+      'email',
+      'name',
+      'phone',
+      'cpf',
+      'profile_url',
+      'birth_date',
+    ]),
   )
   update(
     @Request() request: { user_id: string },

@@ -16,6 +16,7 @@ export class S3Service {
 
   async uploadFile(base64: string) {
     try {
+      if (!base64) return null;
       if (base64.startsWith('http')) return base64;
 
       const bufferImage = Buffer.from(
