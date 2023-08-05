@@ -31,6 +31,13 @@ export declare class ProductsService {
                 filters: number;
                 avaliations: number;
             };
+            filters: {
+                id: number;
+                product_id: number;
+                filter_id: number;
+                created_at: Date;
+                updated_at: Date;
+            }[];
             variants: {
                 id: number;
                 product_id: number;
@@ -63,6 +70,13 @@ export declare class ProductsService {
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
+        filters: {
+            id: number;
+            product_id: number;
+            filter_id: number;
+            created_at: Date;
+            updated_at: Date;
+        }[];
         variants: {
             id: number;
             product_id: number;

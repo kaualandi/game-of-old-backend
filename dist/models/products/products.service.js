@@ -72,6 +72,7 @@ let ProductsService = class ProductsService {
             include: {
                 images: true,
                 variants: true,
+                filters: true,
                 _count: true,
             },
             where: {
@@ -98,6 +99,7 @@ let ProductsService = class ProductsService {
             include: {
                 images: true,
                 variants: true,
+                filters: true,
             },
         });
         if (!product) {
