@@ -158,6 +158,13 @@ let ProductsService = class ProductsService {
         for (const variant of product.variants) {
             await this.variantsService.remove(variant.id);
         }
+        for (const productFilter of product.filters) {
+            await this.prismaService.productFilter.delete({
+                where: {
+                    id: productFilter.id,
+                },
+            });
+        }
         return this.prismaService.product.delete({
             where: {
                 id,

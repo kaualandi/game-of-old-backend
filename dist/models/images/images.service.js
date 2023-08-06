@@ -49,7 +49,8 @@ let ImagesService = class ImagesService {
         });
     }
     async remove(id) {
-        await this.findOne(id);
+        const image = await this.findOne(id);
+        this.s3Service.deleteFile(image.url);
         return this.prismaService.productImage.delete({ where: { id } });
     }
 };

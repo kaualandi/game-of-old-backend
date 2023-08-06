@@ -41,6 +41,19 @@ let S3Service = class S3Service {
             throw new exceptions_1.BadRequestException('Imagem inválida');
         }
     }
+    async deleteFile(url) {
+        try {
+            const Key = url.split('.com/')[1];
+            const params = {
+                Bucket: process.env.AWS_S3_BUCKET_NAME,
+                Key,
+            };
+            await this.s3.deleteObject(params).promise();
+        }
+        catch (error) {
+            throw new exceptions_1.BadRequestException('Imagem inválida');
+        }
+    }
 };
 S3Service = __decorate([
     (0, common_1.Injectable)(),
