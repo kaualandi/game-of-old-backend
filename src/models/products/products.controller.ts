@@ -26,13 +26,13 @@ export class ProductsController {
     new RemoveExtraKeysPipe([
       'name',
       'description',
-      'team_id',
-      'filters',
       'base_price',
-      'images',
       'trending',
       'discount',
-      'is_active',
+      'team_id',
+      'filters',
+      'variants',
+      'images',
     ]),
   )
   async create(@Body() createProductDto: CreateProductDto) {

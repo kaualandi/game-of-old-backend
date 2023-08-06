@@ -18,7 +18,7 @@ export class ProductsService {
   ) {}
 
   async create(createProductDto: CreateProductDto) {
-    const { images, filters, team_id, ...product } = createProductDto;
+    const { images, filters, team_id, variants, ...product } = createProductDto;
 
     try {
       const productCreated = await this.prismaService.product.create({
@@ -48,6 +48,16 @@ export class ProductsService {
             product_id: productCreated.id,
           })),
         });
+      }
+
+      if (variants.length > 0) {
+        for (const variant of variants) {
+          await this.variantsService.create({
+            product_id: productCreated.id,
+            name: variant,
+            is_active: true,
+          });
+        }
       }
 
       return productCreated;
@@ -113,7 +123,7 @@ export class ProductsService {
   async update(id: number, updateProductDto: UpdateProductDto) {
     await this.findOne(id);
 
-    const { images, team_id, filters, ...product } = updateProductDto;
+    const { images, team_id, filters, variants, ...product } = updateProductDto;
 
     try {
       const productUpdate = await this.prismaService.product.update({

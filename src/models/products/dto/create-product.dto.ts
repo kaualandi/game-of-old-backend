@@ -19,6 +19,7 @@ export class CreateProductDto {
   @IsNotEmpty()
   images: string[];
 
+  variants: string[];
   trending: boolean;
   discount?: number;
   is_active?: boolean;
