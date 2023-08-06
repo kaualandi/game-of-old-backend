@@ -15,6 +15,13 @@ export declare class FiltersService {
         count: number;
         results: ({
             category: {
+                section: {
+                    id: number;
+                    name: string;
+                    created_at: Date;
+                    updated_at: Date;
+                };
+            } & {
                 id: number;
                 name: string;
                 created_at: Date;
