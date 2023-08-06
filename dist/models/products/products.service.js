@@ -33,7 +33,7 @@ let ProductsService = class ProductsService {
         this.variantsService = variantsService;
     }
     async create(createProductDto) {
-        const { images, filters, team_id } = createProductDto, product = __rest(createProductDto, ["images", "filters", "team_id"]);
+        const { images, filters, team_id, variants } = createProductDto, product = __rest(createProductDto, ["images", "filters", "team_id", "variants"]);
         try {
             const productCreated = await this.prismaService.product.create({
                 data: Object.assign(Object.assign({}, product), { team: {
@@ -57,6 +57,15 @@ let ProductsService = class ProductsService {
                         product_id: productCreated.id,
                     })),
                 });
+            }
+            if (variants.length > 0) {
+                for (const variant of variants) {
+                    await this.variantsService.create({
+                        product_id: productCreated.id,
+                        name: variant,
+                        is_active: true,
+                    });
+                }
             }
             return productCreated;
         }
@@ -111,7 +120,7 @@ let ProductsService = class ProductsService {
     }
     async update(id, updateProductDto) {
         await this.findOne(id);
-        const { images, team_id, filters } = updateProductDto, product = __rest(updateProductDto, ["images", "team_id", "filters"]);
+        const { images, team_id, filters, variants } = updateProductDto, product = __rest(updateProductDto, ["images", "team_id", "filters", "variants"]);
         try {
             const productUpdate = await this.prismaService.product.update({
                 where: {

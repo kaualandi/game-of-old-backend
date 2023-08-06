@@ -5,6 +5,7 @@ export declare class CreateProductDto {
     filters: number[];
     base_price: number;
     images: string[];
+    variants: string[];
     trending: boolean;
     discount?: number;
     is_active?: boolean;
