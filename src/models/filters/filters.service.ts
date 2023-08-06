@@ -24,7 +24,7 @@ export class FiltersService {
 
     const pagedResult = await this.prismaService.filter.findMany({
       where: { name: { contains: name } },
-      include: { category: true, products: true },
+      include: { category: { include: { section: true } }, products: true },
       skip: (page - 1) * page_size,
       take: page_size,
     });
