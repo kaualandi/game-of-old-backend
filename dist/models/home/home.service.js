@@ -33,6 +33,10 @@ let HomeService = class HomeService {
             orderBy: {
                 sold: 'desc',
             },
+            include: {
+                team: true,
+                images: true,
+            },
             take: 5,
         });
         return {

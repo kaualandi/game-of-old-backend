@@ -55,7 +55,22 @@ export declare class HomeController {
             created_at: Date;
             updated_at: Date;
         }[];
-        products: {
+        products: ({
+            team: {
+                id: number;
+                name: string;
+                url: string;
+                created_at: Date;
+                updated_at: Date;
+            };
+            images: {
+                id: number;
+                product_id: number;
+                url: string;
+                created_at: Date;
+                updated_at: Date;
+            }[];
+        } & {
             id: number;
             name: string;
             description: string;
@@ -67,7 +82,7 @@ export declare class HomeController {
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        }[];
+        })[];
     }>;
     releases(): Promise<{
         id: number;
