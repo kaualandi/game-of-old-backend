@@ -49,7 +49,11 @@ let HomeService = class HomeService {
             orderBy: {
                 created_at: 'desc',
             },
-            take: 5,
+            include: {
+                team: true,
+                images: true,
+            },
+            take: 10,
         });
     }
 };
