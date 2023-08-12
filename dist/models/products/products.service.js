@@ -111,6 +111,7 @@ let ProductsService = class ProductsService {
                 variants: true,
                 team: true,
                 filters: true,
+                avaliations: true,
             },
         });
         if (!product) {
