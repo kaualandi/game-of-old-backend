@@ -23,7 +23,7 @@ let CartService = class CartService {
         return await this.prismaService.cartItem.create({
             data: Object.assign(Object.assign({}, createCartDto), { product_variant: {
                     connect: {
-                        id: createCartDto.product_variant,
+                        id: +createCartDto.product_variant,
                     },
                 }, cart: {
                     connect: {
