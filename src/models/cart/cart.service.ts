@@ -19,7 +19,7 @@ export class CartService {
         ...createCartDto,
         product_variant: {
           connect: {
-            id: createCartDto.product_variant,
+            id: +createCartDto.product_variant,
           },
         },
         cart: {
