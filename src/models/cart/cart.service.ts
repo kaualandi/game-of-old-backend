@@ -41,7 +41,11 @@ export class CartService {
       include: {
         product_variant: {
           include: {
-            product: true,
+            product: {
+              include: {
+                images: true,
+              },
+            },
           },
         },
       },
@@ -59,7 +63,11 @@ export class CartService {
       include: {
         product_variant: {
           include: {
-            product: true,
+            product: {
+              include: {
+                images: true,
+              },
+            },
           },
         },
       },
