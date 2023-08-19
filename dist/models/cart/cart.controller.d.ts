@@ -19,6 +19,14 @@ export declare class CartController {
     findAll(request: AuthRequest): Promise<({
         product_variant: {
             product: {
+                images: {
+                    id: number;
+                    product_id: number;
+                    url: string;
+                    created_at: Date;
+                    updated_at: Date;
+                }[];
+            } & {
                 id: number;
                 name: string;
                 description: string;
@@ -53,6 +61,14 @@ export declare class CartController {
     findOne(id: string, request: AuthRequest): Promise<{
         product_variant: {
             product: {
+                images: {
+                    id: number;
+                    product_id: number;
+                    url: string;
+                    created_at: Date;
+                    updated_at: Date;
+                }[];
+            } & {
                 id: number;
                 name: string;
                 description: string;

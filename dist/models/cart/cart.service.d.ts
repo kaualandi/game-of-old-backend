@@ -20,6 +20,14 @@ export declare class CartService {
     findAll(user_id: number): Promise<({
         product_variant: {
             product: {
+                images: {
+                    id: number;
+                    product_id: number;
+                    url: string;
+                    created_at: Date;
+                    updated_at: Date;
+                }[];
+            } & {
                 id: number;
                 name: string;
                 description: string;
@@ -54,6 +62,14 @@ export declare class CartService {
     findOne(id: number, user_id: number): Promise<{
         product_variant: {
             product: {
+                images: {
+                    id: number;
+                    product_id: number;
+                    url: string;
+                    created_at: Date;
+                    updated_at: Date;
+                }[];
+            } & {
                 id: number;
                 name: string;
                 description: string;

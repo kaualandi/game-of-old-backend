@@ -41,7 +41,11 @@ let CartService = class CartService {
             include: {
                 product_variant: {
                     include: {
-                        product: true,
+                        product: {
+                            include: {
+                                images: true,
+                            },
+                        },
                     },
                 },
             },
@@ -57,7 +61,11 @@ let CartService = class CartService {
             include: {
                 product_variant: {
                     include: {
-                        product: true,
+                        product: {
+                            include: {
+                                images: true,
+                            },
+                        },
                     },
                 },
             },
