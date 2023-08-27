@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
-    create(createUserDto: CreateUserDto): import(".prisma/client").Prisma.Prisma__UserClient<{
+    create(createUserDto: CreateUserDto): import(".prisma/client").Prisma.Prisma__UserClient<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         email: string;
         name: string;
@@ -17,11 +17,21 @@ export declare class UsersController {
         is_admin: boolean;
         created_at: Date;
         updated_at: Date;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    }, unknown, never> & {}, never, import("@prisma/client/runtime/library").DefaultArgs>;
     findAll(name: string, page: string, page_size: string): Promise<{
         count: number;
         results: {
-            address: {
+            id: number;
+            name: string;
+            email: string;
+            phone: string;
+            profile_url: string;
+            cpf: string;
+            birth_date: Date;
+            is_admin: boolean;
+            created_at: Date;
+            updated_at: Date;
+            address: (import("@prisma/client/runtime/library").GetResult<{
                 id: number;
                 user_id: number;
                 zip_code: string;
@@ -33,10 +43,10 @@ export declare class UsersController {
                 complement: string;
                 created_at: Date;
                 updated_at: Date;
-            }[];
+            }, unknown, never> & {})[];
             cart: {
                 id: number;
-                cart_items: {
+                cart_items: (import("@prisma/client/runtime/library").GetResult<{
                     id: number;
                     cart_id: number;
                     product_variant_id: number;
@@ -46,24 +56,24 @@ export declare class UsersController {
                     customization_number: number;
                     created_at: Date;
                     updated_at: Date;
-                }[];
+                }, unknown, never> & {})[];
             };
-            email: string;
-            name: string;
-            phone: string;
-            cpf: string;
-            birth_date: Date;
-            is_admin: boolean;
-            id: number;
-            profile_url: string;
-            created_at: Date;
-            updated_at: Date;
         }[];
         next: boolean;
         previous: boolean;
     }>;
     findOne(id: string): Promise<{
-        address: {
+        id: number;
+        name: string;
+        email: string;
+        phone: string;
+        profile_url: string;
+        cpf: string;
+        birth_date: Date;
+        is_admin: boolean;
+        created_at: Date;
+        updated_at: Date;
+        address: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             user_id: number;
             zip_code: string;
@@ -75,10 +85,10 @@ export declare class UsersController {
             complement: string;
             created_at: Date;
             updated_at: Date;
-        }[];
+        }, unknown, never> & {})[];
         cart: {
             id: number;
-            cart_items: {
+            cart_items: (import("@prisma/client/runtime/library").GetResult<{
                 id: number;
                 cart_id: number;
                 product_variant_id: number;
@@ -88,20 +98,10 @@ export declare class UsersController {
                 customization_number: number;
                 created_at: Date;
                 updated_at: Date;
-            }[];
+            }, unknown, never> & {})[];
         };
-        email: string;
-        name: string;
-        phone: string;
-        cpf: string;
-        birth_date: Date;
-        is_admin: boolean;
-        id: number;
-        profile_url: string;
-        created_at: Date;
-        updated_at: Date;
     }>;
-    update(id: string, updateUserDto: UpdateUserDto): Promise<{
+    update(id: string, updateUserDto: UpdateUserDto): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         email: string;
         name: string;
@@ -114,8 +114,8 @@ export declare class UsersController {
         is_admin: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
-    remove(id: string): Promise<{
+    }, unknown, never> & {}>;
+    remove(id: string): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         email: string;
         name: string;
@@ -128,5 +128,5 @@ export declare class UsersController {
         is_admin: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
 }

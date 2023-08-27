@@ -4,16 +4,16 @@ import { UpdateVariantsDto } from './dto/update-variants.dto';
 export declare class VariantsService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
-    create(createVariantsDto: CreateVariantsDto): Promise<{
+    create(createVariantsDto: CreateVariantsDto): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         product_id: number;
         name: string;
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
     findAll(name: string): import(".prisma/client").Prisma.PrismaPromise<({
-        product: {
+        product: import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             description: string;
@@ -25,17 +25,17 @@ export declare class VariantsService {
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        };
-    } & {
+        }, unknown, never> & {};
+    } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         product_id: number;
         name: string;
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    })[]>;
+    }, unknown, never> & {})[]>;
     findOne(id: number): Promise<{
-        product: {
+        product: import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             description: string;
@@ -47,29 +47,29 @@ export declare class VariantsService {
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        };
-    } & {
+        }, unknown, never> & {};
+    } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         product_id: number;
         name: string;
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
-    update(id: number, updateVariantsDto: UpdateVariantsDto): Promise<{
+    }, unknown, never> & {}>;
+    update(id: number, updateVariantsDto: UpdateVariantsDto): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         product_id: number;
         name: string;
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
-    remove(id: number): Promise<{
+    }, unknown, never> & {}>;
+    remove(id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         product_id: number;
         name: string;
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
 }

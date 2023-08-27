@@ -4,7 +4,7 @@ import { ProductsService } from './products.service';
 export declare class ProductsController {
     private readonly productsService;
     constructor(productsService: ProductsService);
-    create(createProductDto: CreateProductDto): Promise<{
+    create(createProductDto: CreateProductDto): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
         description: string;
@@ -16,17 +16,39 @@ export declare class ProductsController {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
     findAll(name: string, page: string, page_size: string): Promise<{
         count: number;
         results: ({
-            team: {
+            images: (import("@prisma/client/runtime/library").GetResult<{
+                id: number;
+                product_id: number;
+                url: string;
+                created_at: Date;
+                updated_at: Date;
+            }, unknown, never> & {})[];
+            variants: (import("@prisma/client/runtime/library").GetResult<{
+                id: number;
+                product_id: number;
+                name: string;
+                is_active: boolean;
+                created_at: Date;
+                updated_at: Date;
+            }, unknown, never> & {})[];
+            filters: (import("@prisma/client/runtime/library").GetResult<{
+                id: number;
+                product_id: number;
+                filter_id: number;
+                created_at: Date;
+                updated_at: Date;
+            }, unknown, never> & {})[];
+            team: import("@prisma/client/runtime/library").GetResult<{
                 id: number;
                 name: string;
                 url: string;
                 created_at: Date;
                 updated_at: Date;
-            };
+            }, unknown, never> & {};
             _count: {
                 team: number;
                 variants: number;
@@ -34,29 +56,7 @@ export declare class ProductsController {
                 filters: number;
                 avaliations: number;
             };
-            filters: {
-                id: number;
-                product_id: number;
-                filter_id: number;
-                created_at: Date;
-                updated_at: Date;
-            }[];
-            variants: {
-                id: number;
-                product_id: number;
-                name: string;
-                is_active: boolean;
-                created_at: Date;
-                updated_at: Date;
-            }[];
-            images: {
-                id: number;
-                product_id: number;
-                url: string;
-                created_at: Date;
-                updated_at: Date;
-            }[];
-        } & {
+        } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             description: string;
@@ -68,41 +68,41 @@ export declare class ProductsController {
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        })[];
+        }, unknown, never> & {})[];
         next: boolean;
         previous: boolean;
     }>;
     findOne(id: string): Promise<{
-        team: {
+        images: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
-            name: string;
+            product_id: number;
             url: string;
             created_at: Date;
             updated_at: Date;
-        };
-        filters: {
-            id: number;
-            product_id: number;
-            filter_id: number;
-            created_at: Date;
-            updated_at: Date;
-        }[];
-        variants: {
+        }, unknown, never> & {})[];
+        variants: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             product_id: number;
             name: string;
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        }[];
-        images: {
+        }, unknown, never> & {})[];
+        team: import("@prisma/client/runtime/library").GetResult<{
             id: number;
-            product_id: number;
+            name: string;
             url: string;
             created_at: Date;
             updated_at: Date;
-        }[];
-        avaliations: {
+        }, unknown, never> & {};
+        filters: (import("@prisma/client/runtime/library").GetResult<{
+            id: number;
+            product_id: number;
+            filter_id: number;
+            created_at: Date;
+            updated_at: Date;
+        }, unknown, never> & {})[];
+        avaliations: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             user_id: number;
             product_id: number;
@@ -110,8 +110,8 @@ export declare class ProductsController {
             comment: string;
             created_at: Date;
             updated_at: Date;
-        }[];
-    } & {
+        }, unknown, never> & {})[];
+    } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
         description: string;
@@ -123,8 +123,8 @@ export declare class ProductsController {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
-    update(id: string, updateProductDto: UpdateProductDto): Promise<{
+    }, unknown, never> & {}>;
+    update(id: string, updateProductDto: UpdateProductDto): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
         description: string;
@@ -136,8 +136,8 @@ export declare class ProductsController {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
-    remove(id: string): Promise<{
+    }, unknown, never> & {}>;
+    remove(id: string): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
         description: string;
@@ -149,5 +149,5 @@ export declare class ProductsController {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
 }

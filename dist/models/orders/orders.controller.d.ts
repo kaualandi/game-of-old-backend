@@ -14,13 +14,7 @@ export declare class OrdersController {
     findAll(page: string, page_size: string): Promise<{
         count: number;
         results: ({
-            _count: {
-                user: number;
-                address: number;
-                cupom: number;
-                order_items: number;
-            };
-            order_items: {
+            order_items: (import("@prisma/client/runtime/library").GetResult<{
                 id: number;
                 order_id: number;
                 product_variant_id: number;
@@ -32,8 +26,14 @@ export declare class OrdersController {
                 customization_price: number;
                 created_at: Date;
                 updated_at: Date;
-            }[];
-        } & {
+            }, unknown, never> & {})[];
+            _count: {
+                user: number;
+                address: number;
+                cupom: number;
+                order_items: number;
+            };
+        } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             user_id: number;
             address_id: number;
@@ -42,26 +42,20 @@ export declare class OrdersController {
             customization_fee: number;
             total: number;
             tracking_number: string;
-            status: import(".prisma/client").$Enums.OrderStatus;
+            status: import(".prisma/client").OrderStatus;
             cancelled_reason: string;
-            payment_method: import(".prisma/client").$Enums.PaymentMethod;
+            payment_method: import(".prisma/client").PaymentMethod;
             payment_id: string;
             installments: number;
             coupon_id: number;
             created_at: Date;
             updated_at: Date;
-        })[];
+        }, unknown, never> & {})[];
         next: boolean;
         previous: boolean;
     }>;
     findOne(id: string): Promise<{
-        _count: {
-            user: number;
-            address: number;
-            cupom: number;
-            order_items: number;
-        };
-        order_items: {
+        order_items: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             order_id: number;
             product_variant_id: number;
@@ -73,8 +67,14 @@ export declare class OrdersController {
             customization_price: number;
             created_at: Date;
             updated_at: Date;
-        }[];
-    } & {
+        }, unknown, never> & {})[];
+        _count: {
+            user: number;
+            address: number;
+            cupom: number;
+            order_items: number;
+        };
+    } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         user_id: number;
         address_id: number;
@@ -83,16 +83,16 @@ export declare class OrdersController {
         customization_fee: number;
         total: number;
         tracking_number: string;
-        status: import(".prisma/client").$Enums.OrderStatus;
+        status: import(".prisma/client").OrderStatus;
         cancelled_reason: string;
-        payment_method: import(".prisma/client").$Enums.PaymentMethod;
+        payment_method: import(".prisma/client").PaymentMethod;
         payment_id: string;
         installments: number;
         coupon_id: number;
         created_at: Date;
         updated_at: Date;
-    }>;
-    update(id: string, updateOrderDto: UpdateOrderDto): Promise<{
+    }, unknown, never> & {}>;
+    update(id: string, updateOrderDto: UpdateOrderDto): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         user_id: number;
         address_id: number;
@@ -101,16 +101,16 @@ export declare class OrdersController {
         customization_fee: number;
         total: number;
         tracking_number: string;
-        status: import(".prisma/client").$Enums.OrderStatus;
+        status: import(".prisma/client").OrderStatus;
         cancelled_reason: string;
-        payment_method: import(".prisma/client").$Enums.PaymentMethod;
+        payment_method: import(".prisma/client").PaymentMethod;
         payment_id: string;
         installments: number;
         coupon_id: number;
         created_at: Date;
         updated_at: Date;
-    }>;
-    remove(id: string): Promise<{
+    }, unknown, never> & {}>;
+    remove(id: string): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         user_id: number;
         address_id: number;
@@ -119,16 +119,16 @@ export declare class OrdersController {
         customization_fee: number;
         total: number;
         tracking_number: string;
-        status: import(".prisma/client").$Enums.OrderStatus;
+        status: import(".prisma/client").OrderStatus;
         cancelled_reason: string;
-        payment_method: import(".prisma/client").$Enums.PaymentMethod;
+        payment_method: import(".prisma/client").PaymentMethod;
         payment_id: string;
         installments: number;
         coupon_id: number;
         created_at: Date;
         updated_at: Date;
-    }>;
-    cancel(id: string, request: AuthRequest): Promise<{
+    }, unknown, never> & {}>;
+    cancel(id: string, request: AuthRequest): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         user_id: number;
         address_id: number;
@@ -137,13 +137,13 @@ export declare class OrdersController {
         customization_fee: number;
         total: number;
         tracking_number: string;
-        status: import(".prisma/client").$Enums.OrderStatus;
+        status: import(".prisma/client").OrderStatus;
         cancelled_reason: string;
-        payment_method: import(".prisma/client").$Enums.PaymentMethod;
+        payment_method: import(".prisma/client").PaymentMethod;
         payment_id: string;
         installments: number;
         coupon_id: number;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
 }

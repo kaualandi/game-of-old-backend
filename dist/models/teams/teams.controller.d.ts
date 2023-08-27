@@ -4,27 +4,27 @@ import { TeamsService } from './teams.service';
 export declare class TeamsController {
     private readonly teamsService;
     constructor(teamsService: TeamsService);
-    create(createTeamDto: CreateTeamDto): Promise<{
+    create(createTeamDto: CreateTeamDto): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
         url: string;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
     findAll(name: string, page: string, page_size: string): Promise<{
         count: number;
-        results: {
+        results: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             url: string;
             created_at: Date;
             updated_at: Date;
-        }[];
+        }, unknown, never> & {})[];
         next: boolean;
         previous: boolean;
     }>;
     findOne(id: string): Promise<{
-        products: {
+        products: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             description: string;
@@ -36,26 +36,26 @@ export declare class TeamsController {
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        }[];
-    } & {
+        }, unknown, never> & {})[];
+    } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
         url: string;
         created_at: Date;
         updated_at: Date;
-    }>;
-    update(id: string, updateTeamDto: UpdateTeamDto): Promise<{
+    }, unknown, never> & {}>;
+    update(id: string, updateTeamDto: UpdateTeamDto): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
         url: string;
         created_at: Date;
         updated_at: Date;
-    }>;
-    remove(id: string): Promise<{
+    }, unknown, never> & {}>;
+    remove(id: string): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
         url: string;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
 }

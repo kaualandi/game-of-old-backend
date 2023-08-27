@@ -3,7 +3,7 @@ import { PrismaService } from 'src/modules/prisma';
 export declare class ConfigService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
-    findOne(id: number): import(".prisma/client").Prisma.Prisma__ConfigClient<{
+    findOne(id: number): import(".prisma/client").Prisma.Prisma__ConfigClient<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         instagram: string;
         facebook: string;
@@ -19,8 +19,8 @@ export declare class ConfigService {
         installment_limit: number;
         created_at: Date;
         updated_at: Date;
-    }, null, import("@prisma/client/runtime/library").DefaultArgs>;
-    update(updateConfigDto: UpdateConfigDto): import(".prisma/client").Prisma.Prisma__ConfigClient<{
+    }, unknown, never> & {}, null, import("@prisma/client/runtime/library").DefaultArgs>;
+    update(updateConfigDto: UpdateConfigDto): import(".prisma/client").Prisma.Prisma__ConfigClient<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         instagram: string;
         facebook: string;
@@ -36,5 +36,5 @@ export declare class ConfigService {
         installment_limit: number;
         created_at: Date;
         updated_at: Date;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    }, unknown, never> & {}, never, import("@prisma/client/runtime/library").DefaultArgs>;
 }

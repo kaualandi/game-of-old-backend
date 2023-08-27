@@ -3,34 +3,34 @@ export declare class HomeService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
     config(): Promise<{
-        _count: {
-            tags: number;
-            banners: number;
-            articles: number;
-        };
-        tags: {
+        tags: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             icon: string;
             created_at: Date;
             updated_at: Date;
             config_id: number;
-        }[];
-        banners: {
+        }, unknown, never> & {})[];
+        articles: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             image: string;
             created_at: Date;
             updated_at: Date;
             config_id: number;
-        }[];
-        articles: {
+        }, unknown, never> & {})[];
+        banners: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             image: string;
             created_at: Date;
             updated_at: Date;
             config_id: number;
-        }[];
-    } & {
+        }, unknown, never> & {})[];
+        _count: {
+            tags: number;
+            banners: number;
+            articles: number;
+        };
+    } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         instagram: string;
         facebook: string;
@@ -46,31 +46,31 @@ export declare class HomeService {
         installment_limit: number;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
     teamsSellers(): Promise<{
-        teams: {
+        teams: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             url: string;
             created_at: Date;
             updated_at: Date;
-        }[];
+        }, unknown, never> & {})[];
         products: ({
-            team: {
+            team: import("@prisma/client/runtime/library").GetResult<{
                 id: number;
                 name: string;
                 url: string;
                 created_at: Date;
                 updated_at: Date;
-            };
-            images: {
+            }, unknown, never> & {};
+            images: (import("@prisma/client/runtime/library").GetResult<{
                 id: number;
                 product_id: number;
                 url: string;
                 created_at: Date;
                 updated_at: Date;
-            }[];
-        } & {
+            }, unknown, never> & {})[];
+        } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             description: string;
@@ -82,24 +82,24 @@ export declare class HomeService {
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        })[];
+        }, unknown, never> & {})[];
     }>;
     releases(): Promise<({
-        team: {
+        team: import("@prisma/client/runtime/library").GetResult<{
             id: number;
             name: string;
             url: string;
             created_at: Date;
             updated_at: Date;
-        };
-        images: {
+        }, unknown, never> & {};
+        images: (import("@prisma/client/runtime/library").GetResult<{
             id: number;
             product_id: number;
             url: string;
             created_at: Date;
             updated_at: Date;
-        }[];
-    } & {
+        }, unknown, never> & {})[];
+    } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         name: string;
         description: string;
@@ -111,5 +111,5 @@ export declare class HomeService {
         is_active: boolean;
         created_at: Date;
         updated_at: Date;
-    })[]>;
+    }, unknown, never> & {})[]>;
 }

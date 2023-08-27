@@ -6,7 +6,7 @@ export declare class CartService {
     private readonly prismaService;
     private readonly usersService;
     constructor(prismaService: PrismaService, usersService: UsersService);
-    create(createCartDto: CreateCartDto, user_id: number): Promise<{
+    create(createCartDto: CreateCartDto, user_id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -16,18 +16,18 @@ export declare class CartService {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
     findAll(user_id: number): Promise<({
         product_variant: {
             product: {
-                images: {
+                images: (import("@prisma/client/runtime/library").GetResult<{
                     id: number;
                     product_id: number;
                     url: string;
                     created_at: Date;
                     updated_at: Date;
-                }[];
-            } & {
+                }, unknown, never> & {})[];
+            } & import("@prisma/client/runtime/library").GetResult<{
                 id: number;
                 name: string;
                 description: string;
@@ -39,16 +39,16 @@ export declare class CartService {
                 is_active: boolean;
                 created_at: Date;
                 updated_at: Date;
-            };
-        } & {
+            }, unknown, never> & {};
+        } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             product_id: number;
             name: string;
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        };
-    } & {
+        }, unknown, never> & {};
+    } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -58,18 +58,18 @@ export declare class CartService {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    })[]>;
+    }, unknown, never> & {})[]>;
     findOne(id: number, user_id: number): Promise<{
         product_variant: {
             product: {
-                images: {
+                images: (import("@prisma/client/runtime/library").GetResult<{
                     id: number;
                     product_id: number;
                     url: string;
                     created_at: Date;
                     updated_at: Date;
-                }[];
-            } & {
+                }, unknown, never> & {})[];
+            } & import("@prisma/client/runtime/library").GetResult<{
                 id: number;
                 name: string;
                 description: string;
@@ -81,16 +81,16 @@ export declare class CartService {
                 is_active: boolean;
                 created_at: Date;
                 updated_at: Date;
-            };
-        } & {
+            }, unknown, never> & {};
+        } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             product_id: number;
             name: string;
             is_active: boolean;
             created_at: Date;
             updated_at: Date;
-        };
-    } & {
+        }, unknown, never> & {};
+    } & import("@prisma/client/runtime/library").GetResult<{
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -100,8 +100,8 @@ export declare class CartService {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    }>;
-    update(id: number, updateCartDto: UpdateCartDto, user_id: number): Promise<{
+    }, unknown, never> & {}>;
+    update(id: number, updateCartDto: UpdateCartDto, user_id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -111,8 +111,8 @@ export declare class CartService {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    }>;
-    remove(id: number, user_id: number): Promise<{
+    }, unknown, never> & {}>;
+    remove(id: number, user_id: number): Promise<import("@prisma/client/runtime/library").GetResult<{
         id: number;
         cart_id: number;
         product_variant_id: number;
@@ -122,5 +122,5 @@ export declare class CartService {
         customization_number: number;
         created_at: Date;
         updated_at: Date;
-    }>;
+    }, unknown, never> & {}>;
 }
