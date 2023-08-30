@@ -7,12 +7,12 @@ export declare class CorreiosService {
     private readonly nVlPeso;
     priceDeadLine(priceDeadlineCorreioDto: PriceDeadlineCorreioDto): Promise<{
         sedex: {
-            error: string;
+            error: number;
             price: number;
             deadline: string;
         };
         pac: {
-            error: string;
+            error: number;
             price: number;
             deadline: string;
         };

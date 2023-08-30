@@ -46,12 +46,12 @@ let CorreiosService = class CorreiosService {
         const pac = this.xmlToJson(pacResponseXml).Servicos.cServico;
         return {
             sedex: {
-                error: sedex.Erro._text,
+                error: parseFloat(sedex.Erro._text),
                 price: parseFloat(sedex.Valor._text.replace(',', '.')),
                 deadline: sedex.PrazoEntrega._text,
             },
             pac: {
-                error: pac.Erro._text,
+                error: parseFloat(pac.Erro._text),
                 price: parseFloat(pac.Valor._text.replace(',', '.')),
                 deadline: pac.PrazoEntrega._text,
             },

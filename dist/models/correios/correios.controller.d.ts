@@ -5,12 +5,12 @@ export declare class CorreiosController {
     constructor(correiosService: CorreiosService);
     priceDeadLine(priceDeadlineCorreioDto: PriceDeadlineCorreioDto): Promise<{
         sedex: {
-            error: string;
+            error: number;
             price: number;
             deadline: string;
         };
         pac: {
-            error: string;
+            error: number;
             price: number;
             deadline: string;
         };
