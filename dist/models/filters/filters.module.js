@@ -17,7 +17,7 @@ FiltersModule = __decorate([
     (0, common_1.Module)({
         controllers: [filters_controller_1.FiltersController],
         imports: [prisma_1.PrismaModule],
-        providers: [filters_service_1.FiltersService, prisma_1.PrismaService],
+        providers: [filters_service_1.FiltersService],
     })
 ], FiltersModule);
 exports.FiltersModule = FiltersModule;

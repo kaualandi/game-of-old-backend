@@ -17,7 +17,7 @@ SectionsModule = __decorate([
     (0, common_1.Module)({
         controllers: [sections_controller_1.SectionsController],
         imports: [prisma_1.PrismaModule],
-        providers: [sections_service_1.SectionsService, prisma_1.PrismaService],
+        providers: [sections_service_1.SectionsService],
     })
 ], SectionsModule);
 exports.SectionsModule = SectionsModule;

@@ -17,7 +17,7 @@ ConfigModule = __decorate([
     (0, common_1.Module)({
         controllers: [config_controller_1.ConfigController],
         imports: [prisma_1.PrismaModule],
-        providers: [config_service_1.ConfigService, prisma_1.PrismaService],
+        providers: [config_service_1.ConfigService],
     })
 ], ConfigModule);
 exports.ConfigModule = ConfigModule;

@@ -17,7 +17,7 @@ AddressModule = __decorate([
     (0, common_1.Module)({
         controllers: [address_controller_1.AddressController],
         imports: [prisma_1.PrismaModule],
-        providers: [address_service_1.AddressService, prisma_1.PrismaService],
+        providers: [address_service_1.AddressService],
     })
 ], AddressModule);
 exports.AddressModule = AddressModule;

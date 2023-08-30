@@ -6,19 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CouponsModule = void 0;
+exports.CorreiosModule = void 0;
 const common_1 = require("@nestjs/common");
-const coupons_service_1 = require("./coupons.service");
-const coupons_controller_1 = require("./coupons.controller");
-const prisma_1 = require("../../modules/prisma");
-let CouponsModule = class CouponsModule {
+const correios_service_1 = require("./correios.service");
+const correios_controller_1 = require("./correios.controller");
+const axios_1 = require("@nestjs/axios");
+let CorreiosModule = class CorreiosModule {
 };
-CouponsModule = __decorate([
+CorreiosModule = __decorate([
     (0, common_1.Module)({
-        controllers: [coupons_controller_1.CouponsController],
-        imports: [prisma_1.PrismaModule],
-        providers: [coupons_service_1.CouponsService],
+        controllers: [correios_controller_1.CorreiosController],
+        imports: [axios_1.HttpModule],
+        providers: [correios_service_1.CorreiosService],
     })
-], CouponsModule);
-exports.CouponsModule = CouponsModule;
-//# sourceMappingURL=coupons.module.js.map
+], CorreiosModule);
+exports.CorreiosModule = CorreiosModule;
+//# sourceMappingURL=correios.module.js.map

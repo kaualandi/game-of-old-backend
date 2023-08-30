@@ -30,6 +30,7 @@ const articles_module_1 = require("./models/articles/articles.module");
 const home_module_1 = require("./models/home/home.module");
 const sections_module_1 = require("./models/sections/sections.module");
 const address_module_1 = require("./models/address/address.module");
+const correios_module_1 = require("./models/correios/correios.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -57,6 +58,7 @@ AppModule = __decorate([
             home_module_1.HomeModule,
             sections_module_1.SectionsModule,
             address_module_1.AddressModule,
+            correios_module_1.CorreiosModule,
         ],
         providers: [app_service_1.AppService],
     })

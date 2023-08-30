@@ -21,6 +21,7 @@ import { ArticlesModule } from './models/articles/articles.module';
 import { HomeModule } from './models/home/home.module';
 import { SectionsModule } from './models/sections/sections.module';
 import { AddressModule } from './models/address/address.module';
+import { CorreiosModule } from './models/correios/correios.module';
 
 @Global()
 @Module({
@@ -46,6 +47,7 @@ import { AddressModule } from './models/address/address.module';
     HomeModule,
     SectionsModule,
     AddressModule,
+    CorreiosModule,
   ],
   providers: [AppService],
 })

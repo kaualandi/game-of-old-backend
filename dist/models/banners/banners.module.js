@@ -19,7 +19,7 @@ BannersModule = __decorate([
     (0, common_1.Module)({
         controllers: [banners_controller_1.BannersController],
         imports: [s3_module_1.S3Module, prisma_1.PrismaModule],
-        providers: [banners_service_1.BannersService, s3_service_1.S3Service, prisma_1.PrismaService],
+        providers: [banners_service_1.BannersService, s3_service_1.S3Service],
     })
 ], BannersModule);
 exports.BannersModule = BannersModule;

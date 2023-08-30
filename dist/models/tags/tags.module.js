@@ -17,7 +17,7 @@ TagsModule = __decorate([
     (0, common_1.Module)({
         controllers: [tags_controller_1.TagsController],
         imports: [prisma_1.PrismaModule],
-        providers: [tags_service_1.TagsService, prisma_1.PrismaService],
+        providers: [tags_service_1.TagsService],
     })
 ], TagsModule);
 exports.TagsModule = TagsModule;

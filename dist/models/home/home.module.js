@@ -17,7 +17,7 @@ HomeModule = __decorate([
     (0, common_1.Module)({
         controllers: [home_controller_1.HomeController],
         imports: [prisma_1.PrismaModule],
-        providers: [home_service_1.HomeService, prisma_1.PrismaService],
+        providers: [home_service_1.HomeService],
     })
 ], HomeModule);
 exports.HomeModule = HomeModule;

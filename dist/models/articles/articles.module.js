@@ -19,7 +19,7 @@ ArticlesModule = __decorate([
     (0, common_1.Module)({
         controllers: [articles_controller_1.ArticlesController],
         imports: [s3_module_1.S3Module, prisma_1.PrismaModule],
-        providers: [articles_service_1.ArticlesService, s3_service_1.S3Service, prisma_1.PrismaService],
+        providers: [articles_service_1.ArticlesService, s3_service_1.S3Service],
     })
 ], ArticlesModule);
 exports.ArticlesModule = ArticlesModule;
