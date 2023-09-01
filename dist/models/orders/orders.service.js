@@ -166,6 +166,7 @@ let OrdersService = class OrdersService {
             total_without_discount: totalWithoutDiscount,
             total_customizations: totalCustomizations,
             total_discount: totalDiscount,
+            items: order_items,
         };
     }
 };

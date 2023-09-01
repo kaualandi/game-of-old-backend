@@ -151,5 +151,39 @@ export declare class OrdersService {
         total_without_discount: number;
         total_customizations: number;
         total_discount: number;
+        items: ({
+            product_variant: {
+                product: import("@prisma/client/runtime/library").GetResult<{
+                    id: number;
+                    name: string;
+                    description: string;
+                    base_price: number;
+                    trending: boolean;
+                    discount: number;
+                    team_id: number;
+                    sold: number;
+                    is_active: boolean;
+                    created_at: Date;
+                    updated_at: Date;
+                }, unknown, never> & {};
+            } & import("@prisma/client/runtime/library").GetResult<{
+                id: number;
+                product_id: number;
+                name: string;
+                is_active: boolean;
+                created_at: Date;
+                updated_at: Date;
+            }, unknown, never> & {};
+        } & import("@prisma/client/runtime/library").GetResult<{
+            id: number;
+            cart_id: number;
+            product_variant_id: number;
+            quantity: number;
+            customization: boolean;
+            customization_name: string;
+            customization_number: number;
+            created_at: Date;
+            updated_at: Date;
+        }, unknown, never> & {})[];
     }>;
 }
