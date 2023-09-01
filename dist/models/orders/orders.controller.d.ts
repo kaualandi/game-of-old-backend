@@ -156,7 +156,15 @@ export declare class OrdersController {
         total_discount: number;
         items: ({
             product_variant: {
-                product: import("@prisma/client/runtime/library").GetResult<{
+                product: {
+                    images: (import("@prisma/client/runtime/library").GetResult<{
+                        id: number;
+                        product_id: number;
+                        url: string;
+                        created_at: Date;
+                        updated_at: Date;
+                    }, unknown, never> & {})[];
+                } & import("@prisma/client/runtime/library").GetResult<{
                     id: number;
                     name: string;
                     description: string;
