@@ -171,7 +171,11 @@ export class OrdersService {
 
     const order_items = await this.prismaService.cartItem.findMany({
       where: { id: { in: items } },
-      include: { product_variant: { include: { product: true } } },
+      include: {
+        product_variant: {
+          include: { product: { include: { images: true } } },
+        },
+      },
     });
 
     if (order_items.length === 0) {
