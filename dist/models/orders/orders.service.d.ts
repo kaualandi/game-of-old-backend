@@ -1,6 +1,7 @@
 import { PrismaService } from 'src/modules/prisma';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { PrePriceDto } from './dto/pre-price.dto';
 export declare class OrdersService {
     private readonly prismaService;
     constructor(prismaService: PrismaService);
@@ -145,4 +146,10 @@ export declare class OrdersService {
         created_at: Date;
         updated_at: Date;
     }, unknown, never> & {}>;
+    pricePrice(prePriceDto: PrePriceDto, user_id: number): Promise<{
+        total_with_discount: number;
+        total_without_discount: number;
+        total_customizations: number;
+        total_discount: number;
+    }>;
 }

@@ -20,6 +20,7 @@ const remove_extra_keys_pipe_1 = require("../../common/pipes/models/remove-extra
 const create_order_dto_1 = require("./dto/create-order.dto");
 const update_order_dto_1 = require("./dto/update-order.dto");
 const orders_service_1 = require("./orders.service");
+const pre_price_dto_1 = require("./dto/pre-price.dto");
 let OrdersController = class OrdersController {
     constructor(ordersService) {
         this.ordersService = ordersService;
@@ -41,6 +42,9 @@ let OrdersController = class OrdersController {
     }
     async cancel(id, request) {
         return await this.ordersService.cancel(+id, request.user_id);
+    }
+    async prePrice(prePriceDto, request) {
+        return await this.ordersService.pricePrice(prePriceDto, +request.user_id);
     }
 };
 __decorate([
@@ -118,6 +122,15 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], OrdersController.prototype, "cancel", null);
+__decorate([
+    (0, common_1.Post)('pre-price'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [pre_price_dto_1.PrePriceDto, Object]),
+    __metadata("design:returntype", Promise)
+], OrdersController.prototype, "prePrice", null);
 OrdersController = __decorate([
     (0, common_1.Controller)('orders'),
     __metadata("design:paramtypes", [orders_service_1.OrdersService])

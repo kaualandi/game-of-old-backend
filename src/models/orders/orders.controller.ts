@@ -17,6 +17,7 @@ import { RemoveExtraKeysPipe } from 'src/common/pipes/models/remove-extra-keys/r
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrdersService } from './orders.service';
+import { PrePriceDto } from './dto/pre-price.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -90,5 +91,14 @@ export class OrdersController {
   @UseGuards(AuthGuard)
   async cancel(@Param('id') id: string, @Request() request: AuthRequest) {
     return await this.ordersService.cancel(+id, request.user_id);
+  }
+
+  @Post('pre-price')
+  @UseGuards(AuthGuard)
+  async prePrice(
+    @Body() prePriceDto: PrePriceDto,
+    @Request() request: { user_id: string },
+  ) {
+    return await this.ordersService.pricePrice(prePriceDto, +request.user_id);
   }
 }

@@ -2,6 +2,7 @@ import { AuthRequest } from 'src/common/guards/auth.guard';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrdersService } from './orders.service';
+import { PrePriceDto } from './dto/pre-price.dto';
 export declare class OrdersController {
     private readonly ordersService;
     constructor(ordersService: OrdersService);
@@ -146,4 +147,12 @@ export declare class OrdersController {
         created_at: Date;
         updated_at: Date;
     }, unknown, never> & {}>;
+    prePrice(prePriceDto: PrePriceDto, request: {
+        user_id: string;
+    }): Promise<{
+        total_with_discount: number;
+        total_without_discount: number;
+        total_customizations: number;
+        total_discount: number;
+    }>;
 }
