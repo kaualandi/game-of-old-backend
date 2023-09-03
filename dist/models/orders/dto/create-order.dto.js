@@ -17,10 +17,6 @@ class CreateOrderDto {
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateOrderDto.prototype, "user_id", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
 ], CreateOrderDto.prototype, "address_id", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
@@ -29,19 +25,15 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
-], CreateOrderDto.prototype, "subtotal", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
 ], CreateOrderDto.prototype, "delivery_fee", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
-], CreateOrderDto.prototype, "customization_fee", void 0);
+    __metadata("design:type", String)
+], CreateOrderDto.prototype, "delivery_method", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Array)
-], CreateOrderDto.prototype, "order_items", void 0);
+], CreateOrderDto.prototype, "cart_ids", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)

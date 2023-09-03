@@ -25,8 +25,8 @@ let OrdersController = class OrdersController {
     constructor(ordersService) {
         this.ordersService = ordersService;
     }
-    async create(createOrderDto) {
-        return await this.ordersService.create(createOrderDto);
+    async create(createOrderDto, request) {
+        return await this.ordersService.create(createOrderDto, +request.user_id);
     }
     async findAll(page, page_size) {
         return await this.ordersService.findAll(+page, +page_size);
@@ -44,30 +44,30 @@ let OrdersController = class OrdersController {
         return await this.ordersService.cancel(+id, request.user_id);
     }
     async prePrice(prePriceDto, request) {
-        return await this.ordersService.pricePrice(prePriceDto, +request.user_id);
+        return await this.ordersService.prePrice(prePriceDto, +request.user_id);
     }
 };
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.UsePipes)(new remove_extra_keys_pipe_1.RemoveExtraKeysPipe([
-        'status',
-        'total',
         'address_id',
-        'subtotal',
+        'total',
         'delivery_fee',
-        'customization_fee',
-        'order_items',
+        'delivery_method',
+        'cart_ids',
         'payment_method',
         'card_number',
         'card_validity',
         'card_cvv',
         'card_holder_name',
         'installments',
+        'cupom',
     ])),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_order_dto_1.CreateOrderDto]),
+    __metadata("design:paramtypes", [create_order_dto_1.CreateOrderDto, Object]),
     __metadata("design:returntype", Promise)
 ], OrdersController.prototype, "create", null);
 __decorate([

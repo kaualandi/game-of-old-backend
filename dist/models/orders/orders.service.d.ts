@@ -2,14 +2,15 @@ import { PrismaService } from 'src/modules/prisma';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { PrePriceDto } from './dto/pre-price.dto';
+import { CorreiosService } from '../correios/correios.service';
 export declare class OrdersService {
     private readonly prismaService;
-    constructor(prismaService: PrismaService);
-    create(createOrderDto: CreateOrderDto): Promise<{
+    private readonly correiosService;
+    constructor(prismaService: PrismaService, correiosService: CorreiosService);
+    create(createOrderDto: CreateOrderDto, user_id: number): Promise<{
         worked: boolean;
         status: string;
         order_id: number;
-        qr_code: any;
     }>;
     findAll(page: number, page_size: number): Promise<{
         count: number;
@@ -55,7 +56,38 @@ export declare class OrdersService {
         previous: boolean;
     }>;
     findOne(id: number): Promise<{
-        order_items: (import("@prisma/client/runtime/library").GetResult<{
+        order_items: ({
+            product_variant: {
+                product: {
+                    images: (import("@prisma/client/runtime/library").GetResult<{
+                        id: number;
+                        product_id: number;
+                        url: string;
+                        created_at: Date;
+                        updated_at: Date;
+                    }, unknown, never> & {})[];
+                } & import("@prisma/client/runtime/library").GetResult<{
+                    id: number;
+                    name: string;
+                    description: string;
+                    base_price: number;
+                    trending: boolean;
+                    discount: number;
+                    team_id: number;
+                    sold: number;
+                    is_active: boolean;
+                    created_at: Date;
+                    updated_at: Date;
+                }, unknown, never> & {};
+            } & import("@prisma/client/runtime/library").GetResult<{
+                id: number;
+                product_id: number;
+                name: string;
+                is_active: boolean;
+                created_at: Date;
+                updated_at: Date;
+            }, unknown, never> & {};
+        } & import("@prisma/client/runtime/library").GetResult<{
             id: number;
             order_id: number;
             product_variant_id: number;
@@ -146,7 +178,7 @@ export declare class OrdersService {
         created_at: Date;
         updated_at: Date;
     }, unknown, never> & {}>;
-    pricePrice(prePriceDto: PrePriceDto, user_id: number): Promise<{
+    prePrice(prePriceDto: PrePriceDto, user_id: number): Promise<{
         total_with_discount: number;
         total_without_discount: number;
         total_customizations: number;
@@ -193,5 +225,7 @@ export declare class OrdersService {
             created_at: Date;
             updated_at: Date;
         }, unknown, never> & {})[];
+        cupom_status: boolean;
+        cupom_discount: number;
     }>;
 }

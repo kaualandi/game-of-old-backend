@@ -1,3 +1,4 @@
+import { CorreiosService } from './../correios/correios.service';
 import {
   Body,
   Controller,
@@ -27,23 +28,25 @@ export class OrdersController {
   @UseGuards(AuthGuard)
   @UsePipes(
     new RemoveExtraKeysPipe([
-      'status',
-      'total',
       'address_id',
-      'subtotal',
+      'total',
       'delivery_fee',
-      'customization_fee',
-      'order_items',
+      'delivery_method',
+      'cart_ids',
       'payment_method',
       'card_number',
       'card_validity',
       'card_cvv',
       'card_holder_name',
       'installments',
+      'cupom',
     ]),
   )
-  async create(@Body() createOrderDto: CreateOrderDto) {
-    return await this.ordersService.create(createOrderDto);
+  async create(
+    @Body() createOrderDto: CreateOrderDto,
+    @Request() request: { user_id: string },
+  ) {
+    return await this.ordersService.create(createOrderDto, +request.user_id);
   }
 
   @Get()
@@ -99,6 +102,6 @@ export class OrdersController {
     @Body() prePriceDto: PrePriceDto,
     @Request() request: { user_id: string },
   ) {
-    return await this.ordersService.pricePrice(prePriceDto, +request.user_id);
+    return await this.ordersService.prePrice(prePriceDto, +request.user_id);
   }
 }
