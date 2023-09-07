@@ -75,4 +75,10 @@ export class AuthController {
   ) {
     return this.authService.update(request.user_id, updateUserDto);
   }
+
+  @Get('account-resume')
+  @UseGuards(AuthGuard)
+  async accountResume(@Request() request: { user_id: string }) {
+    return await this.authService.accountResume(+request.user_id);
+  }
 }

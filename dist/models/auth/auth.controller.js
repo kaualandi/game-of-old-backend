@@ -40,6 +40,9 @@ let AuthController = class AuthController {
     update(request, updateUserDto) {
         return this.authService.update(request.user_id, updateUserDto);
     }
+    async accountResume(request) {
+        return await this.authService.accountResume(+request.user_id);
+    }
 };
 __decorate([
     (0, common_1.Post)('login'),
@@ -99,6 +102,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, update_user_dto_1.UpdateUserDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "update", null);
+__decorate([
+    (0, common_1.Get)('account-resume'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "accountResume", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

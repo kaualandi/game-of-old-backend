@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
 import { S3Module } from 'src/modules/aws/s3/s3.module';
 import { S3Service } from 'src/modules/aws/s3/s3.service';
+import { PrismaModule, PrismaService } from 'src/modules/prisma';
 
 @Module({
   imports: [
@@ -16,8 +17,9 @@ import { S3Service } from 'src/modules/aws/s3/s3.service';
       signOptions: { expiresIn: '60d' },
     }),
     S3Module,
+    PrismaModule,
   ],
-  providers: [AuthService, S3Service],
+  providers: [AuthService, S3Service, PrismaService],
   controllers: [AuthController],
 })
 export class AuthModule {}

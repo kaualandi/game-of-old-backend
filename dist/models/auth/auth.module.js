@@ -15,6 +15,7 @@ const auth_service_1 = require("./auth.service");
 const constants_1 = require("./constants");
 const s3_module_1 = require("../../modules/aws/s3/s3.module");
 const s3_service_1 = require("../../modules/aws/s3/s3.service");
+const prisma_1 = require("../../modules/prisma");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
@@ -27,8 +28,9 @@ AuthModule = __decorate([
                 signOptions: { expiresIn: '60d' },
             }),
             s3_module_1.S3Module,
+            prisma_1.PrismaModule,
         ],
-        providers: [auth_service_1.AuthService, s3_service_1.S3Service],
+        providers: [auth_service_1.AuthService, s3_service_1.S3Service, prisma_1.PrismaService],
         controllers: [auth_controller_1.AuthController],
     })
 ], AuthModule);

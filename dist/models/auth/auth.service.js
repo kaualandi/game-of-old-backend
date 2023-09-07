@@ -10,13 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
+const prisma_service_1 = require("./../../modules/prisma/prisma.service");
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
 let AuthService = class AuthService {
-    constructor(usersService, jwtService) {
+    constructor(usersService, prismaService, jwtService) {
         this.usersService = usersService;
+        this.prismaService = prismaService;
         this.jwtService = jwtService;
+        this.itemsToCalcRegisterPercent = [
+            'name',
+            'email',
+            'phone',
+            'cpf',
+            'birth_date',
+            'profile_url',
+        ];
     }
     async signIn(createAuthDto) {
         const { email, password: pass } = createAuthDto;
@@ -52,10 +62,52 @@ let AuthService = class AuthService {
         await this.usersService.update(parseInt(id), updateUserDto);
         return this.usersService.findOne(parseInt(id));
     }
+    async accountResume(id) {
+        const user = await this.getMe(id + '');
+        const lastOrder = await this.prismaService.order.findFirst({
+            where: {
+                user_id: id,
+            },
+            orderBy: {
+                created_at: 'desc',
+            },
+            include: {
+                address: true,
+            },
+        });
+        const { percent, text_status: textStatus } = this.calcUserPercent(user);
+        return {
+            user,
+            last_order: lastOrder,
+            user_register_percent: percent,
+            user_register_text_status: textStatus,
+        };
+    }
+    calcUserPercent(user) {
+        const quantityValid = this.itemsToCalcRegisterPercent.reduce((acc, curr) => {
+            if (user[curr]) {
+                acc++;
+            }
+            return acc;
+        }, 0);
+        const percent = Math.round((quantityValid / this.itemsToCalcRegisterPercent.length) * 100);
+        const textStatus = percent < 20
+            ? 'Nada mal!'
+            : percent < 60
+                ? 'Quase lá!'
+                : percent < 100
+                    ? 'Falta pouco!'
+                    : 'Parabéns!';
+        return {
+            percent,
+            text_status: textStatus,
+        };
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [users_service_1.UsersService,
+        prisma_service_1.PrismaService,
         jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;
