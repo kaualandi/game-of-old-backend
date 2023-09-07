@@ -1,4 +1,3 @@
-import { CorreiosService } from './../correios/correios.service';
 import {
   Body,
   Controller,

@@ -81,4 +81,10 @@ export class AuthController {
   async accountResume(@Request() request: { user_id: string }) {
     return await this.authService.accountResume(+request.user_id);
   }
+
+  @Get('account-orders')
+  @UseGuards(AuthGuard)
+  async accountOrders(@Request() request: { user_id: string }) {
+    return await this.authService.accountOrders(+request.user_id);
+  }
 }

@@ -43,6 +43,9 @@ let AuthController = class AuthController {
     async accountResume(request) {
         return await this.authService.accountResume(+request.user_id);
     }
+    async accountOrders(request) {
+        return await this.authService.accountOrders(+request.user_id);
+    }
 };
 __decorate([
     (0, common_1.Post)('login'),
@@ -110,6 +113,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "accountResume", null);
+__decorate([
+    (0, common_1.Get)('account-orders'),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "accountOrders", null);
 AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

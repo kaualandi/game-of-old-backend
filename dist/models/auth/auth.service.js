@@ -83,6 +83,21 @@ let AuthService = class AuthService {
             user_register_text_status: textStatus,
         };
     }
+    async accountOrders(id) {
+        const orders = await this.prismaService.order.findMany({
+            where: {
+                user_id: id,
+            },
+            orderBy: {
+                created_at: 'desc',
+            },
+            include: {
+                address: true,
+                order_items: true,
+            },
+        });
+        return orders;
+    }
     calcUserPercent(user) {
         const quantityValid = this.itemsToCalcRegisterPercent.reduce((acc, curr) => {
             if (user[curr]) {
