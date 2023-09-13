@@ -101,6 +101,19 @@ export declare class OrdersController {
             created_at: Date;
             updated_at: Date;
         }, unknown, never> & {})[];
+        address: import("@prisma/client/runtime/library").GetResult<{
+            id: number;
+            user_id: number;
+            zip_code: string;
+            state: string;
+            city: string;
+            neighborhood: string;
+            street: string;
+            number: string;
+            complement: string;
+            created_at: Date;
+            updated_at: Date;
+        }, unknown, never> & {};
         _count: {
             user: number;
             address: number;

@@ -168,6 +168,7 @@ let OrdersService = class OrdersService {
                         },
                     },
                 },
+                address: true,
                 _count: true,
             },
         });
