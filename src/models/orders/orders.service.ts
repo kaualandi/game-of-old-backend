@@ -193,6 +193,7 @@ export class OrdersService {
             },
           },
         },
+        address: true,
         _count: true,
       },
     });
