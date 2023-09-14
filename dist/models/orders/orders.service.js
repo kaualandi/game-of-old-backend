@@ -109,12 +109,14 @@ let OrdersService = class OrdersService {
                 cupom: cupom_status ? { connect: { code: cupom } } : undefined,
             },
         });
-        await this.prismaService.usedCoupon.create({
-            data: {
-                user: { connect: { id: user_id } },
-                coupon: { connect: { id: coupon.id } },
-            },
-        });
+        if (coupon) {
+            await this.prismaService.usedCoupon.create({
+                data: {
+                    user: { connect: { id: user_id } },
+                    coupon: { connect: { id: coupon.id } },
+                },
+            });
+        }
         console.log('\n\ncreatedOrder', createdOrder, '\n\n');
         for (const item of items) {
             await this.prismaService.cartItem.delete({ where: { id: item.id } });
