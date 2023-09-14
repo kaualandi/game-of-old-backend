@@ -123,12 +123,14 @@ export class OrdersService {
       },
     });
 
-    await this.prismaService.usedCoupon.create({
-      data: {
-        user: { connect: { id: user_id } },
-        coupon: { connect: { id: coupon.id } },
-      },
-    });
+    if (coupon) {
+      await this.prismaService.usedCoupon.create({
+        data: {
+          user: { connect: { id: user_id } },
+          coupon: { connect: { id: coupon.id } },
+        },
+      });
+    }
 
     console.log('\n\ncreatedOrder', createdOrder, '\n\n');
 
