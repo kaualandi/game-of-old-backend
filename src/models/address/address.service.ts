@@ -30,6 +30,7 @@ export class AddressService {
       where: {
         id,
         user_id,
+        is_active: true,
       },
     });
 
@@ -59,10 +60,13 @@ export class AddressService {
   async remove(id: number, user_id: number) {
     await this.findOne(id, user_id);
 
-    return this.prisma.address.delete({
+    return this.prisma.address.update({
       where: {
         id,
         user_id,
+      },
+      data: {
+        is_active: false,
       },
     });
   }
