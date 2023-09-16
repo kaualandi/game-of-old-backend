@@ -36,6 +36,7 @@ let AddressService = class AddressService {
         if (!address) {
             throw new exceptions_1.NotFoundException(`Endereço não encontrado`);
         }
+        return address;
     }
     async update(id, updateAddressDto, user_id) {
         await this.findOne(id, user_id);

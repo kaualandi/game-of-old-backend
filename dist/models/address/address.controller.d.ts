@@ -21,7 +21,19 @@ export declare class AddressController {
     }, unknown, never> & {}>;
     findOne(id: string, request: {
         user_id: string;
-    }): Promise<void>;
+    }): Promise<import("@prisma/client/runtime/library").GetResult<{
+        id: number;
+        user_id: number;
+        zip_code: string;
+        state: string;
+        city: string;
+        neighborhood: string;
+        street: string;
+        number: string;
+        complement: string;
+        created_at: Date;
+        updated_at: Date;
+    }, unknown, never> & {}>;
     update(id: string, updateAddressDto: UpdateAddressDto, request: {
         user_id: string;
     }): Promise<import("@prisma/client/runtime/library").GetResult<{
