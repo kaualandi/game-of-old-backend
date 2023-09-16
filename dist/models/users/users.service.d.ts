@@ -17,7 +17,11 @@ export declare class UsersService {
         is_admin: boolean;
         created_at: boolean;
         updated_at: boolean;
-        address: boolean;
+        address: {
+            where: {
+                is_active: boolean;
+            };
+        };
         cart: {
             select: {
                 id: boolean;
@@ -62,6 +66,7 @@ export declare class UsersService {
                 street: string;
                 number: string;
                 complement: string;
+                is_active: boolean;
                 created_at: Date;
                 updated_at: Date;
             }, unknown, never> & {})[];
@@ -104,6 +109,7 @@ export declare class UsersService {
             street: string;
             number: string;
             complement: string;
+            is_active: boolean;
             created_at: Date;
             updated_at: Date;
         }, unknown, never> & {})[];

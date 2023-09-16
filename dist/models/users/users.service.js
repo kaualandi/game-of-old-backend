@@ -29,7 +29,11 @@ let UsersService = class UsersService {
             is_admin: true,
             created_at: true,
             updated_at: true,
-            address: true,
+            address: {
+                where: {
+                    is_active: true,
+                },
+            },
             cart: {
                 select: {
                     id: true,
