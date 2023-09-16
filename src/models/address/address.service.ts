@@ -36,6 +36,8 @@ export class AddressService {
     if (!address) {
       throw new NotFoundException(`Endereço não encontrado`);
     }
+
+    return address;
   }
 
   async update(
