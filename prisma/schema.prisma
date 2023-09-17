@@ -23,6 +23,12 @@ enum PaymentMethod {
   BILLET
 }
 
+enum ContactBack {
+  CALL
+  WHATSAPP
+  EMAIL
+}
+
 model User {
   id           Int          @id @default(autoincrement())
   email        String       @unique
@@ -289,4 +295,19 @@ model Article {
   updated_at DateTime @default(now()) @updatedAt
   config_id  Int
   config     Config   @relation(fields: [config_id], references: [id])
+}
+
+model Contact {
+  id           Int         @id @default(autoincrement())
+  name         String
+  email        String?
+  phone        String
+  contact_back ContactBack
+  subject      String
+  message      String
+  opened       Boolean     @default(true)
+  read         Boolean     @default(false)
+  conclusion   String?
+  created_at   DateTime    @default(now())
+  updated_at   DateTime    @default(now()) @updatedAt
 }
