@@ -40,17 +40,23 @@ let ContactService = class ContactService {
         };
     }
     async findOne(id) {
-        return await this.prismaService.contact.findUnique({
+        const contact = await this.prismaService.contact.findUnique({
             where: { id },
         });
+        if (!contact) {
+            throw new common_1.BadRequestException('Contato não encontrado.');
+        }
+        return contact;
     }
     async update(id, updateContactDto) {
+        await this.findOne(id);
         return await this.prismaService.contact.update({
             where: { id },
             data: updateContactDto,
         });
     }
     async remove(id) {
+        await this.findOne(id);
         return await this.prismaService.contact.delete({
             where: { id },
         });
