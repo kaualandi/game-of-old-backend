@@ -16,12 +16,16 @@ exports.CorreiosController = void 0;
 const common_1 = require("@nestjs/common");
 const correios_service_1 = require("./correios.service");
 const price_deadline_correio_dto_1 = require("./dto/price-deadline-correio.dto");
+const tracking_by_code_dto_1 = require("./dto/tracking-by-code.dto");
 let CorreiosController = class CorreiosController {
     constructor(correiosService) {
         this.correiosService = correiosService;
     }
     async priceDeadLine(priceDeadlineCorreioDto) {
         return await this.correiosService.priceDeadLine(priceDeadlineCorreioDto);
+    }
+    async trackingByCode(trackingByCodeDto) {
+        return await this.correiosService.trackingByCode(trackingByCodeDto);
     }
 };
 __decorate([
@@ -31,6 +35,13 @@ __decorate([
     __metadata("design:paramtypes", [price_deadline_correio_dto_1.PriceDeadlineCorreioDto]),
     __metadata("design:returntype", Promise)
 ], CorreiosController.prototype, "priceDeadLine", null);
+__decorate([
+    (0, common_1.Get)('tracking/by-code'),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [tracking_by_code_dto_1.TrackingByCodeDto]),
+    __metadata("design:returntype", Promise)
+], CorreiosController.prototype, "trackingByCode", null);
 CorreiosController = __decorate([
     (0, common_1.Controller)('correios'),
     __metadata("design:paramtypes", [correios_service_1.CorreiosService])

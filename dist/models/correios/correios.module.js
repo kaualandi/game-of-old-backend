@@ -11,12 +11,13 @@ const common_1 = require("@nestjs/common");
 const correios_service_1 = require("./correios.service");
 const correios_controller_1 = require("./correios.controller");
 const axios_1 = require("@nestjs/axios");
+const prisma_1 = require("../../modules/prisma");
 let CorreiosModule = class CorreiosModule {
 };
 CorreiosModule = __decorate([
     (0, common_1.Module)({
         controllers: [correios_controller_1.CorreiosController],
-        imports: [axios_1.HttpModule],
+        imports: [axios_1.HttpModule, prisma_1.PrismaModule],
         providers: [correios_service_1.CorreiosService],
     })
 ], CorreiosModule);

@@ -1,13 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { PriceDeadlineCorreioDto } from './dto/price-deadline-correio.dto';
 import { HttpService } from '@nestjs/axios';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
 import { xml2js } from 'xml-js';
+import { PrismaService } from './../../modules/prisma/prisma.service';
 import { ReturnPriceDeadlineXMLConverted } from './dto/correios';
+import { PriceDeadlineCorreioDto } from './dto/price-deadline-correio.dto';
+import { TrackingByCodeDto } from './dto/tracking-by-code.dto';
 
 @Injectable()
 export class CorreiosService {
-  constructor(private readonly http: HttpService) {}
+  constructor(
+    private readonly http: HttpService,
+    private prismaService: PrismaService,
+  ) {}
 
   private readonly sCepOrigem = '25953001';
   private readonly nVlPeso = 0.1;
@@ -63,6 +68,20 @@ export class CorreiosService {
         deadline: pac.PrazoEntrega._text,
       },
     };
+  }
+
+  async trackingByCode(trackingByCodeDto: TrackingByCodeDto) {
+    const order = await this.prismaService.order.findFirst({
+      where: {
+        tracking_number: trackingByCodeDto.code,
+      },
+    });
+
+    if (!order) {
+      throw new BadRequestException(
+        'Não foi possível encontrar o pedido com esse código.',
+      );
+    }
   }
 
   private xmlToJson(xml: string) {

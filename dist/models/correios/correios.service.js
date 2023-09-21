@@ -10,13 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CorreiosService = void 0;
-const common_1 = require("@nestjs/common");
 const axios_1 = require("@nestjs/axios");
+const common_1 = require("@nestjs/common");
 const rxjs_1 = require("rxjs");
 const xml_js_1 = require("xml-js");
+const prisma_service_1 = require("./../../modules/prisma/prisma.service");
+const dist_1 = require("correios-brasil/dist");
 let CorreiosService = class CorreiosService {
-    constructor(http) {
+    constructor(http, prismaService) {
         this.http = http;
+        this.prismaService = prismaService;
         this.sCepOrigem = '25953001';
         this.nVlPeso = 0.1;
     }
@@ -57,6 +60,20 @@ let CorreiosService = class CorreiosService {
             },
         };
     }
+    async trackingByCode(trackingByCodeDto) {
+        const order = await this.prismaService.order.findFirst({
+            where: {
+                tracking_number: trackingByCodeDto.code,
+            },
+        });
+        if (!order) {
+            throw new common_1.BadRequestException('Não foi possível encontrar o pedido com esse código.');
+        }
+        return (0, dist_1.rastrearEncomendas)([order.tracking_number]).then((response) => {
+            console.log(response);
+            return response;
+        });
+    }
     xmlToJson(xml) {
         const options = { compact: true, ignoreComment: true, spaces: 4 };
         return (0, xml_js_1.xml2js)(xml, options);
@@ -64,7 +81,8 @@ let CorreiosService = class CorreiosService {
 };
 CorreiosService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [axios_1.HttpService])
+    __metadata("design:paramtypes", [axios_1.HttpService,
+        prisma_service_1.PrismaService])
 ], CorreiosService);
 exports.CorreiosService = CorreiosService;
 //# sourceMappingURL=correios.service.js.map
