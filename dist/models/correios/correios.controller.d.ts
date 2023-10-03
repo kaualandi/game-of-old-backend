@@ -16,5 +16,5 @@ export declare class CorreiosController {
             deadline: string;
         };
     }>;
-    trackingByCode(trackingByCodeDto: TrackingByCodeDto): Promise<any>;
+    trackingByCode(trackingByCodeDto: TrackingByCodeDto): Promise<void>;
 }

@@ -245,4 +245,5 @@ export declare class OrdersController {
         cupom_status: boolean;
         cupom_discount: number;
     }>;
+    pay(): Promise<any>;
 }

@@ -46,6 +46,9 @@ let OrdersController = class OrdersController {
     async prePrice(prePriceDto, request) {
         return await this.ordersService.prePrice(prePriceDto, +request.user_id);
     }
+    async pay() {
+        return await this.ordersService.pay();
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -131,6 +134,12 @@ __decorate([
     __metadata("design:paramtypes", [pre_price_dto_1.PrePriceDto, Object]),
     __metadata("design:returntype", Promise)
 ], OrdersController.prototype, "prePrice", null);
+__decorate([
+    (0, common_1.Post)('pay'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], OrdersController.prototype, "pay", null);
 OrdersController = __decorate([
     (0, common_1.Controller)('orders'),
     __metadata("design:paramtypes", [orders_service_1.OrdersService])

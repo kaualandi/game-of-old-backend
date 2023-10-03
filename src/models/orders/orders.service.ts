@@ -8,12 +8,14 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { PrePriceDto } from './dto/pre-price.dto';
 import { CorreiosService } from '../correios/correios.service';
+import { MercadopagoService } from 'src/modules/mercadopago/mercadopago.service';
 
 @Injectable()
 export class OrdersService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly correiosService: CorreiosService,
+    private readonly mercadopagoService: MercadopagoService,
   ) {}
 
   async create(createOrderDto: CreateOrderDto, user_id: number) {
@@ -152,6 +154,22 @@ export class OrdersService {
     }
 
     console.log('order items criados e fluxo finalizado');
+
+    const order = await this.prismaService.order.findUnique({
+      where: { id: createdOrder.id },
+      include: {
+        order_items: {
+          include: {
+            product_variant: {
+              include: { product: { include: { images: true } } },
+            },
+          },
+        },
+        address: true,
+        user: true,
+        _count: true,
+      },
+    });
 
     return {
       worked: true,
@@ -333,5 +351,31 @@ export class OrdersService {
       cupom_status,
       cupom_discount,
     };
+  }
+
+  async pay() {
+    const order = await this.prismaService.order.findUnique({
+      where: { id: 1 },
+      include: {
+        order_items: {
+          include: {
+            product_variant: {
+              include: { product: { include: { images: true } } },
+            },
+          },
+        },
+        address: true,
+        user: true,
+        _count: true,
+      },
+    });
+
+    if (!order) {
+      throw new NotFoundException(`Pedido não encontrado.`);
+    }
+
+    const payment = await this.mercadopagoService.createPayment(order);
+
+    return payment;
   }
 }

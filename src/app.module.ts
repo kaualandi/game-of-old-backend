@@ -23,6 +23,7 @@ import { SectionsModule } from './models/sections/sections.module';
 import { AddressModule } from './models/address/address.module';
 import { CorreiosModule } from './models/correios/correios.module';
 import { ContactModule } from './models/contact/contact.module';
+import { MercadopagoModule } from './modules/mercadopago/mercadopago.module';
 
 @Global()
 @Module({
@@ -50,6 +51,7 @@ import { ContactModule } from './models/contact/contact.module';
     AddressModule,
     CorreiosModule,
     ContactModule,
+    MercadopagoModule,
   ],
   providers: [AppService],
 })

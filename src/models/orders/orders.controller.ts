@@ -103,4 +103,9 @@ export class OrdersController {
   ) {
     return await this.ordersService.prePrice(prePriceDto, +request.user_id);
   }
+
+  @Post('pay')
+  async pay() {
+    return await this.ordersService.pay();
+  }
 }

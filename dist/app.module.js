@@ -32,6 +32,7 @@ const sections_module_1 = require("./models/sections/sections.module");
 const address_module_1 = require("./models/address/address.module");
 const correios_module_1 = require("./models/correios/correios.module");
 const contact_module_1 = require("./models/contact/contact.module");
+const mercadopago_module_1 = require("./modules/mercadopago/mercadopago.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -61,6 +62,7 @@ AppModule = __decorate([
             address_module_1.AddressModule,
             correios_module_1.CorreiosModule,
             contact_module_1.ContactModule,
+            mercadopago_module_1.MercadopagoModule,
         ],
         providers: [app_service_1.AppService],
     })

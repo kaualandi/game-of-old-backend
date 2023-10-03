@@ -15,7 +15,6 @@ const common_1 = require("@nestjs/common");
 const rxjs_1 = require("rxjs");
 const xml_js_1 = require("xml-js");
 const prisma_service_1 = require("./../../modules/prisma/prisma.service");
-const dist_1 = require("correios-brasil/dist");
 let CorreiosService = class CorreiosService {
     constructor(http, prismaService) {
         this.http = http;
@@ -69,10 +68,6 @@ let CorreiosService = class CorreiosService {
         if (!order) {
             throw new common_1.BadRequestException('Não foi possível encontrar o pedido com esse código.');
         }
-        return (0, dist_1.rastrearEncomendas)([order.tracking_number]).then((response) => {
-            console.log(response);
-            return response;
-        });
     }
     xmlToJson(xml) {
         const options = { compact: true, ignoreComment: true, spaces: 4 };

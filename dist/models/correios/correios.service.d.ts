@@ -20,6 +20,6 @@ export declare class CorreiosService {
             deadline: string;
         };
     }>;
-    trackingByCode(trackingByCodeDto: TrackingByCodeDto): Promise<any>;
+    trackingByCode(trackingByCodeDto: TrackingByCodeDto): Promise<void>;
     private xmlToJson;
 }

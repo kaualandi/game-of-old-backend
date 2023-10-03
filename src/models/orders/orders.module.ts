@@ -1,13 +1,14 @@
+import { HttpModule, HttpService } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { OrdersService } from './orders.service';
-import { OrdersController } from './orders.controller';
+import { MercadopagoModule } from 'src/modules/mercadopago/mercadopago.module';
 import { PrismaModule } from 'src/modules/prisma';
 import { CorreiosService } from '../correios/correios.service';
-import { HttpModule } from '@nestjs/axios';
+import { OrdersController } from './orders.controller';
+import { OrdersService } from './orders.service';
 
 @Module({
   controllers: [OrdersController],
-  imports: [PrismaModule, HttpModule],
+  imports: [PrismaModule, HttpModule, MercadopagoModule],
   providers: [OrdersService, CorreiosService],
 })
 export class OrdersModule {}

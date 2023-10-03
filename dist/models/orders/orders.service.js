@@ -25,10 +25,12 @@ const common_1 = require("@nestjs/common");
 const exceptions_1 = require("@nestjs/common/exceptions");
 const prisma_1 = require("../../modules/prisma");
 const correios_service_1 = require("../correios/correios.service");
+const mercadopago_service_1 = require("../../modules/mercadopago/mercadopago.service");
 let OrdersService = class OrdersService {
-    constructor(prismaService, correiosService) {
+    constructor(prismaService, correiosService, mercadopagoService) {
         this.prismaService = prismaService;
         this.correiosService = correiosService;
+        this.mercadopagoService = mercadopagoService;
     }
     async create(createOrderDto, user_id) {
         console.log('create called');
@@ -135,6 +137,21 @@ let OrdersService = class OrdersService {
             console.log('carrinho deletado e product order criado');
         }
         console.log('order items criados e fluxo finalizado');
+        const order = await this.prismaService.order.findUnique({
+            where: { id: createdOrder.id },
+            include: {
+                order_items: {
+                    include: {
+                        product_variant: {
+                            include: { product: { include: { images: true } } },
+                        },
+                    },
+                },
+                address: true,
+                user: true,
+                _count: true,
+            },
+        });
         return {
             worked: true,
             status: 'PENDING',
@@ -278,11 +295,34 @@ let OrdersService = class OrdersService {
             cupom_discount,
         };
     }
+    async pay() {
+        const order = await this.prismaService.order.findUnique({
+            where: { id: 1 },
+            include: {
+                order_items: {
+                    include: {
+                        product_variant: {
+                            include: { product: { include: { images: true } } },
+                        },
+                    },
+                },
+                address: true,
+                user: true,
+                _count: true,
+            },
+        });
+        if (!order) {
+            throw new exceptions_1.NotFoundException(`Pedido não encontrado.`);
+        }
+        const payment = await this.mercadopagoService.createPayment(order);
+        return payment;
+    }
 };
 OrdersService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_1.PrismaService,
-        correios_service_1.CorreiosService])
+        correios_service_1.CorreiosService,
+        mercadopago_service_1.MercadopagoService])
 ], OrdersService);
 exports.OrdersService = OrdersService;
 //# sourceMappingURL=orders.service.js.map

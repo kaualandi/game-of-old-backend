@@ -3,10 +3,12 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { PrePriceDto } from './dto/pre-price.dto';
 import { CorreiosService } from '../correios/correios.service';
+import { MercadopagoService } from 'src/modules/mercadopago/mercadopago.service';
 export declare class OrdersService {
     private readonly prismaService;
     private readonly correiosService;
-    constructor(prismaService: PrismaService, correiosService: CorreiosService);
+    private readonly mercadopagoService;
+    constructor(prismaService: PrismaService, correiosService: CorreiosService, mercadopagoService: MercadopagoService);
     create(createOrderDto: CreateOrderDto, user_id: number): Promise<{
         worked: boolean;
         status: string;
@@ -242,4 +244,5 @@ export declare class OrdersService {
         cupom_status: boolean;
         cupom_discount: number;
     }>;
+    pay(): Promise<any>;
 }
