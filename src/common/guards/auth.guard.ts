@@ -4,9 +4,9 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { jwtConstants } from '../../models/auth/constants';
+import { firstValueFrom } from 'rxjs';
+import { AuthService } from 'src/modules/auth/auth.service';
 
 export interface AuthRequest {
   user_id: number;
@@ -14,30 +14,30 @@ export interface AuthRequest {
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(private readonly authService: AuthService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const token = this.extractTokenFromHeader(request);
-    if (!token) {
-      throw new UnauthorizedException('Você precisa estar logado');
+    const userId = this.extractUserIdFromHeader(request);
+    if (!userId) {
+      throw new UnauthorizedException('Forneça o id do usuário');
     }
 
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
-      });
-      request['user_id'] = payload?.id;
+      const user = await firstValueFrom(this.authService.findOne(+userId));
+
+      if (!user) {
+        throw new UnauthorizedException('Usuário inválido.');
+      }
+
+      request['userId'] = user.id;
     } catch {
-      throw new UnauthorizedException(
-        'Você não tem permissão para acessar esse recurso',
-      );
+      throw new UnauthorizedException('Usuário inválido.');
     }
     return true;
   }
 
-  private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
+  private extractUserIdFromHeader(request: Request): string {
+    return request.headers.user_id as string;
   }
 }

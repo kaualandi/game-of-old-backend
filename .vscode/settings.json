@@ -3,10 +3,14 @@
   "editor.formatOnSave": true,
   "eslint.packageManager": "npm",
   "[javascript]": {
-    "editor.codeActionsOnSave": { "source.fixAll.eslint": true }
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }
   },
   "[typescript]": {
-    "editor.codeActionsOnSave": { "source.fixAll.eslint": true }
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }
   },
   "files.associations": {
     ".sequelizerc": "javascript",
@@ -15,7 +19,9 @@
   },
   "editor.tabSize": 2,
   "git.enableSmartCommit": true,
-  "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
   "window.zoomLevel": 0,
   "eslint.validate": ["javascript", "typescript"]
 }

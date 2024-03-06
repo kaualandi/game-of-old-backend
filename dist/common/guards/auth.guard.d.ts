@@ -1,11 +1,11 @@
 import { CanActivate, ExecutionContext } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { AuthService } from 'src/modules/auth/auth.service';
 export interface AuthRequest {
     user_id: number;
 }
 export declare class AuthGuard implements CanActivate {
-    private jwtService;
-    constructor(jwtService: JwtService);
+    private readonly authService;
+    constructor(authService: AuthService);
     canActivate(context: ExecutionContext): Promise<boolean>;
-    private extractTokenFromHeader;
+    private extractUserIdFromHeader;
 }
