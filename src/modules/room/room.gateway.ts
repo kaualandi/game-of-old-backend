@@ -1,11 +1,11 @@
 import {
-  WebSocketGateway,
-  SubscribeMessage,
   MessageBody,
+  SubscribeMessage,
+  WebSocketGateway,
 } from '@nestjs/websockets';
-import { RoomService } from './room.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
+import { RoomService } from './room.service';
 
 @WebSocketGateway()
 export class RoomGateway {

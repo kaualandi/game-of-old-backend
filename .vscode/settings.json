@@ -22,6 +22,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "window.zoomLevel": 0,
   "eslint.validate": ["javascript", "typescript"]
 }
