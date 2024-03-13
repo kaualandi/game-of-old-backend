@@ -35,7 +35,7 @@ export class AuthService {
 
   update(id: number, updateAuthDto: UpdateAuthDto) {
     return this.http
-      .post<User>(`http://localhost:3000/user/${id}`, updateAuthDto)
+      .put<User>(`http://localhost:3000/user/${id}`, updateAuthDto)
       .pipe(map((resp) => resp.data));
   }
 
