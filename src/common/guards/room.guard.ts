@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { firstValueFrom } from 'rxjs';
-import { AuthService } from 'src/modules/auth/auth.service';
 import { RoomService } from 'src/modules/room/room.service';
 
 @Injectable()

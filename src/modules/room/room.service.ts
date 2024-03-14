@@ -13,8 +13,14 @@ export class RoomService {
       .pipe(map((resp) => resp.data));
   }
 
-  findOne(id: number) {
+  connection(id: number) {
     return 'Kauà é gay ' + id;
+  }
+
+  findOne(id: number) {
+    return this.http
+      .get<Room>(`http://localhost:3000/room/${id}`)
+      .pipe(map((resp) => resp.data));
   }
 
   remove(id: number) {

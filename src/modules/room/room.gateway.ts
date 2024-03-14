@@ -9,8 +9,8 @@ import { RoomService } from './room.service';
 export class RoomGateway {
   constructor(private readonly roomService: RoomService) {}
 
-  @SubscribeMessage('findOneRoom')
-  findOne(@MessageBody() id: number) {
-    return this.roomService.findOne(id);
+  @SubscribeMessage('connectionRoom')
+  connection(@MessageBody() id: number) {
+    return this.roomService.connection(id);
   }
 }
