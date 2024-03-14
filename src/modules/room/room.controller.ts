@@ -1,14 +1,6 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Param,
-  Post,
-  UseGuards,
-} from '@nestjs/common';
-import { RoomService } from './room.service';
+import { Controller, Delete, Param, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/common/guards/auth.guard';
-import { CreateRoomDto } from './dto/create-room.dto';
+import { RoomService } from './room.service';
 
 @Controller('room')
 export class RoomController {
@@ -16,8 +8,8 @@ export class RoomController {
 
   @Post()
   @UseGuards(AuthGuard)
-  create(@Body() createRoomDto: CreateRoomDto) {
-    return this.roomService.create(createRoomDto);
+  create() {
+    return this.roomService.create();
   }
 
   @Delete(':id')

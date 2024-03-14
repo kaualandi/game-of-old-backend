@@ -1,15 +1,14 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { map } from 'rxjs';
-import { CreateRoomDto } from './dto/create-room.dto';
 import { Room } from './entities/room.entity';
 
 @Injectable()
 export class RoomService {
   constructor(private readonly http: HttpService) {}
-  create(createRoomDto: CreateRoomDto) {
+  create() {
     return this.http
-      .get<Room>(`http://localhost:3000/room`, createRoomDto)
+      .get<Room>(`http://localhost:3000/room`)
       .pipe(map((resp) => resp.data));
   }
 
