@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthGuard = void 0;
 const common_1 = require("@nestjs/common");
-const rxjs_1 = require("rxjs");
 const auth_service_1 = require("../../modules/auth/auth.service");
 let AuthGuard = class AuthGuard {
     constructor(authService) {
@@ -19,20 +18,6 @@ let AuthGuard = class AuthGuard {
     }
     async canActivate(context) {
         const request = context.switchToHttp().getRequest();
-        const userId = this.extractUserIdFromHeader(request);
-        if (!userId) {
-            throw new common_1.UnauthorizedException('Forneça o id do usuário');
-        }
-        try {
-            const user = await (0, rxjs_1.firstValueFrom)(this.authService.findOne(+userId));
-            if (!user) {
-                throw new common_1.UnauthorizedException('Usuário inválido.');
-            }
-            request['userId'] = user.id;
-        }
-        catch (_a) {
-            throw new common_1.UnauthorizedException('Usuário inválido.');
-        }
         return true;
     }
     extractUserIdFromHeader(request) {

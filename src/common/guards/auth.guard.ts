@@ -1,11 +1,5 @@
-import {
-  CanActivate,
-  ExecutionContext,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Request } from 'express';
-import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/modules/auth/auth.service';
 
 export interface AuthRequest {
@@ -18,22 +12,7 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const userId = this.extractUserIdFromHeader(request);
-    if (!userId) {
-      throw new UnauthorizedException('Forneça o id do usuário');
-    }
 
-    try {
-      const user = await firstValueFrom(this.authService.findOne(+userId));
-
-      if (!user) {
-        throw new UnauthorizedException('Usuário inválido.');
-      }
-
-      request['userId'] = user.id;
-    } catch {
-      throw new UnauthorizedException('Usuário inválido.');
-    }
     return true;
   }
 
